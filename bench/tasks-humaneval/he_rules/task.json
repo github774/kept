@@ -1,0 +1,44 @@
+{
+  "id": "he_rules",
+  "version": 100,
+  "suite": "humaneval",
+  "source": "openai/human-eval data/HumanEval.jsonl.gz",
+  "humaneval_task_ids": [
+    "HumanEval/126",
+    "HumanEval/137",
+    "HumanEval/95",
+    "HumanEval/118"
+  ],
+  "spec": "SPEC.md",
+  "functions": [
+    {
+      "name": "is_sorted",
+      "file": "is_sorted.py",
+      "test": "tests/test_is_sorted.py",
+      "subgoal": "HumanEval/126 is_sorted",
+      "humaneval_task_id": "HumanEval/126"
+    },
+    {
+      "name": "compare_one",
+      "file": "compare_one.py",
+      "test": "tests/test_compare_one.py",
+      "subgoal": "HumanEval/137 compare_one",
+      "humaneval_task_id": "HumanEval/137"
+    },
+    {
+      "name": "check_dict_case",
+      "file": "check_dict_case.py",
+      "test": "tests/test_check_dict_case.py",
+      "subgoal": "HumanEval/95 check_dict_case",
+      "humaneval_task_id": "HumanEval/95"
+    },
+    {
+      "name": "get_closest_vowel",
+      "file": "get_closest_vowel.py",
+      "test": "tests/test_get_closest_vowel.py",
+      "subgoal": "HumanEval/118 get_closest_vowel",
+      "humaneval_task_id": "HumanEval/118"
+    }
+  ],
+  "traps": []
+}

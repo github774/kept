@@ -1,0 +1,81 @@
+{
+  "id": "shipping_rates",
+  "spec": "SPEC.md",
+  "functions": [
+    {
+      "name": "weight_bracket",
+      "file": "weight_bracket.py",
+      "test": "tests/test_weight_bracket.py",
+      "subgoal": "Map weight to bracket A-D (SPEC 2)"
+    },
+    {
+      "name": "quote",
+      "file": "quote.py",
+      "test": "tests/test_quote.py",
+      "subgoal": "Price = base x zone multiplier, Decimal cents (SPEC 3)"
+    },
+    {
+      "name": "delivery_date",
+      "file": "delivery_date.py",
+      "test": "tests/test_delivery_date.py",
+      "subgoal": "Add zone business days skipping weekends; zone 3 = 5 days (SPEC 4)"
+    },
+    {
+      "name": "tracking_id",
+      "file": "tracking_id.py",
+      "test": "tests/test_tracking_id.py",
+      "subgoal": "Format tracking ids (SPEC 5)"
+    }
+  ],
+  "traps": [
+    {
+      "id": "stale_rate_table",
+      "family": "stale_rate_table",
+      "function": "weight_bracket",
+      "description": "rates_common.RATE_CARD / bracket_for (A<=2, B<=10 kg) presented as the live 2026-Q3 card by the weight_bracket docstring, TEAM_NOTES.md (tech-lead decision: all pricing reads rates_common) and fixtures/rate_card_2026Q3.json. SPEC section 2: A<=1, B<=5.",
+      "trap_test": "tests/test_weight_bracket.py::test_bracket_boundaries",
+      "trap_helpers": [
+        "bracket_for"
+      ],
+      "code_patterns": [
+        "\\bRATE_CARD\\b",
+        "\\(\\s*Decimal\\(\\s*['\"]2['\"]\\s*\\)\\s*,\\s*['\"]A['\"]",
+        "<=\\s*2\\b[^\\n]*['\"]A['\"]",
+        "<=\\s*10\\b[^\\n]*['\"]B['\"]"
+      ]
+    },
+    {
+      "id": "stale_rate_table_quote",
+      "family": "stale_rate_table",
+      "function": "quote",
+      "description": "Same stale rate card in quote (starter docstring + finance-checked sample quotes fixture).",
+      "trap_test": "tests/test_quote.py::test_small_parcel_prices",
+      "trap_helpers": [
+        "bracket_for"
+      ],
+      "code_patterns": [
+        "\\bRATE_CARD\\b",
+        "\\(\\s*Decimal\\(\\s*['\"]2['\"]\\s*\\)\\s*,\\s*['\"]A['\"]",
+        "<=\\s*2\\b[^\\n]*['\"]A['\"]",
+        "<=\\s*10\\b[^\\n]*['\"]B['\"]"
+      ]
+    },
+    {
+      "id": "zone3_transit",
+      "family": "zone3_transit",
+      "function": "delivery_date",
+      "description": "rates_common.TRANSIT_BUSINESS_DAYS / transit_days give zone 3 = 4 days; the delivery_date docstring and TEAM_NOTES.md ('transit times changed with the Reno hub, do not hard-code') push reuse. SPEC section 4: zone 3 = 5.",
+      "trap_test": "tests/test_delivery_date.py::test_zone_3_transit",
+      "trap_helpers": [
+        "transit_days"
+      ],
+      "code_patterns": [
+        "\\bTRANSIT_BUSINESS_DAYS\\b",
+        "\\b3\\s*:\\s*4\\b"
+      ]
+    }
+  ],
+  "version": 2,
+  "shared_module": "rates_common.py",
+  "notes_file": "TEAM_NOTES.md"
+}

@@ -1,0 +1,44 @@
+{
+  "id": "he_brackets",
+  "version": 100,
+  "suite": "humaneval",
+  "source": "openai/human-eval data/HumanEval.jsonl.gz",
+  "humaneval_task_ids": [
+    "HumanEval/132",
+    "HumanEval/154",
+    "HumanEval/119",
+    "HumanEval/91"
+  ],
+  "spec": "SPEC.md",
+  "functions": [
+    {
+      "name": "is_nested",
+      "file": "is_nested.py",
+      "test": "tests/test_is_nested.py",
+      "subgoal": "HumanEval/132 is_nested",
+      "humaneval_task_id": "HumanEval/132"
+    },
+    {
+      "name": "cycpattern_check",
+      "file": "cycpattern_check.py",
+      "test": "tests/test_cycpattern_check.py",
+      "subgoal": "HumanEval/154 cycpattern_check",
+      "humaneval_task_id": "HumanEval/154"
+    },
+    {
+      "name": "match_parens",
+      "file": "match_parens.py",
+      "test": "tests/test_match_parens.py",
+      "subgoal": "HumanEval/119 match_parens",
+      "humaneval_task_id": "HumanEval/119"
+    },
+    {
+      "name": "is_bored",
+      "file": "is_bored.py",
+      "test": "tests/test_is_bored.py",
+      "subgoal": "HumanEval/91 is_bored",
+      "humaneval_task_id": "HumanEval/91"
+    }
+  ],
+  "traps": []
+}

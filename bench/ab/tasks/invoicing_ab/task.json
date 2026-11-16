@@ -1,0 +1,53 @@
+{
+  "id": "invoicing_ab",
+  "version": 3,
+  "spec": "SPEC.md",
+  "functions": [
+    {
+      "name": "line_net",
+      "file": "line_net.py",
+      "test": "tests/test_line_net.py",
+      "subgoal": "Net of one line, rounded to the currency minor unit (SPEC 2, 3.1)"
+    },
+    {
+      "name": "line_tax",
+      "file": "line_tax.py",
+      "test": "tests/test_line_tax.py",
+      "subgoal": "Tax of one line under the seller/buyer treatment (SPEC 4, 5.1)"
+    },
+    {
+      "name": "invoice_totals",
+      "file": "invoice_totals.py",
+      "test": "tests/test_invoice_totals.py",
+      "subgoal": "Invoice totals with the per-rate tax rule (SPEC 5.2, 8.3)"
+    },
+    {
+      "name": "convert",
+      "file": "convert.py",
+      "test": "tests/test_convert.py",
+      "subgoal": "Currency conversion via EUR rates (SPEC 2.3)"
+    },
+    {
+      "name": "due_date",
+      "file": "due_date.py",
+      "test": "tests/test_due_date.py",
+      "subgoal": "Due date from terms + seller business-day calendar (SPEC 6)"
+    },
+    {
+      "name": "credit_note",
+      "file": "credit_note.py",
+      "test": "tests/test_credit_note.py",
+      "subgoal": "Credit note reversing returned quantities (SPEC 8.6)"
+    },
+    {
+      "name": "late_fee",
+      "file": "late_fee.py",
+      "test": "tests/test_late_fee.py",
+      "subgoal": "Statutory late-payment fee (SPEC 7)"
+    }
+  ],
+  "traps": [],
+  "shared_module": "billing_common.py",
+  "notes_file": "TEAM_NOTES.md",
+  "note": "bench/ab: v3 invoicing with a CLEAN billing_common (JPY/NL/roll traps fixed) and SPEC 0 pointing at round_money; poison/ holds the mid-run FIN-3 (half-even) replacement"
+}

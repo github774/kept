@@ -1,0 +1,277 @@
+{
+  "generated_at": "2026-10-31T19:49:39.139Z",
+  "mock": false,
+  "rows_read": 80,
+  "rows_used": 80,
+  "rows_excluded_mock": 0,
+  "duplicate_rows_dropped": 0,
+  "window_size": 50,
+  "experiment": "emg-202610311936",
+  "library_id": "emg-202610311936-shared",
+  "arms": {
+    "shared": {
+      "agents": 40,
+      "runs": 10,
+      "exposed": 30,
+      "trap_hit_final": {
+        "count": 0,
+        "known": 30,
+        "rate": 0
+      },
+      "trap_hit_any": {
+        "count": 0,
+        "known": 30,
+        "rate": 0
+      },
+      "retired": {
+        "count": 0,
+        "known": 40,
+        "rate": 0
+      },
+      "lesson_in_prompt": {
+        "count": 0,
+        "known": 0,
+        "rate": null
+      },
+      "chunk_reused": {
+        "count": 1,
+        "known": 40,
+        "rate": 0.025
+      },
+      "passing_subtasks": {
+        "count": 40,
+        "known": 40,
+        "rate": 1
+      },
+      "runs_killed": 0,
+      "runs_capped_usd": 0,
+      "runs_crashed": 0,
+      "run_tokens": 625146,
+      "run_usd": 0.093872,
+      "run_tokens_per_passing_subtask": 15629,
+      "windows": [
+        {
+          "window": 0,
+          "from": 0,
+          "to": 49,
+          "agents": 40,
+          "partial": true,
+          "runs": 10,
+          "exposed": 30,
+          "trap_hit_final": {
+            "count": 0,
+            "known": 30,
+            "rate": 0
+          },
+          "trap_hit_any": {
+            "count": 0,
+            "known": 30,
+            "rate": 0
+          },
+          "retired": {
+            "count": 0,
+            "known": 40,
+            "rate": 0
+          },
+          "lesson_in_prompt": {
+            "count": 0,
+            "known": 0,
+            "rate": null
+          },
+          "trap_lesson_in_library_at_launch": {
+            "count": 0,
+            "known": 30,
+            "rate": 0
+          },
+          "chunk_reused": {
+            "count": 1,
+            "known": 40,
+            "rate": 0.025
+          },
+          "passing_subtasks": {
+            "count": 40,
+            "known": 40,
+            "rate": 1
+          },
+          "tokens": 625146,
+          "tokens_known": 40,
+          "tokens_per_passing_subtask": 15629,
+          "usd": 0.093874,
+          "library_cases_at_launch_max": 0,
+          "library_lessons_at_launch_max": 0
+        }
+      ]
+    },
+    "control": {
+      "agents": 40,
+      "runs": 10,
+      "exposed": 30,
+      "trap_hit_final": {
+        "count": 0,
+        "known": 30,
+        "rate": 0
+      },
+      "trap_hit_any": {
+        "count": 0,
+        "known": 30,
+        "rate": 0
+      },
+      "retired": {
+        "count": 0,
+        "known": 40,
+        "rate": 0
+      },
+      "lesson_in_prompt": {
+        "count": 0,
+        "known": 0,
+        "rate": null
+      },
+      "chunk_reused": {
+        "count": 1,
+        "known": 40,
+        "rate": 0.025
+      },
+      "passing_subtasks": {
+        "count": 39,
+        "known": 40,
+        "rate": 0.975
+      },
+      "runs_killed": 0,
+      "runs_capped_usd": 0,
+      "runs_crashed": 0,
+      "run_tokens": 502486,
+      "run_usd": 0.069954,
+      "run_tokens_per_passing_subtask": 12884,
+      "windows": [
+        {
+          "window": 0,
+          "from": 0,
+          "to": 49,
+          "agents": 40,
+          "partial": true,
+          "runs": 10,
+          "exposed": 30,
+          "trap_hit_final": {
+            "count": 0,
+            "known": 30,
+            "rate": 0
+          },
+          "trap_hit_any": {
+            "count": 0,
+            "known": 30,
+            "rate": 0
+          },
+          "retired": {
+            "count": 0,
+            "known": 40,
+            "rate": 0
+          },
+          "lesson_in_prompt": {
+            "count": 0,
+            "known": 0,
+            "rate": null
+          },
+          "trap_lesson_in_library_at_launch": {
+            "count": 0,
+            "known": 30,
+            "rate": 0
+          },
+          "chunk_reused": {
+            "count": 1,
+            "known": 40,
+            "rate": 0.025
+          },
+          "passing_subtasks": {
+            "count": 39,
+            "known": 40,
+            "rate": 0.975
+          },
+          "tokens": 502486,
+          "tokens_known": 40,
+          "tokens_per_passing_subtask": 12884,
+          "usd": 0.069952,
+          "library_cases_at_launch_max": 0,
+          "library_lessons_at_launch_max": 0
+        }
+      ]
+    }
+  },
+  "curve": {
+    "metric": "trap_hit_final rate over exposed agents",
+    "windows": [
+      {
+        "window": 0,
+        "from": 0,
+        "to": 49,
+        "shared": 0,
+        "shared_n": 30,
+        "control": 0,
+        "control_n": 30,
+        "shared_any": 0,
+        "control_any": 0
+      }
+    ]
+  },
+  "library_growth": [
+    {
+      "wave": 1,
+      "at": 1793475596504,
+      "cases": 0,
+      "lessons": 0,
+      "synthetic": 0,
+      "revoked": 0
+    },
+    {
+      "wave": 2,
+      "at": 1793475720423,
+      "cases": 0,
+      "lessons": 0,
+      "synthetic": 0,
+      "revoked": 0
+    },
+    {
+      "wave": 3,
+      "at": 1793475872005,
+      "cases": 0,
+      "lessons": 0,
+      "synthetic": 0,
+      "revoked": 0
+    },
+    {
+      "wave": 4,
+      "at": 1793476061668,
+      "cases": 0,
+      "lessons": 0,
+      "synthetic": 0,
+      "revoked": 0
+    },
+    {
+      "wave": 5,
+      "at": 1793476179131,
+      "cases": 0,
+      "lessons": 0,
+      "synthetic": 0,
+      "revoked": 0
+    }
+  ],
+  "cost": {
+    "ledger_usd": 0.163826,
+    "openrouter_key_usage_delta_usd": 1.156439,
+    "budget_usd": 12
+  },
+  "wall": {
+    "first_launch": 1793475417198,
+    "last_end": 1793476175824,
+    "span_ms": 758626,
+    "session_ms": 0,
+    "run_ms_mean": 132926
+  },
+  "resources": {
+    "processes": 1024,
+    "stack_processes": 379,
+    "stack_rss_mb": 11851,
+    "bench_rss_mb": 85,
+    "samples": 158
+  },
+  "notes": []
+}

@@ -1,0 +1,1 @@
+[{"runId":"r59zw","taskId":"invoice_parser","mode":"ours","libraryId":"lib-r59zw","status":"finished","model":"openai/gpt-6-luna","startedAt":1793484907123,"endedAt":1793484943106,"agents":4,"retires":1,"cases":1,"testsPassing":4,"testsTotal":4,"usd":0.0029565380000000003}]

@@ -1,0 +1,44 @@
+{
+  "id": "he_math",
+  "version": 100,
+  "suite": "humaneval",
+  "source": "openai/human-eval data/HumanEval.jsonl.gz",
+  "humaneval_task_ids": [
+    "HumanEval/39",
+    "HumanEval/130",
+    "HumanEval/75",
+    "HumanEval/94"
+  ],
+  "spec": "SPEC.md",
+  "functions": [
+    {
+      "name": "prime_fib",
+      "file": "prime_fib.py",
+      "test": "tests/test_prime_fib.py",
+      "subgoal": "HumanEval/39 prime_fib",
+      "humaneval_task_id": "HumanEval/39"
+    },
+    {
+      "name": "tri",
+      "file": "tri.py",
+      "test": "tests/test_tri.py",
+      "subgoal": "HumanEval/130 tri",
+      "humaneval_task_id": "HumanEval/130"
+    },
+    {
+      "name": "is_multiply_prime",
+      "file": "is_multiply_prime.py",
+      "test": "tests/test_is_multiply_prime.py",
+      "subgoal": "HumanEval/75 is_multiply_prime",
+      "humaneval_task_id": "HumanEval/75"
+    },
+    {
+      "name": "skjkasdkd",
+      "file": "skjkasdkd.py",
+      "test": "tests/test_skjkasdkd.py",
+      "subgoal": "HumanEval/94 skjkasdkd",
+      "humaneval_task_id": "HumanEval/94"
+    }
+  ],
+  "traps": []
+}

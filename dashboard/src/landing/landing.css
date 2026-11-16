@@ -1,0 +1,1320 @@
+/*
+  Kept, the landing page (design/mockups/01-03). Warm cream paper with a fine grain, deep ink, Imbue for display,
+  Albert Sans for text, Geist Mono inside cards. Orange belongs to the bad note and print-blue to
+  immunity; nothing else uses either. Every value is scoped to .lp; the dashboard's tokens are untouched.
+
+  Motion: none on scroll. Buttons press to 0.97 in 120 ms; colours change in 150 ms; the hero ink is the only
+  extended motion on the page and it stops once the story is told.
+*/
+
+.lp-doc,
+.lp-doc body {
+  background-color: #efebe3;
+  color-scheme: light;
+}
+
+.lp {
+  --paper: #efebe3;
+  --paper-hi: #f6f3ec;
+  --paper-lo: #e7e1d6;
+  --ink: #1c1a17;
+  --ink-2: #47433d;
+  --ink-3: #7b756b;
+  --rule: rgb(28 26 23 / 0.14);
+  --note: #e0711f;
+  --note-deep: #c65d12;
+  --blue: #2f5bd3;
+  --pass: #3d7a4f;
+  --fail: #c2352b;
+
+  --serif: "Imbue", "Didot", "Bodoni 72", "Times New Roman", serif;
+  --sans: "Albert Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --gutter: max(16px, 3.95vw);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .32 0 0 0 0 .27 0 0 0 0 .2 0 0 0 .32 -.08'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+
+  position: relative;
+  min-height: 100svh;
+  overflow-x: clip;
+  background-color: var(--paper);
+  background-image: var(--grain);
+  color: var(--ink);
+  font-family: var(--sans);
+  font-size: clamp(16px, 1.05vw, 20px);
+  line-height: 1.5;
+  font-variant-numeric: lining-nums proportional-nums;
+  -webkit-font-smoothing: antialiased;
+}
+.lp ::selection {
+  background: rgb(28 26 23 / 0.16);
+}
+.lp :focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+:where(.lp) a {
+  color: inherit;
+}
+:where(.lp) :where(p, h1, h2, h3, dl, dd, ol, ul, figure) {
+  margin: 0;
+}
+:where(.lp) :where(ol, ul) {
+  padding: 0;
+  list-style: none;
+}
+
+/* ---------- Type ---------- */
+
+.lp-display,
+.lp-h2,
+.lp-wordmark,
+.lp-stage-name {
+  font-family: var(--serif);
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 100;
+  font-weight: 640;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+}
+/* The mockups set display type tall and extra condensed. Imbue is the closest condensed didone on Google Fonts but
+   still wider, so display lines are set ~15% larger and compressed horizontally to the mockup's proportions. */
+.lp-display,
+.lp-h2,
+.lp-stage-name {
+  transform: scaleX(0.87);
+  transform-origin: 0 50%;
+}
+.lp-h2,
+.lp-stage-name {
+  transform-origin: 50% 50%;
+}
+.lp-display {
+  font-size: clamp(72px, 10vw, 22.5svh);
+  line-height: 0.84;
+}
+.lp-h2 {
+  font-size: clamp(54px, 9.6vw, 196px);
+  line-height: 0.9;
+}
+.lp-source {
+  color: var(--ink-2);
+  font-size: clamp(14px, 0.85vw, 16px);
+  line-height: 1.5;
+}
+
+/* ---------- Controls ---------- */
+
+.lp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55em;
+  height: clamp(56px, 4.15vw, 80px);
+  padding: 0 clamp(28px, 3.5vw, 66px);
+  border-radius: 999px;
+  background: var(--ink);
+  color: var(--paper-hi);
+  font: 500 clamp(18px, 1.5vw, 29px) / 1 var(--sans);
+  letter-spacing: -0.005em;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow:
+    0 1px 1px rgb(28 26 23 / 0.12),
+    0 4px 10px -6px rgb(28 26 23 / 0.35);
+  transition:
+    background-color 160ms var(--ease-out),
+    box-shadow 160ms var(--ease-out),
+    transform 160ms var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+.lp-btn-arrow {
+  width: 0.9em;
+  height: 0.9em;
+  transition: transform 160ms var(--ease-out);
+}
+/* Press: a quick, decisive 0.97 (100 ms), released on the same curve. */
+.lp-btn:active {
+  transform: scale(0.97);
+  transition-duration: 100ms;
+}
+@media (hover: hover) and (pointer: fine) {
+  .lp-btn:hover {
+    background: #2a2722;
+  }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .lp-btn:hover,
+  .lp-btn:focus-visible {
+    transform: translateY(-1px);
+    box-shadow:
+      0 2px 2px rgb(28 26 23 / 0.12),
+      0 12px 24px -10px rgb(28 26 23 / 0.5);
+  }
+  .lp-btn:hover .lp-btn-arrow,
+  .lp-btn:focus-visible .lp-btn-arrow {
+    transform: translateX(3px);
+  }
+  .lp-btn:active {
+    transform: scale(0.97);
+  }
+}
+.lp-chip {
+  display: inline-grid;
+  place-items: center;
+  height: 1.75em;
+  padding: 0 0.55em;
+  border: 1px solid rgb(28 26 23 / 0.22);
+  border-radius: 6px;
+  background: rgb(255 255 255 / 0.35);
+  color: var(--ink-2);
+  font: 500 max(14px, 0.78em) / 1 var(--mono);
+}
+
+/* ---------- Navigation ---------- */
+
+.lp-nav {
+  position: absolute;
+  inset: 0 0 auto 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: clamp(72px, 10.6svh, 120px);
+  padding: 0 var(--gutter);
+}
+.lp-wordmark {
+  font-size: clamp(34px, 2.9vw, 58px);
+  line-height: 1;
+  text-decoration: none;
+}
+.lp-links {
+  display: flex;
+  gap: clamp(20px, 3.1vw, 60px);
+  margin-right: 2.3vw;
+  font-size: clamp(15px, 0.98vw, 19px);
+  font-weight: 500;
+}
+.lp-links a {
+  position: relative;
+  text-decoration: none;
+  transition: color 160ms var(--ease-out);
+}
+/* The underline draws in from the left (180 ms) and leaves to the right. */
+.lp-links a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.3em;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: right center;
+  transition: transform 180ms var(--ease-out);
+}
+.lp-links a:focus-visible::after {
+  transform: scaleX(1);
+  transform-origin: left center;
+}
+@media (hover: hover) and (pointer: fine) {
+  .lp-links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left center;
+  }
+}
+
+/* ---------- Hero ---------- */
+
+.lp-hero {
+  position: relative;
+  height: 100svh;
+  min-height: 620px;
+  max-height: 1400px;
+}
+.lp-hero-copy {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100%;
+  padding: clamp(72px, 10.6svh, 120px) var(--gutter) 6svh;
+  max-width: 60%;
+}
+.lp-tagline {
+  margin-bottom: clamp(18px, 2.6svh, 34px);
+  color: var(--ink-2);
+  font-size: clamp(16px, 1.25vw, 24px);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+.lp-hero .lp-display {
+  margin-left: -0.03em;
+}
+.lp-line {
+  display: block;
+  white-space: nowrap;
+}
+.lp-lead {
+  max-width: 23em;
+  margin: clamp(22px, 3.6svh, 44px) 0 clamp(28px, 4.6svh, 58px);
+  color: var(--ink-2);
+  font-size: clamp(19px, 1.85vw, 36px);
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+}
+.lp-hero-art {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 51%;
+  pointer-events: none;
+}
+.lp-hero-ink {
+  position: absolute;
+  inset: 0;
+  /* Multiply: the canvas is white where there is no ink, so the page's own paper and grain show through every
+     stain. Set on the wrapper, which is the layer that meets the paper. */
+  mix-blend-mode: multiply;
+}
+.lp-hero-notes {
+  position: absolute;
+  inset: 0;
+}
+/* One caption at a time under the composition, in step with the ink. It enters (200 ms, strong ease-out) and is
+   simply replaced by the next; nothing loops. */
+.lp-ink-caption {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  color: var(--ink);
+  font-size: clamp(28px, 1.6vw, 32px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-align: center;
+  text-shadow:
+    0 0 3px var(--paper),
+    0 0 3px var(--paper),
+    0 0 8px var(--paper);
+  animation: lp-note-in 200ms var(--ease-out);
+}
+/* The still's labels, knocked out of the ring lines with a paper halo. */
+.lp-ink-label {
+  position: absolute;
+  font-size: clamp(24px, 1.4vw, 28px);
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  text-shadow:
+    0 0 3px var(--paper),
+    0 0 3px var(--paper),
+    0 0 6px var(--paper);
+  animation: lp-note-in 220ms var(--ease-out);
+}
+.lp-ink-label.is-caught {
+  transform: translate(-50%, -50%);
+  color: var(--ink);
+}
+.lp-ink-label.is-immune {
+  transform: translate(0, -50%);
+  color: var(--blue);
+}
+@keyframes lp-note-in {
+  from {
+    opacity: 0;
+    translate: 0 4px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lp-ink-caption,
+  .lp-ink-label {
+    animation: none;
+  }
+}
+.lp-ink,
+.lp-ink-static {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.lp-ink {
+  opacity: 0;
+}
+.lp-ink[data-ready] {
+  opacity: 1;
+}
+.lp-ink-static-pk {
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- How it works ---------- */
+
+.lp-how {
+  padding: clamp(56px, 4vw, 80px) var(--gutter) clamp(72px, 6vw, 120px);
+  scroll-margin-top: 24px;
+}
+.lp-how-title {
+  text-align: center;
+}
+.lp-stages {
+  --art-h: clamp(360px, 27vw, 520px);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+  column-gap: clamp(12px, 1.6vw, 32px);
+  margin-top: clamp(24px, 2.4vw, 48px);
+}
+.lp-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  text-align: center;
+}
+.lp-stage-art {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: var(--art-h);
+}
+.lp-stage-arrow {
+  display: grid;
+  place-items: center;
+  height: var(--art-h);
+  color: var(--ink);
+}
+.lp-stage-arrow svg {
+  width: clamp(24px, 2.3vw, 44px);
+}
+.lp-stage-name {
+  margin-top: clamp(24px, 2.6vw, 52px);
+  font-size: clamp(46px, 5vw, 98px);
+  line-height: 1;
+}
+.lp-stage-text {
+  max-width: 15em;
+  margin-top: clamp(10px, 1vw, 18px);
+  color: var(--ink-2);
+  font-size: clamp(17px, 1.55vw, 30px);
+  line-height: 1.3;
+}
+.lp-how > .lp-source {
+  margin-top: clamp(40px, 3.6vw, 64px);
+  text-align: center;
+}
+
+/* Paper cards */
+
+.lp-card {
+  position: relative;
+  padding: clamp(16px, 1.45vw, 28px);
+  border-radius: 4px;
+  background-color: var(--paper-hi);
+  background-image: var(--grain);
+  box-shadow:
+    0 0 0 1px rgb(60 48 32 / 0.05),
+    0 1px 1px rgb(60 48 32 / 0.06),
+    0 6px 12px -4px rgb(60 48 32 / 0.12),
+    0 18px 34px -16px rgb(60 48 32 / 0.32);
+  text-align: left;
+}
+.lp-stack {
+  position: relative;
+  width: min(100%, 22.5em);
+  font-size: clamp(16px, 0.95vw, 18px);
+}
+.lp-stack::before,
+.lp-stack::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 4px;
+  background-color: #f1ede5;
+  background-image: var(--grain);
+  box-shadow:
+    0 0 0 1px rgb(60 48 32 / 0.05),
+    0 8px 18px -10px rgb(60 48 32 / 0.3);
+}
+.lp-stack::before {
+  transform: translate(-2.4%, -2.6%) rotate(-1.6deg);
+}
+.lp-stack::after {
+  transform: translate(1.8%, 2.2%) rotate(1.2deg);
+}
+.lp-stack > .lp-card {
+  z-index: 1;
+}
+.lp-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1em;
+}
+.lp-card-name {
+  font: 600 1.5em/1.1 var(--sans);
+  letter-spacing: -0.01em;
+}
+.lp-card-fn {
+  margin-top: 0.45em;
+  color: var(--ink-2);
+  font: 500 max(14px, 0.8em) / 1 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.lp-card-pk {
+  display: block;
+  width: 52%;
+  margin: 1.2em auto 1em;
+  color: var(--note);
+}
+.lp-rows {
+  display: grid;
+  gap: 0.75em;
+  padding-top: 1em;
+  border-top: 1px solid var(--rule);
+}
+.lp-row {
+  display: grid;
+  grid-template-columns: 1.15em 1fr;
+  align-items: center;
+  gap: 0.6em;
+  font: 400 1em/1.3 var(--mono);
+}
+.lp-row.is-note {
+  color: var(--note-deep);
+}
+.lp-row-label {
+  color: var(--ink-2);
+}
+.lp-row-value {
+  justify-self: end;
+  text-align: right;
+}
+.lp-row-icon {
+  width: 1.25em;
+  height: 1.25em;
+  color: var(--ink-2);
+}
+.lp-row-icon.is-pass {
+  color: var(--pass);
+}
+.lp-row-icon.is-fail {
+  color: var(--fail);
+}
+.lp-row-dot {
+  width: 0.7em;
+  height: 0.7em;
+  margin-left: 0.28em;
+  border-radius: 50%;
+}
+.lp-row-dot.is-note {
+  background: var(--note);
+}
+.lp-row-dot.is-ink {
+  border: 1.5px solid var(--ink-3);
+}
+.is-note {
+  color: var(--note-deep);
+}
+
+.lp-quote {
+  margin: 0.4em 0 0 1.85em;
+  font: 400 0.92em/1.4 var(--mono);
+}
+.lp-term {
+  margin: 1.1em 0 1em;
+  padding: 1.1em 1.1em 1.2em;
+  border-radius: 3px;
+  background: var(--paper-lo);
+  box-shadow: inset 0 1px 2px rgb(60 48 32 / 0.1);
+  font: 400 1em/1.45 var(--mono);
+}
+.lp-term-cmd {
+  font-size: 1em;
+}
+.lp-term-fail {
+  margin-top: 0.7em;
+  color: var(--fail);
+  font-weight: 500;
+}
+.lp-term-assert {
+  margin-top: 0.5em;
+  color: var(--ink-2);
+}
+.lp-stack-retired {
+  height: 86%;
+}
+.lp-stack-retired::before,
+.lp-stack-retired::after {
+  display: none;
+}
+.lp-card-back {
+  width: 82%;
+  height: 74%;
+  opacity: 0.62;
+  filter: saturate(0.55);
+}
+.lp-card-back .lp-card-pk {
+  width: 46%;
+  margin: 1.4em auto 0;
+  opacity: 0.7;
+}
+.lp-card-pk-wrap {
+  position: relative;
+  min-height: 5.5rem;
+}
+.lp-pencil {
+  position: absolute;
+  inset: 22% -6% auto;
+  width: 112%;
+  overflow: visible;
+}
+.lp-pencil path {
+  fill: none;
+  stroke: #d34a33;
+  stroke-width: 7;
+  stroke-linecap: round;
+  opacity: 0.85;
+}
+.lp-card-front {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 84%;
+}
+
+.lp-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: min(100%, 22.5em);
+  font-size: clamp(16px, 0.95vw, 18px);
+}
+.lp-card-case {
+  width: 86%;
+}
+.lp-lesson {
+  margin-top: 0.9em;
+  padding-top: 0.8em;
+  border-top: 1px solid var(--rule);
+  font: 500 1em/1.4 var(--mono);
+}
+.lp-tree-lines {
+  width: 54%;
+  height: 2.6em;
+}
+.lp-tree-lines path {
+  fill: none;
+  stroke: var(--blue);
+  stroke-width: 1.6;
+}
+.lp-tree-kids {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1em;
+  width: 100%;
+}
+.lp-card-sm {
+  padding: 1.1em;
+}
+.lp-card-sm .lp-card-head {
+  gap: 0.4em;
+}
+.lp-card-sm .lp-card-name {
+  font-size: 1.25em;
+  white-space: nowrap;
+}
+.lp-card-shield {
+  display: block;
+  width: 42%;
+  margin: 1em auto 0.3em;
+  color: var(--blue);
+}
+
+/* ---------- Proof ---------- */
+
+.lp-proof {
+  display: grid;
+  grid-template-columns: minmax(0, 1.75fr) minmax(0, 1fr);
+  column-gap: 4vw;
+  align-items: end;
+  padding: clamp(24px, 2vw, 40px) var(--gutter) clamp(64px, 5.5vw, 110px);
+  box-shadow: inset 0 -1px 0 var(--rule);
+  scroll-margin-top: 24px;
+}
+.lp-proof-title {
+  font-size: clamp(56px, 7.6vw, 156px);
+  line-height: 0.9;
+  transform-origin: 0 50%;
+  line-height: 0.86;
+}
+.lp-proof-ref {
+  margin-top: clamp(18px, 1.8vw, 32px);
+  color: var(--ink);
+  font-size: clamp(24px, 2vw, 38px);
+  line-height: 1.25;
+  letter-spacing: -0.005em;
+  font-variant-numeric: tabular-nums;
+}
+.lp-proof-how {
+  max-width: 36em;
+  margin-top: clamp(16px, 1.4vw, 24px);
+  padding-top: clamp(14px, 1.2vw, 20px);
+  border-top: 1px solid var(--rule);
+  color: var(--ink-2);
+  font-size: clamp(17px, 1.2vw, 22px);
+  line-height: 1.4;
+}
+.lp-proof-ref.lp-measured {
+  margin-top: 0.35em;
+}
+.lp-proof-ref strong {
+  font-weight: 600;
+}
+.lp-bars {
+  --plot-h: clamp(220px, 19vw, 360px);
+  padding-bottom: 0.4em;
+}
+.lp-bars-plot {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: end;
+  gap: 2.5vw;
+  height: calc(var(--plot-h) + 5em);
+  padding: 0 1.5vw;
+  border-bottom: 1px solid rgb(28 26 23 / 0.35);
+  box-shadow: 0 1px 0 rgb(255 255 255 / 0.6);
+}
+.lp-bar-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+}
+.lp-bar-col .lp-bar {
+  max-height: var(--plot-h);
+}
+.lp-bar-fig {
+  display: grid;
+  justify-items: center;
+  margin-bottom: 0.7em;
+  line-height: 1.15;
+}
+.lp-bar-fig strong {
+  font-size: clamp(20px, 1.6vw, 32px);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.lp-bar-fig span {
+  color: var(--ink-2);
+  font-size: clamp(18px, 1.25vw, 24px);
+}
+.lp-bar {
+  width: min(100%, 9vw);
+  min-width: 64px;
+  border-radius: 2px 2px 0 0;
+}
+.lp-bar.is-codex,
+.lp-bar.is-ours {
+  background-color: #2c2925;
+  background-image: var(--grain), var(--grain);
+  background-size: 240px, 97px;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.08),
+    -14px 8px 22px -14px rgb(60 48 32 / 0.45);
+}
+/* Unmeasured: an outline drawn in pencil and left unfinished at the top. */
+.lp-bar.is-pending {
+  border: 2px dashed rgb(28 26 23 / 0.45);
+  border-bottom: 0;
+  border-top: 0;
+  -webkit-mask-image: linear-gradient(to top, #000 45%, transparent 100%);
+  mask-image: linear-gradient(to top, #000 45%, transparent 100%);
+}
+.lp-bars-axis {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5vw;
+  padding: 0.8em 1.5vw 0;
+  color: var(--ink);
+  font-size: clamp(15px, 1.15vw, 22px);
+  text-align: center;
+}
+/* ---------- Close ---------- */
+
+.lp-close {
+  display: grid;
+  grid-template-columns: 21% minmax(0, 1fr) 21%;
+  align-items: center;
+  gap: 1vw;
+  padding: clamp(80px, 7vw, 140px) var(--gutter) clamp(80px, 7vw, 140px);
+}
+.lp-close-mid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(28px, 3vw, 56px);
+  text-align: center;
+}
+.lp-close-title {
+  /* Its layout box is wider than the compressed glyphs; give the difference back to the side sheets. */
+  margin-inline: -6.5%;
+  font-size: clamp(46px, 5.4vw, 110px);
+  white-space: nowrap;
+  line-height: 0.95;
+  text-wrap-style: balance;
+}
+.lp-close-sheet {
+  position: relative;
+  justify-self: center;
+  width: min(100%, 16.5em);
+  font-size: clamp(15px, 0.96vw, 19px);
+}
+
+.lp-sheet {
+  position: relative;
+  z-index: 1;
+  padding: 1.6em 1.6em 2.2em;
+  border-radius: 3px;
+  background-color: var(--paper-hi);
+  background-image: var(--grain);
+  box-shadow:
+    0 0 0 1px rgb(60 48 32 / 0.05),
+    0 1px 1px rgb(60 48 32 / 0.06),
+    0 18px 34px -16px rgb(60 48 32 / 0.32),
+    -7px 7px 0 -1px #f1ede5,
+    -7px 7px 0 0 rgb(60 48 32 / 0.08),
+    -13px 12px 0 -1px #ece7de,
+    -13px 12px 0 0 rgb(60 48 32 / 0.08);
+}
+.lp-sheet-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin-bottom: 1.1em;
+  font: 500 1.05em/1.2 var(--mono);
+}
+.lp-sheet-title.is-note {
+  color: var(--note-deep);
+}
+.lp-sheet-shield {
+  width: 1em;
+  color: var(--blue);
+}
+.lp-sheet-list {
+  display: grid;
+  gap: 0.7em;
+  font: 400 0.95em/1.2 var(--mono);
+  color: var(--ink-2);
+}
+.lp-sheet-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.7em;
+}
+.lp-sheet-check {
+  width: 1.05em;
+  height: 1.05em;
+  color: var(--pass);
+}
+.lp-sheet-o {
+  width: 0.8em;
+  height: 0.8em;
+  border: 1.5px solid var(--ink-3);
+  border-radius: 50%;
+}
+.lp-sheet-list .is-lie {
+  color: var(--note-deep);
+}
+.lp-sheet-list .is-lie .lp-sheet-o {
+  border-color: var(--note);
+  background: var(--note);
+}
+.lp-foot {
+  display: grid;
+  gap: 0.3em;
+  padding: 28px var(--gutter) 40px;
+  border-top: 1px solid var(--rule);
+  color: var(--ink-2);
+  font-size: clamp(14px, 0.85vw, 16px);
+}
+.lp-foot strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/* The hand-off to /live: paper over everything for a moment. */
+.lp-handoff {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: #efebe3;
+  pointer-events: none;
+}
+
+/* ---------- Narrow screens ---------- */
+
+@media (max-width: 1180px) {
+  .lp-stages {
+    grid-template-columns: 1fr auto 1fr;
+    row-gap: 72px;
+  }
+  .lp-stage-arrow:nth-child(4) {
+    display: none;
+  }
+}
+
+@media (max-width: 1180px) {
+  .lp-close-title {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 899px) {
+  .lp-nav {
+    height: 64px;
+  }
+  .lp-links {
+    margin-right: 0;
+    gap: 16px;
+  }
+  .lp-links a:not(:last-child) {
+    display: none;
+  }
+  .lp-hero {
+    height: auto;
+    min-height: 0;
+    max-height: none;
+  }
+  .lp-hero-copy {
+    max-width: none;
+    height: auto;
+    padding: 104px var(--gutter) 8px;
+  }
+  .lp-display {
+    font-size: clamp(56px, 18vw, 136px);
+  }
+  .lp-lead {
+    font-size: 20px;
+  }
+  .lp-hero-art {
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1;
+    max-height: 72svh;
+  }
+  .lp-ink-caption,
+  .lp-ink-label {
+    font-size: 20px;
+  }
+  .lp-stages {
+    grid-template-columns: 1fr;
+    row-gap: 24px;
+  }
+  .lp-stage-arrow,
+  .lp-stage-arrow:nth-child(4) {
+    display: grid;
+    height: auto;
+    transform: rotate(90deg);
+  }
+  .lp-stage-art {
+    height: auto;
+    min-height: 320px;
+  }
+  .lp-stack,
+  .lp-tree {
+    font-size: 14px;
+  }
+  .lp-stack-retired {
+    height: 360px;
+  }
+  .lp-card-back {
+    height: 62%;
+  }
+  .lp-proof {
+    grid-template-columns: 1fr;
+    row-gap: 48px;
+  }
+  .lp-proof-title {
+    font-size: clamp(48px, 13.5vw, 110px);
+  }
+  .lp-close-title {
+    margin-inline: 0;
+    white-space: normal;
+  }
+  .lp-bars-plot {
+    padding: 0;
+  }
+  .lp-close {
+    grid-template-columns: 1fr;
+    row-gap: 56px;
+  }
+  .lp-close-sheet {
+    font-size: 14px;
+    width: min(78%, 17em);
+  }
+  .lp-close-sheet.is-left {
+    order: 2;
+  }
+  .lp-close-sheet.is-right {
+    order: 3;
+  }
+}
+
+/* ---------- Hover layer ----------
+   Pointer-only, transform / opacity / box-shadow / colour, 160-220 ms, strong ease-out, nothing loops.
+   Hovering a stage (its card or its label) lifts the card, settles its paper pile, sweeps a highlight under
+   the one line that matters, and inks the stage name in its own colour. */
+
+.lp-stage {
+  --tone: var(--ink);
+}
+.lp-stage[data-tone="note"] {
+  --tone: var(--note-deep);
+}
+.lp-stage[data-tone="fail"] {
+  --tone: var(--fail);
+}
+.lp-stage[data-tone="muted"] {
+  --tone: var(--ink-3);
+}
+.lp-stage[data-tone="blue"] {
+  --tone: var(--blue);
+}
+.lp-stage-name {
+  transition: color 180ms var(--ease-out);
+}
+.lp-card,
+.lp-stack::before,
+.lp-stack::after {
+  transition:
+    transform 180ms var(--ease-out),
+    box-shadow 180ms var(--ease-out);
+}
+/* The key line's highlighter: a pale wash that sweeps in from the left, behind the text. */
+.lp-key {
+  position: relative;
+  isolation: isolate;
+}
+.lp-key::before {
+  content: "";
+  position: absolute;
+  inset: -0.12em -0.35em;
+  z-index: -1;
+  border-radius: 3px;
+  background: var(--key, rgb(28 26 23 / 0.08));
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 220ms var(--ease-out);
+}
+.lp-key.is-note {
+  --key: rgb(224 113 31 / 0.15);
+}
+.lp-key.is-fail {
+  --key: rgb(194 53 43 / 0.13);
+}
+.lp-key.is-blue {
+  --key: rgb(47 91 211 / 0.13);
+}
+@media (hover: hover) and (pointer: fine) {
+  .lp-stage:hover .lp-stage-name {
+    color: var(--tone);
+  }
+  .lp-stage:hover .lp-key::before {
+    transform: scaleX(1);
+  }
+}
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .lp-stage:hover .lp-card:not(.lp-card-back) {
+    transform: translateY(-3px);
+    box-shadow:
+      0 0 0 1px rgb(60 48 32 / 0.05),
+      0 2px 2px rgb(60 48 32 / 0.06),
+      0 12px 20px -6px rgb(60 48 32 / 0.16),
+      0 28px 44px -18px rgb(60 48 32 / 0.38);
+  }
+  /* The pile under the top sheet squares up as the sheet lifts. */
+  .lp-stage:hover .lp-stack::before {
+    transform: translate(-1.2%, -1.2%) rotate(-0.5deg);
+  }
+  .lp-stage:hover .lp-stack::after {
+    transform: translate(0.9%, 1%) rotate(0.4deg);
+  }
+}
+
+/* Proof bars: hovering (or focusing) a bar darkens it and shows its exact figure. */
+.lp-bar-col {
+  position: relative;
+  outline-offset: 6px;
+}
+.lp-bar.is-codex,
+.lp-bar.is-ours {
+  transition: background-color 160ms var(--ease-out);
+}
+.lp-bar.is-pending {
+  transition: border-color 160ms var(--ease-out);
+}
+.lp-bar-exact {
+  position: absolute;
+  left: 50%;
+  bottom: 34%;
+  z-index: 1;
+  padding: 0.45em 0.7em;
+  border-radius: 6px;
+  background: var(--paper-hi);
+  box-shadow:
+    0 0 0 1px rgb(60 48 32 / 0.08),
+    0 8px 18px -8px rgb(60 48 32 / 0.35);
+  color: var(--ink);
+  font: 500 clamp(15px, 0.95vw, 18px) / 1.2 var(--sans);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, 4px);
+  transition:
+    opacity 160ms var(--ease-out),
+    transform 160ms var(--ease-out);
+}
+.lp-bar-col:focus-visible .lp-bar-exact {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+.lp-bar-col:focus-visible .lp-bar.is-codex,
+.lp-bar-col:focus-visible .lp-bar.is-ours {
+  background-color: var(--ink);
+}
+@media (hover: hover) and (pointer: fine) {
+  .lp-bar-col:hover .lp-bar-exact {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+  .lp-bar-col:hover .lp-bar.is-codex,
+  .lp-bar-col:hover .lp-bar.is-ours {
+    background-color: var(--ink);
+  }
+  .lp-bar-col:hover .lp-bar.is-pending {
+    border-color: rgb(28 26 23 / 0.75);
+  }
+}
+
+/* Close sheets: tilted toward the pointer by script (max 2 degrees, damped); only the transform moves. */
+.lp-close-sheet {
+  transform-style: preserve-3d;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lp-btn {
+    transition:
+      background-color 150ms var(--ease-out),
+      box-shadow 150ms var(--ease-out);
+  }
+  .lp-btn:active {
+    transform: none;
+  }
+  .lp-links a::after,
+  .lp-key::before,
+  .lp-bar-exact {
+    transition: none;
+  }
+  .lp-bar-exact,
+  .lp-bar-col:focus-visible .lp-bar-exact {
+    transform: translate(-50%, 0);
+  }
+}
+
+/* ---------- Hero proof, facts, demo video, get started, stack ---------- */
+
+.lp-hero-proof {
+  margin: calc(-1 * clamp(10px, 2svh, 28px)) 0 clamp(24px, 3.6svh, 44px);
+  color: var(--ink);
+  font-size: clamp(15px, 1.1vw, 21px);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.lp-facts {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 40px);
+  margin-top: clamp(48px, 4.5vw, 88px);
+  padding-top: clamp(24px, 2.2vw, 40px);
+  border-top: 1px solid var(--rule);
+}
+.lp-fact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  min-width: 0;
+}
+.lp-fact-value {
+  font-family: var(--serif);
+  font-weight: 640;
+  font-size: clamp(44px, 4.2vw, 84px);
+  line-height: 0.95;
+  letter-spacing: -0.012em;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.lp-fact-vs {
+  color: var(--ink-3);
+  font-family: var(--sans);
+  font-size: 0.4em;
+  font-weight: 500;
+  vertical-align: middle;
+}
+.lp-fact-label {
+  color: var(--ink-2);
+  font-size: clamp(15px, 1.05vw, 20px);
+  line-height: 1.35;
+}
+.lp-fact-source {
+  margin-top: auto;
+  color: var(--ink-3);
+  font: 400 clamp(12px, 0.75vw, 14px) / 1.3 var(--mono);
+}
+.lp-fact.is-projected .lp-fact-value {
+  color: var(--ink-3);
+}
+.lp-fact.is-projected .lp-fact-source {
+  color: var(--note-deep);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.lp-section-title {
+  font-size: clamp(48px, 6vw, 120px);
+  transform-origin: 0 50%;
+}
+.lp-video,
+.lp-start {
+  padding: clamp(56px, 5vw, 100px) var(--gutter);
+  box-shadow: inset 0 -1px 0 var(--rule);
+  scroll-margin-top: 24px;
+}
+.lp-video-frame {
+  position: relative;
+  max-width: 1200px;
+  margin-top: clamp(24px, 2.4vw, 48px);
+  aspect-ratio: 16 / 9;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--ink);
+  box-shadow: 0 24px 48px -24px rgb(60 48 32 / 0.45);
+}
+.lp-video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.lp-bars-note {
+  margin-top: 0.6em;
+  color: var(--ink-3);
+  font-size: clamp(13px, 0.85vw, 16px);
+  text-align: center;
+}
+.lp-steps {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.6fr) minmax(0, 0.9fr);
+  gap: clamp(20px, 2.4vw, 48px);
+  margin-top: clamp(24px, 2.4vw, 48px);
+}
+.lp-step {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6em;
+  min-width: 0;
+}
+.lp-step-name {
+  font-size: clamp(20px, 1.5vw, 28px);
+  font-weight: 600;
+}
+.lp-step-text {
+  color: var(--ink-2);
+  font-size: clamp(15px, 1.05vw, 20px);
+  line-height: 1.4;
+}
+.lp-code {
+  width: 100%;
+  margin: 0.4em 0 0;
+  padding: 1em 1.2em;
+  overflow-x: auto;
+  border-radius: 6px;
+  background: var(--ink);
+  color: var(--paper-hi);
+  font: 400 clamp(13px, 0.85vw, 16px) / 1.55 var(--mono);
+  white-space: pre;
+}
+.lp-btn.lp-btn-sm {
+  height: clamp(48px, 3.4vw, 64px);
+  margin-top: 0.4em;
+  padding: 0 clamp(24px, 2.4vw, 44px);
+  font-size: clamp(16px, 1.15vw, 22px);
+}
+.lp-stack-title {
+  margin-top: clamp(48px, 4.5vw, 88px);
+  padding-top: clamp(20px, 1.8vw, 32px);
+  border-top: 1px solid var(--rule);
+  color: var(--ink-3);
+  font-size: clamp(14px, 0.9vw, 17px);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.lp-stack-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(16px, 2vw, 40px);
+  margin-top: 1em;
+}
+.lp-stack-name {
+  font-family: var(--serif);
+  font-weight: 640;
+  font-size: clamp(28px, 2.3vw, 46px);
+  line-height: 1;
+}
+.lp-stack-by {
+  color: var(--ink-3);
+  font-family: var(--sans);
+  font-size: 0.42em;
+  font-weight: 500;
+}
+.lp-stack-role {
+  margin-top: 0.5em;
+  color: var(--ink-2);
+  font-size: clamp(15px, 1.05vw, 20px);
+  line-height: 1.4;
+}
+
+@media (max-width: 1180px) {
+  .lp-facts {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .lp-steps {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .lp-stack-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (max-width: 899px) {
+  .lp-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .lp-stack-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

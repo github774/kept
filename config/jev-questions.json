@@ -1,0 +1,78 @@
+{
+  "_comment": "true always means 'problem found'. State holds only the needed excerpt; agent text is passed in state as quoted fields, never in instructions.",
+  "instruction_conflicts_spec": {
+    "type": "noul",
+    "state_keys": [
+      "spec_excerpt",
+      "instruction"
+    ],
+    "instructions": "Would following the quoted instruction make the code's observable behaviour or output break a requirement in the quoted spec excerpt? Internal implementation choices that still produce exactly the required outputs do not break a requirement.",
+    "criteria": {
+      "true": "Following the instruction would make the behaviour or output break at least one requirement in the spec excerpt.",
+      "false": "Following the instruction keeps every required behaviour and output in the spec excerpt, even if it changes internal implementation details."
+    }
+  },
+  "fact_contradicts_spec": {
+    "type": "noul",
+    "state_keys": [
+      "spec_excerpt",
+      "fact"
+    ],
+    "instructions": "Does the quoted fact contradict the quoted spec excerpt?",
+    "criteria": {
+      "true": "The fact contradicts the spec excerpt.",
+      "false": "The fact does not contradict the spec excerpt."
+    }
+  },
+  "note_consistent_with_spec": {
+    "type": "noul",
+    "state_keys": [
+      "spec_excerpt",
+      "note"
+    ],
+    "instructions": "Is any statement in the quoted note inconsistent with the quoted spec excerpt?",
+    "criteria": {
+      "true": "At least one statement in the note is inconsistent with the spec excerpt.",
+      "false": "Every statement in the note is consistent with the spec excerpt."
+    }
+  },
+  "failure_category": {
+    "type": "choice",
+    "state_keys": [
+      "claim",
+      "evidence"
+    ],
+    "instructions": "Which category best describes the failure shown by the quoted claim and evidence?",
+    "options": {
+      "false_success_claim": "The claim says something succeeded (e.g. tests pass) but the evidence shows it did not.",
+      "invented_api": "The claim relies on a function, module or API that does not exist.",
+      "spec_misread": "The claim reflects a misreading of the task spec.",
+      "conflicting_instruction": "The claim follows an instruction that conflicts with the spec.",
+      "other": "None of the above."
+    }
+  },
+  "lesson_relevant": {
+    "type": "noul",
+    "state_keys": [
+      "lesson",
+      "subtask"
+    ],
+    "instructions": "Would the quoted lesson change how someone does the quoted subtask?",
+    "criteria": {
+      "true": "The lesson would change how someone does the subtask.",
+      "false": "The lesson would not change how someone does the subtask."
+    }
+  },
+  "subtask_difficulty": {
+    "type": "choice",
+    "stretch": true,
+    "state_keys": [
+      "subtask"
+    ],
+    "instructions": "How difficult is the quoted subtask? Routine subtasks go to the small model, hard ones to the larger model.",
+    "options": {
+      "routine": "A routine subtask a small model handles reliably.",
+      "hard": "A hard subtask that needs the larger model."
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "id": "invoice_parser",
+  "spec": "SPEC.md",
+  "functions": [
+    {
+      "name": "format_invoice_id",
+      "file": "format_invoice_id.py",
+      "test": "tests/test_format_invoice_id.py",
+      "subgoal": "Canonicalize invoice ids (SPEC 4)"
+    },
+    {
+      "name": "parse_line",
+      "file": "parse_line.py",
+      "test": "tests/test_parse_line.py",
+      "subgoal": "Parse one CSV row into id/date/customer/amount (SPEC 1-4)"
+    },
+    {
+      "name": "total_by_customer",
+      "file": "total_by_customer.py",
+      "test": "tests/test_total_by_customer.py",
+      "subgoal": "Sum Decimal dollar amounts per customer (SPEC 5)"
+    },
+    {
+      "name": "overdue_invoices",
+      "file": "overdue_invoices.py",
+      "test": "tests/test_overdue_invoices.py",
+      "subgoal": "List ids past due as of a date (SPEC 5)"
+    }
+  ],
+  "traps": [
+    {
+      "id": "amount_cents",
+      "description": "Starter comment in parse_line.py says amounts without a decimal point are cents; SPEC section 3 says always dollars.",
+      "trap_test": "tests/test_parse_line.py::test_trap_amount_is_dollars"
+    }
+  ]
+}

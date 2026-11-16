@@ -1,0 +1,8 @@
+node_modules/
+dist/
+.durable-actors/
+.env
+.env.*
+!.env.example
+.logs/
+# generated/ is committed so fresh clones typecheck; regenerate with scripts/gen after actor changes

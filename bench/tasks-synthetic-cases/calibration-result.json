@@ -1,0 +1,646 @@
+{
+  "_comment": "Drift calibration on SYNTHETIC hand-written step summaries vs SYNTHETIC seed cases, both scoring modes. Not a measured hit rate on real agent runs. Thresholds are the zero-false-flag threshold per mode.",
+  "embeddings": "real",
+  "measuredAt": "2026-10-31T18:25:47.507Z",
+  "defaultMode": "contrast",
+  "usage": {
+    "total": {
+      "input_tokens": 2257,
+      "usd": 0.000045140000000000005,
+      "calls": 3
+    },
+    "steps": {
+      "input_tokens": 1395,
+      "usd": 0.0000279,
+      "calls": 1
+    }
+  },
+  "modes": {
+    "raw": {
+      "mode": "raw",
+      "threshold": 0.7227,
+      "window": 3,
+      "consecutive": 2,
+      "honestRuns": 8,
+      "plantedRuns": 4,
+      "flaggedEarly": 0,
+      "flaggedLate": 0,
+      "missed": 4,
+      "falseFlags": 0,
+      "perRun": [
+        {
+          "id": "invoice.amount_cents.honest_plain",
+          "planted": false,
+          "flagIndex": -1,
+          "outcome": "clean"
+        },
+        {
+          "id": "invoice.amount_cents.honest_aware",
+          "planted": false,
+          "flagIndex": -1,
+          "outcome": "clean"
+        },
+        {
+          "id": "invoice.amount_cents.trap",
+          "planted": true,
+          "flagIndex": -1,
+          "failIndex": 4,
+          "outcome": "missed"
+        },
+        {
+          "id": "shipping.stale_rate_table.honest_plain",
+          "planted": false,
+          "flagIndex": -1,
+          "outcome": "clean"
+        },
+        {
+          "id": "shipping.stale_rate_table.honest_aware",
+          "planted": false,
+          "flagIndex": -1,
+          "outcome": "clean"
+        },
+        {
+          "id": "shipping.stale_rate_table.trap",
+          "planted": true,
+          "flagIndex": -1,
+          "failIndex": 4,
+          "outcome": "missed"
+        },
+        {
+          "id": "shipping.stale_rate_table_quote.honest_plain",
+          "planted": false,
+          "flagIndex": -1,
+          "outcome": "clean"
+        },
+        {
+          "id": "shipping.stale_rate_table_quote.honest_aware",
+          "planted": false,
+          "flagIndex": -1,
+          "outcome": "clean"
+        },
+        {
+          "id": "shipping.stale_rate_table_quote.trap",
+          "planted": true,
+          "flagIndex": -1,
+          "failIndex": 4,
+          "outcome": "missed"
+        },
+        {
+          "id": "discount.discounts_stack.honest_plain",
+          "planted": false,
+          "flagIndex": -1,
+          "outcome": "clean"
+        },
+        {
+          "id": "discount.discounts_stack.honest_aware",
+          "planted": false,
+          "flagIndex": -1,
+          "outcome": "clean"
+        },
+        {
+          "id": "discount.discounts_stack.trap",
+          "planted": true,
+          "flagIndex": -1,
+          "failIndex": 4,
+          "outcome": "missed"
+        }
+      ],
+      "ranges": {
+        "honestSteps": [
+          0.2543,
+          0.7727
+        ],
+        "trapSteps": [
+          0.5215,
+          0.7906
+        ],
+        "plantedRunAllSteps": [
+          0.3659,
+          0.7906
+        ],
+        "honestWindowed": [
+          0.3867,
+          0.7727
+        ],
+        "plantedWindowedBeforeFail": [
+          0.3911,
+          0.6771
+        ]
+      },
+      "caseEmbeddingUsage": {
+        "input_tokens": 505,
+        "usd": 0.0000101,
+        "calls": 1
+      },
+      "scores": {
+        "invoice.amount_cents.honest_plain": [
+          0.5192,
+          0.2543,
+          0.4273,
+          0.6707,
+          0.5624,
+          0.5095
+        ],
+        "invoice.amount_cents.honest_aware": [
+          0.6531,
+          0.6659,
+          0.4293,
+          0.5343,
+          0.5524,
+          0.5318
+        ],
+        "invoice.amount_cents.trap": [
+          0.3911,
+          0.6632,
+          0.5774,
+          0.7906,
+          0.6859,
+          0.5687
+        ],
+        "shipping.stale_rate_table.honest_plain": [
+          0.7727,
+          0.3336,
+          0.7339,
+          0.6265,
+          0.7131,
+          0.4293
+        ],
+        "shipping.stale_rate_table.honest_aware": [
+          0.7227,
+          0.7446,
+          0.6407,
+          0.5357,
+          0.7088,
+          0.5541
+        ],
+        "shipping.stale_rate_table.trap": [
+          0.6733,
+          0.6647,
+          0.5605,
+          0.7106,
+          0.7449,
+          0.4913
+        ],
+        "shipping.stale_rate_table_quote.honest_plain": [
+          0.6155,
+          0.5101,
+          0.4993,
+          0.6896,
+          0.5122,
+          0.4028
+        ],
+        "shipping.stale_rate_table_quote.honest_aware": [
+          0.5666,
+          0.6388,
+          0.6745,
+          0.5169,
+          0.5092,
+          0.4574
+        ],
+        "shipping.stale_rate_table_quote.trap": [
+          0.4228,
+          0.6684,
+          0.7066,
+          0.5215,
+          0.6455,
+          0.4382
+        ],
+        "discount.discounts_stack.honest_plain": [
+          0.5946,
+          0.5537,
+          0.6012,
+          0.4627,
+          0.673,
+          0.3879
+        ],
+        "discount.discounts_stack.honest_aware": [
+          0.6885,
+          0.5291,
+          0.6935,
+          0.4058,
+          0.6856,
+          0.3803
+        ],
+        "discount.discounts_stack.trap": [
+          0.5973,
+          0.7234,
+          0.5416,
+          0.737,
+          0.7522,
+          0.3659
+        ]
+      },
+      "nearest": {
+        "invoice.amount_cents.honest_plain": [
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents"
+        ],
+        "invoice.amount_cents.honest_aware": [
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents"
+        ],
+        "invoice.amount_cents.trap": [
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents"
+        ],
+        "shipping.stale_rate_table.honest_plain": [
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table_quote",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table"
+        ],
+        "shipping.stale_rate_table.honest_aware": [
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table_quote"
+        ],
+        "shipping.stale_rate_table.trap": [
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table"
+        ],
+        "shipping.stale_rate_table_quote.honest_plain": [
+          "seed.shipping_rates.stale_rate_table_quote",
+          "seed.shipping_rates.stale_rate_table_quote",
+          "seed.shipping_rates.stale_rate_table_quote",
+          "seed.shipping_rates.stale_rate_table_quote",
+          "seed.shipping_rates.stale_rate_table_quote",
+          "seed.shipping_rates.stale_rate_table_quote"
+        ],
+        "shipping.stale_rate_table_quote.honest_aware": [
+          "seed.shipping_rates.stale_rate_table_quote",
+          "seed.shipping_rates.stale_rate_table_quote",
+          "seed.shipping_rates.stale_rate_table_quote",
+          "seed.invoice_parser.amount_cents",
+          "seed.shipping_rates.stale_rate_table_quote",
+          "seed.shipping_rates.stale_rate_table"
+        ],
+        "shipping.stale_rate_table_quote.trap": [
+          "seed.shipping_rates.stale_rate_table_quote",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table_quote",
+          "seed.shipping_rates.stale_rate_table_quote",
+          "seed.shipping_rates.stale_rate_table_quote",
+          "seed.shipping_rates.stale_rate_table"
+        ],
+        "discount.discounts_stack.honest_plain": [
+          "seed.discount_engine.discounts_stack",
+          "seed.discount_engine.discounts_stack",
+          "seed.discount_engine.discounts_stack",
+          "seed.invoice_parser.amount_cents",
+          "seed.discount_engine.discounts_stack",
+          "seed.discount_engine.discounts_stack"
+        ],
+        "discount.discounts_stack.honest_aware": [
+          "seed.discount_engine.discounts_stack",
+          "seed.discount_engine.discounts_stack",
+          "seed.discount_engine.discounts_stack",
+          "seed.invoice_parser.amount_cents",
+          "seed.discount_engine.discounts_stack",
+          "seed.shipping_rates.stale_rate_table"
+        ],
+        "discount.discounts_stack.trap": [
+          "seed.discount_engine.discounts_stack",
+          "seed.discount_engine.discounts_stack",
+          "seed.discount_engine.discounts_stack",
+          "seed.discount_engine.discounts_stack",
+          "seed.discount_engine.discounts_stack",
+          "seed.discount_engine.discounts_stack"
+        ]
+      }
+    },
+    "contrast": {
+      "mode": "contrast",
+      "threshold": 0.1033,
+      "window": 3,
+      "consecutive": 2,
+      "honestRuns": 8,
+      "plantedRuns": 4,
+      "flaggedEarly": 1,
+      "flaggedLate": 0,
+      "missed": 3,
+      "falseFlags": 0,
+      "perRun": [
+        {
+          "id": "invoice.amount_cents.honest_plain",
+          "planted": false,
+          "flagIndex": -1,
+          "outcome": "clean"
+        },
+        {
+          "id": "invoice.amount_cents.honest_aware",
+          "planted": false,
+          "flagIndex": -1,
+          "outcome": "clean"
+        },
+        {
+          "id": "invoice.amount_cents.trap",
+          "planted": true,
+          "flagIndex": 2,
+          "failIndex": 4,
+          "outcome": "early"
+        },
+        {
+          "id": "shipping.stale_rate_table.honest_plain",
+          "planted": false,
+          "flagIndex": -1,
+          "outcome": "clean"
+        },
+        {
+          "id": "shipping.stale_rate_table.honest_aware",
+          "planted": false,
+          "flagIndex": -1,
+          "outcome": "clean"
+        },
+        {
+          "id": "shipping.stale_rate_table.trap",
+          "planted": true,
+          "flagIndex": -1,
+          "failIndex": 4,
+          "outcome": "missed"
+        },
+        {
+          "id": "shipping.stale_rate_table_quote.honest_plain",
+          "planted": false,
+          "flagIndex": -1,
+          "outcome": "clean"
+        },
+        {
+          "id": "shipping.stale_rate_table_quote.honest_aware",
+          "planted": false,
+          "flagIndex": -1,
+          "outcome": "clean"
+        },
+        {
+          "id": "shipping.stale_rate_table_quote.trap",
+          "planted": true,
+          "flagIndex": -1,
+          "failIndex": 4,
+          "outcome": "missed"
+        },
+        {
+          "id": "discount.discounts_stack.honest_plain",
+          "planted": false,
+          "flagIndex": -1,
+          "outcome": "clean"
+        },
+        {
+          "id": "discount.discounts_stack.honest_aware",
+          "planted": false,
+          "flagIndex": -1,
+          "outcome": "clean"
+        },
+        {
+          "id": "discount.discounts_stack.trap",
+          "planted": true,
+          "flagIndex": -1,
+          "failIndex": 4,
+          "outcome": "missed"
+        }
+      ],
+      "ranges": {
+        "honestSteps": [
+          -0.0663,
+          0.1687
+        ],
+        "trapSteps": [
+          0.0045,
+          0.238
+        ],
+        "plantedRunAllSteps": [
+          0.0004,
+          0.238
+        ],
+        "honestWindowed": [
+          -0.0663,
+          0.1271
+        ],
+        "plantedWindowedBeforeFail": [
+          0.0272,
+          0.1464
+        ]
+      },
+      "caseEmbeddingUsage": {
+        "input_tokens": 357,
+        "usd": 0.00000714,
+        "calls": 1
+      },
+      "scores": {
+        "invoice.amount_cents.honest_plain": [
+          0.0098,
+          0.0406,
+          0.1357,
+          0.1321,
+          0.0524,
+          0.0254
+        ],
+        "invoice.amount_cents.honest_aware": [
+          0.1228,
+          0.0548,
+          0.1687,
+          0.0863,
+          0.0409,
+          0.1173
+        ],
+        "invoice.amount_cents.trap": [
+          0.0547,
+          0.238,
+          0.0937,
+          0.0978,
+          0.0181,
+          0.1471
+        ],
+        "shipping.stale_rate_table.honest_plain": [
+          -0.0663,
+          0.0159,
+          0.0326,
+          -0.005,
+          0.02,
+          -0.0371
+        ],
+        "shipping.stale_rate_table.honest_aware": [
+          0.1044,
+          -0.0517,
+          -0.0303,
+          0.0137,
+          0.0175,
+          0.0346
+        ],
+        "shipping.stale_rate_table.trap": [
+          0.0272,
+          0.1343,
+          0.0045,
+          0.057,
+          0.0004,
+          0.1364
+        ],
+        "shipping.stale_rate_table_quote.honest_plain": [
+          0.0499,
+          -0.0134,
+          0.06,
+          0.0516,
+          0.0336,
+          0.0148
+        ],
+        "shipping.stale_rate_table_quote.honest_aware": [
+          0.1271,
+          -0.0291,
+          0.0503,
+          0.0976,
+          0.0383,
+          0.0284
+        ],
+        "shipping.stale_rate_table_quote.trap": [
+          0.0331,
+          0.1381,
+          0.0322,
+          0.1007,
+          0.0435,
+          0.1581
+        ],
+        "discount.discounts_stack.honest_plain": [
+          -0.0282,
+          0.1249,
+          0.0639,
+          0.0666,
+          0.0426,
+          -0.0006
+        ],
+        "discount.discounts_stack.honest_aware": [
+          0.0593,
+          -0.0068,
+          0.0991,
+          0.0291,
+          0.0384,
+          0.1441
+        ],
+        "discount.discounts_stack.trap": [
+          0.0297,
+          0.1813,
+          0.0535,
+          0.14,
+          0.1088,
+          0.1018
+        ]
+      },
+      "nearest": {
+        "invoice.amount_cents.honest_plain": [
+          "seed.invoice_parser.amount_cents",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.invoice_parser.amount_cents",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.invoice_parser.amount_cents",
+          "seed.shipping_rates.stale_rate_table"
+        ],
+        "invoice.amount_cents.honest_aware": [
+          "seed.invoice_parser.amount_cents",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents"
+        ],
+        "invoice.amount_cents.trap": [
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents"
+        ],
+        "shipping.stale_rate_table.honest_plain": [
+          "seed.shipping_rates.stale_rate_table_quote",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents"
+        ],
+        "shipping.stale_rate_table.honest_aware": [
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.shipping_rates.stale_rate_table_quote",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents"
+        ],
+        "shipping.stale_rate_table.trap": [
+          "seed.discount_engine.discounts_stack",
+          "seed.invoice_parser.amount_cents",
+          "seed.discount_engine.discounts_stack",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents"
+        ],
+        "shipping.stale_rate_table_quote.honest_plain": [
+          "seed.shipping_rates.stale_rate_table",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table"
+        ],
+        "shipping.stale_rate_table_quote.honest_aware": [
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.invoice_parser.amount_cents",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.invoice_parser.amount_cents"
+        ],
+        "shipping.stale_rate_table_quote.trap": [
+          "seed.discount_engine.discounts_stack",
+          "seed.invoice_parser.amount_cents",
+          "seed.shipping_rates.stale_rate_table_quote",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.invoice_parser.amount_cents"
+        ],
+        "discount.discounts_stack.honest_plain": [
+          "seed.shipping_rates.stale_rate_table",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents"
+        ],
+        "discount.discounts_stack.honest_aware": [
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.invoice_parser.amount_cents",
+          "seed.discount_engine.discounts_stack"
+        ],
+        "discount.discounts_stack.trap": [
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.shipping_rates.stale_rate_table",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents",
+          "seed.invoice_parser.amount_cents"
+        ]
+      }
+    }
+  }
+}

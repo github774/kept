@@ -1,0 +1,245 @@
+{
+  "generated_at": "2026-10-31T19:36:12.606Z",
+  "mock": false,
+  "rows_read": 20,
+  "rows_used": 20,
+  "rows_excluded_mock": 0,
+  "duplicate_rows_dropped": 0,
+  "window_size": 50,
+  "experiment": "emg-202610311932",
+  "library_id": "emg-202610311932-shared",
+  "arms": {
+    "shared": {
+      "agents": 12,
+      "runs": 3,
+      "exposed": 9,
+      "trap_hit_final": {
+        "count": 0,
+        "known": 9,
+        "rate": 0
+      },
+      "trap_hit_any": {
+        "count": 0,
+        "known": 9,
+        "rate": 0
+      },
+      "retired": {
+        "count": 0,
+        "known": 12,
+        "rate": 0
+      },
+      "lesson_in_prompt": {
+        "count": 0,
+        "known": 0,
+        "rate": null
+      },
+      "chunk_reused": {
+        "count": 0,
+        "known": 12,
+        "rate": 0
+      },
+      "passing_subtasks": {
+        "count": 12,
+        "known": 12,
+        "rate": 1
+      },
+      "runs_killed": 0,
+      "runs_capped_usd": 0,
+      "runs_crashed": 0,
+      "run_tokens": 168870,
+      "run_usd": 0.023872,
+      "run_tokens_per_passing_subtask": 14073,
+      "windows": [
+        {
+          "window": 0,
+          "from": 0,
+          "to": 49,
+          "agents": 12,
+          "partial": true,
+          "runs": 3,
+          "exposed": 9,
+          "trap_hit_final": {
+            "count": 0,
+            "known": 9,
+            "rate": 0
+          },
+          "trap_hit_any": {
+            "count": 0,
+            "known": 9,
+            "rate": 0
+          },
+          "retired": {
+            "count": 0,
+            "known": 12,
+            "rate": 0
+          },
+          "lesson_in_prompt": {
+            "count": 0,
+            "known": 0,
+            "rate": null
+          },
+          "trap_lesson_in_library_at_launch": {
+            "count": 0,
+            "known": 9,
+            "rate": 0
+          },
+          "chunk_reused": {
+            "count": 0,
+            "known": 12,
+            "rate": 0
+          },
+          "passing_subtasks": {
+            "count": 12,
+            "known": 12,
+            "rate": 1
+          },
+          "tokens": 168870,
+          "tokens_known": 12,
+          "tokens_per_passing_subtask": 14073,
+          "usd": 0.023873,
+          "library_cases_at_launch_max": 0,
+          "library_lessons_at_launch_max": 0
+        }
+      ]
+    },
+    "control": {
+      "agents": 8,
+      "runs": 2,
+      "exposed": 6,
+      "trap_hit_final": {
+        "count": 0,
+        "known": 6,
+        "rate": 0
+      },
+      "trap_hit_any": {
+        "count": 0,
+        "known": 6,
+        "rate": 0
+      },
+      "retired": {
+        "count": 0,
+        "known": 8,
+        "rate": 0
+      },
+      "lesson_in_prompt": {
+        "count": 0,
+        "known": 0,
+        "rate": null
+      },
+      "chunk_reused": {
+        "count": 0,
+        "known": 8,
+        "rate": 0
+      },
+      "passing_subtasks": {
+        "count": 8,
+        "known": 8,
+        "rate": 1
+      },
+      "runs_killed": 0,
+      "runs_capped_usd": 0,
+      "runs_crashed": 0,
+      "run_tokens": 157468,
+      "run_usd": 0.027623,
+      "run_tokens_per_passing_subtask": 19684,
+      "windows": [
+        {
+          "window": 0,
+          "from": 0,
+          "to": 49,
+          "agents": 8,
+          "partial": true,
+          "runs": 2,
+          "exposed": 6,
+          "trap_hit_final": {
+            "count": 0,
+            "known": 6,
+            "rate": 0
+          },
+          "trap_hit_any": {
+            "count": 0,
+            "known": 6,
+            "rate": 0
+          },
+          "retired": {
+            "count": 0,
+            "known": 8,
+            "rate": 0
+          },
+          "lesson_in_prompt": {
+            "count": 0,
+            "known": 0,
+            "rate": null
+          },
+          "trap_lesson_in_library_at_launch": {
+            "count": 0,
+            "known": 6,
+            "rate": 0
+          },
+          "chunk_reused": {
+            "count": 0,
+            "known": 8,
+            "rate": 0
+          },
+          "passing_subtasks": {
+            "count": 8,
+            "known": 8,
+            "rate": 1
+          },
+          "tokens": 157468,
+          "tokens_known": 8,
+          "tokens_per_passing_subtask": 19684,
+          "usd": 0.027623,
+          "library_cases_at_launch_max": 0,
+          "library_lessons_at_launch_max": 0
+        }
+      ]
+    }
+  },
+  "curve": {
+    "metric": "trap_hit_final rate over exposed agents",
+    "windows": [
+      {
+        "window": 0,
+        "from": 0,
+        "to": 49,
+        "shared": 0,
+        "shared_n": 9,
+        "control": 0,
+        "control_n": 6,
+        "shared_any": 0,
+        "control_any": 0
+      }
+    ]
+  },
+  "library_growth": [
+    {
+      "wave": 1,
+      "at": 1793475372565,
+      "cases": 0,
+      "lessons": 0,
+      "synthetic": 0,
+      "revoked": 0
+    }
+  ],
+  "cost": {
+    "ledger_usd": 0.051495,
+    "openrouter_key_usage_delta_usd": 0.069197,
+    "budget_usd": 1
+  },
+  "wall": {
+    "first_launch": 1793475122954,
+    "last_end": 1793475370912,
+    "span_ms": 247958,
+    "session_ms": 249708,
+    "run_ms_mean": 215147
+  },
+  "resources": {
+    "processes": 857,
+    "stack_processes": 116,
+    "stack_rss_mb": 4344,
+    "bench_rss_mb": 70,
+    "samples": 51
+  },
+  "notes": []
+}

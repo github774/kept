@@ -1,0 +1,25 @@
+{
+  "_comment": "USD per 1M tokens. Ledger prefers OpenRouter usage.cost when present (DECISIONS #1).",
+  "checked": "2026-10-31",
+  "models": {
+    "openai/gpt-6-luna": {
+      "input": 0.1,
+      "cached_input": 0.01,
+      "output": 0.5
+    },
+    "typesafe/jev-1.14": {
+      "input": 0.042,
+      "output": 0
+    },
+    "openai/text-embedding-3-small": {
+      "input": 0.02,
+      "output": 0
+    },
+    "deepseek/deepseek-v4.1-flash-1017": {
+      "input": 0.3,
+      "cached_input": 0.006,
+      "output": 1.2,
+      "_note": "OpenRouter price varies by time of day (0.15-0.30 in / 0.60-1.20 out); peak listed as fallback. Ledger uses OpenRouter usage.cost when present."
+    }
+  }
+}

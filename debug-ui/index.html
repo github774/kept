@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Orchestrator debug UI</title>
+<style>
+  :root { color-scheme: dark; --bg:#16161a; --panel:#1f1f25; --line:#33333c; --ink:#e8e8ee; --dim:#9a9aa6; --accent:#b89cff; --ok:#5fd38d; --warn:#f2c14e; --bad:#ff6b6b; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:var(--bg); color:var(--ink); font:14px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; }
+  header { display:flex; flex-wrap:wrap; gap:8px; align-items:center; padding:10px 14px; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--bg); z-index:1; }
+  header h1 { font-size:15px; margin:0 12px 0 0; }
+  main { display:grid; grid-template-columns:repeat(auto-fit,minmax(420px,1fr)); gap:12px; padding:12px; }
+  section { background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:10px; min-width:0; }
+  section h2 { font-size:13px; margin:0 0 8px; color:var(--dim); text-transform:uppercase; letter-spacing:.05em; display:flex; justify-content:space-between; gap:8px; }
+  .scroll { max-height:360px; overflow:auto; }
+  table { width:100%; border-collapse:collapse; }
+  th, td { text-align:left; padding:4px 6px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { color:var(--dim); font-weight:normal; }
+  button, select, input { font:inherit; color:var(--ink); background:#2a2a32; border:1px solid var(--line); border-radius:5px; padding:4px 8px; }
+  button { cursor:pointer; } button:hover { border-color:var(--accent); }
+  pre { margin:0; white-space:pre-wrap; word-break:break-word; font-size:12px; }
+  .badge { padding:2px 8px; border-radius:4px; font-weight:bold; }
+  .mock { background:var(--warn); color:#000; }
+  .live { background:var(--ok); color:#000; }
+  .off { background:var(--bad); color:#000; }
+  .dim { color:var(--dim); }
+  .blocked { text-decoration:line-through; color:var(--bad); }
+  .s-trusted{color:var(--ok)} .s-probation{color:var(--warn)} .s-under_investigation{color:#ff9f43} .s-retiring{color:#d08b5b} .s-retired{color:var(--dim)} .s-failed{color:var(--bad)}
+  .clickable { cursor:pointer; text-decoration:underline dotted; }
+  #log div { border-bottom:1px solid var(--line); padding:2px 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Orchestrator debug UI</h1>
+  <span id="conn" class="badge off">SSE: closed</span>
+  <span id="mockBadge"></span>
+  <span class="dim">run</span><select id="runSel"></select>
+  <button id="refresh">Refresh</button>
+  <span class="dim">|</span>
+  <select id="task"><option>invoice_parser</option><option>shipping_rates</option><option>discount_engine</option></select>
+  <select id="mode"><option>ours</option><option>baseline</option><option>ablation</option></select>
+  <input id="lib" placeholder="libraryId (blank = cold)" size="22">
+  <button id="start">Start run</button>
+  <button id="stop">Stop run</button>
+  <button id="crash" title="Mock only: exits the server so its supervisor restarts it">Crash (mock)</button>
+  <span id="status" class="dim"></span>
+</header>
+<main>
+  <section><h2>Run <span id="runMeta"></span></h2><div id="run" class="scroll"></div></section>
+  <section><h2>Roster</h2><div id="roster" class="scroll"></div></section>
+  <section><h2>Relay feed</h2><div id="relay" class="scroll"></div></section>
+  <section><h2>Cases <span class="dim">click to open</span></h2><div id="cases" class="scroll"></div><pre id="caseDetail" class="scroll"></pre></section>
+  <section><h2>Ledger</h2><pre id="ledger" class="scroll"></pre></section>
+  <section><h2>Jev + swarm + recovery</h2><pre id="jev" class="scroll"></pre></section>
+  <section><h2>Benchmark rows <button id="loadBench">Load</button></h2><div id="bench" class="scroll"></div></section>
+  <section><h2>Event log (SSE) <span><label><input type="checkbox" id="pause"> pause</label> <button id="clearLog">Clear</button></span></h2><div id="log" class="scroll"></div></section>
+</main>
+<script>
+const $ = (id) => document.getElementById(id);
+const esc = (s) => String(s ?? "").replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
+const usd = (n) => (n == null ? "-" : "$" + Number(n).toPrecision(3));
+const time = (ts) => (ts ? new Date(ts).toLocaleTimeString() : "-");
+const state = { runId: null, runs: [], mock: false, lastSeq: 0, extra: { swarm: null, recoveries: [] } };
+
+async function call(method, path, body) {
+  const res = await fetch(path, { method, headers: body ? { "Content-Type": "application/json" } : {}, body: body ? JSON.stringify(body) : undefined });
+  const text = await res.text();
+  let data; try { data = text ? JSON.parse(text) : null; } catch { data = text; }
+  $("status").textContent = `${method} ${path} -> ${res.status}` + (res.ok ? "" : ` ${typeof data === "object" ? JSON.stringify(data) : data}`);
+  if (!res.ok) throw Object.assign(new Error(res.status), { data });
+  return data;
+}
+
+function setMock(flag) { if (flag) state.mock = true; $("mockBadge").innerHTML = state.mock ? '<span class="badge mock">MOCK</span>' : ""; }
+
+async function loadRuns() {
+  state.runs = (await call("GET", "/api/runs")) || [];
+  if (!state.runId && state.runs.length) state.runId = state.runs.at(-1).runId;
+  $("runSel").innerHTML = state.runs.map((r) => `<option ${r.runId === state.runId ? "selected" : ""}>${esc(r.runId)}</option>`).join("");
+  state.runs.forEach((r) => setMock(r.mock));
+  renderRun();
+}
+
+function renderRun() {
+  const r = state.runs.find((x) => x.runId === state.runId);
+  $("runMeta").textContent = r ? `${r.status}` : "none";
+  $("run").innerHTML = r ? `<table>${Object.entries(r).map(([k, v]) => `<tr><th>${esc(k)}</th><td>${esc(k.endsWith("At") ? time(v) : typeof v === "object" ? JSON.stringify(v) : v)}</td></tr>`).join("")}</table>` : '<span class="dim">No run yet. Start one.</span>';
+}
+
+function renderRoster(agents) {
+  $("roster").innerHTML = `<table><tr><th>slot</th><th>name</th><th>gen</th><th>status</th><th>step</th><th>subtask</th><th>ver</th><th>$</th><th>actions</th></tr>${(agents || []).map((a) => `<tr>
+    <td>${a.slot}</td><td>${esc(a.name)}${a.possessed ? ' <b style="color:var(--accent)">POSSESSED</b>' : ""}</td><td>g${a.gen}</td>
+    <td class="s-${a.status}">${esc(a.status)}</td><td>${a.step}</td><td>${esc(a.subtask)}</td><td>${a.verifiedSteps}</td><td>${usd(a.tokens?.usd)}</td>
+    <td><button data-possess="${a.slot}">Possess</button> <select data-fault-sel="${a.slot}"><option>F1</option><option>F2</option><option>F3</option><option>F4</option></select><button data-fault="${a.slot}">Inject</button></td></tr>
+    <tr><td></td><td colspan="8" class="dim">${esc(a.lastSummary || "")}</td></tr>`).join("")}</table>`;
+}
+
+function relayRow(m) {
+  const b = m.blocked ? `<div class="dim">BLOCKED: ${esc(m.blocked.reason)} (${esc(m.blocked.questionId)} P=${m.blocked.probability} via ${esc(m.blocked.source)})</div>` : "";
+  const c = m.metadata?.caseId ? ` <span class="clickable" data-case="${esc(m.metadata.caseId)}">[case ${esc(m.metadata.caseId)}]</span>` : "";
+  return `<tr><td class="dim">${m.seq}<br>${time(m.ts)}</td><td>${esc(m.channel)}<br><span class="dim">${esc(m.metadata?.kind || "")}</span></td><td><b>${esc(m.from)}</b>${m.to ? " → " + esc(m.to) : ""}${c}<div class="${m.blocked ? "blocked" : ""}">${esc(m.text)}</div>${b}</td></tr>`;
+}
+let relayItems = [];
+function renderRelay() { $("relay").innerHTML = `<table>${relayItems.slice(-200).reverse().map(relayRow).join("")}</table>`; }
+
+function renderCases(cases) {
+  $("cases").innerHTML = `<table><tr><th>id</th><th>agent</th><th>category</th><th>lesson</th></tr>${(cases || []).map((c) => `<tr>
+    <td class="clickable" data-case="${esc(c.id)}">${esc(c.id)}${c.synthetic ? " (synthetic)" : ""}${c.revoked ? " (revoked)" : ""}</td><td>${esc(c.agentName)}</td><td>${esc(c.category)}</td><td>${esc(c.lesson ?? "NO_LESSON")}</td></tr>`).join("")}</table>`;
+}
+
+function renderExtra(jev) {
+  $("jev").textContent = JSON.stringify({ jev: jev ?? state.extra.jev, swarm: state.extra.swarm, recoveries: state.extra.recoveries }, null, 2);
+  if (jev) state.extra.jev = jev;
+}
+
+async function refreshRun() {
+  await loadRuns();
+  if (!state.runId) return;
+  const id = encodeURIComponent(state.runId);
+  const [roster, ledger, relay, cases, jev] = await Promise.all([
+    call("GET", `/api/runs/${id}/roster`), call("GET", `/api/runs/${id}/ledger`), call("GET", `/api/runs/${id}/relay`), call("GET", `/api/runs/${id}/cases`), call("GET", "/api/jev"),
+  ]);
+  renderRoster(roster); $("ledger").textContent = JSON.stringify(ledger, null, 2);
+  relayItems = relay || []; renderRelay(); renderCases(cases); renderExtra(jev);
+}
+
+let rosterCache = [];
+function onEvent(ev) {
+  state.lastSeq = Math.max(state.lastSeq, ev.seq || 0);
+  setMock(ev.mock);
+  if (!$("pause").checked) {
+    const d = document.createElement("div");
+    d.innerHTML = `<span class="dim">#${ev.seq} ${time(ev.ts)}</span> <b>${esc(ev.type)}</b> <span class="dim">${esc(ev.runId)}</span> <details style="display:inline"><summary></summary><pre>${esc(JSON.stringify(ev, null, 2))}</pre></details>`;
+    $("log").prepend(d);
+    while ($("log").childElementCount > 300) $("log").lastChild.remove();
+  }
+  if (ev.type === "run.status") {
+    const i = state.runs.findIndex((r) => r.runId === ev.run.runId);
+    if (i >= 0) state.runs[i] = ev.run; else { state.runs.push(ev.run); $("runSel").insertAdjacentHTML("beforeend", `<option>${esc(ev.run.runId)}</option>`); }
+    if (!state.runId) { state.runId = ev.run.runId; refreshRun(); }
+    renderRun();
+    if (ev.banner) $("status").textContent = "banner: " + ev.banner;
+  }
+  if (ev.runId !== state.runId && ev.type !== "jev.status" && ev.type !== "swarm.stats") return;
+  switch (ev.type) {
+    case "roster": rosterCache = ev.agents; renderRoster(rosterCache); break;
+    case "agent.status": {
+      const i = rosterCache.findIndex((a) => a.slot === ev.slot);
+      const next = ev.agent ?? { ...(rosterCache[i] || {}), slot: ev.slot, gen: ev.gen, status: ev.status, step: ev.step };
+      if (i >= 0) rosterCache[i] = next; else rosterCache.push(next);
+      renderRoster(rosterCache); break;
+    }
+    case "relay.message": relayItems.push(ev.item); renderRelay(); break;
+    case "case.created": call("GET", `/api/runs/${encodeURIComponent(state.runId)}/cases`).then(renderCases); break;
+    case "case.reply": call("GET", `/api/runs/${encodeURIComponent(state.runId)}/cases`).then(renderCases); break;
+    case "ledger.totals": $("ledger").textContent = JSON.stringify(ev.totals, null, 2); break;
+    case "jev.status": renderExtra(ev.status); break;
+    case "swarm.stats": state.extra.swarm = ev.stats; renderExtra(); break;
+    case "recovery": state.extra.recoveries.push({ caseId: ev.caseId, ms: ev.ms }); renderExtra(); break;
+  }
+}
+
+let es = null, retry = 0;
+function connect() {
+  es?.close();
+  es = new EventSource(`/api/events${state.lastSeq ? `?since=${state.lastSeq}` : ""}`);
+  const types = ["roster", "agent.status", "relay.message", "case.created", "case.reply", "ledger.totals", "jev.status", "recovery", "run.status", "swarm.stats"];
+  types.forEach((t) => es.addEventListener(t, (e) => onEvent(JSON.parse(e.data))));
+  es.onmessage = (e) => { try { onEvent(JSON.parse(e.data)); } catch {} };
+  es.onopen = () => { retry = 0; $("conn").className = "badge live"; $("conn").textContent = "SSE: open"; refreshRun().catch(() => {}); };
+  es.onerror = () => {
+    es.close(); $("conn").className = "badge off"; $("conn").textContent = "SSE: reconnecting";
+    setTimeout(connect, [1000, 2000, 4000][retry++] ?? 5000);
+  };
+}
+
+document.addEventListener("click", async (e) => {
+  const t = e.target;
+  try {
+    if (t.dataset.possess) await call("POST", `/api/runs/${encodeURIComponent(state.runId)}/possess`, { slot: Number(t.dataset.possess) });
+    if (t.dataset.fault) await call("POST", `/api/runs/${encodeURIComponent(state.runId)}/fault`, { slot: Number(t.dataset.fault), fault: document.querySelector(`[data-fault-sel="${t.dataset.fault}"]`).value });
+    if (t.dataset.case) $("caseDetail").textContent = JSON.stringify(await call("GET", `/api/cases/${encodeURIComponent(t.dataset.case)}`), null, 2);
+  } catch {}
+});
+$("start").onclick = async () => {
+  const body = { taskId: $("task").value, mode: $("mode").value };
+  if ($("lib").value.trim()) body.libraryId = $("lib").value.trim();
+  try { const r = await call("POST", "/api/runs", body); state.runId = r.runId; relayItems = []; rosterCache = []; await refreshRun(); } catch {}
+};
+$("stop").onclick = () => state.runId && call("POST", `/api/runs/${encodeURIComponent(state.runId)}/stop`).catch(() => {});
+$("crash").onclick = () => call("POST", "/api/demo/crash").catch(() => {});
+$("refresh").onclick = () => refreshRun().catch(() => {});
+$("runSel").onchange = (e) => { state.runId = e.target.value; refreshRun().catch(() => {}); };
+$("clearLog").onclick = () => ($("log").innerHTML = "");
+$("loadBench").onclick = async () => {
+  const rows = (await call("GET", "/api/bench").catch(() => [])) || [];
+  rows.forEach((r) => setMock(r.mock));
+  const cols = ["mode", "task", "trial", "success", "tokens_per_passing_task", "usd", "trap_hits", "repeat_trap_hits", "recovery_ms", "finish_ms", "false_retires", "sourceId"];
+  $("bench").innerHTML = `<div class="dim">${rows.length} rows</div><table><tr>${cols.map((c) => `<th>${c}</th>`).join("")}</tr>${rows.map((r) => `<tr>${cols.map((c) => `<td>${esc(r[c])}</td>`).join("")}</tr>`).join("")}</table>`;
+};
+call("GET", "/api/meta").then((m) => setMock(m?.mock)).catch(() => {});
+connect();
+</script>
+</body>
+</html>

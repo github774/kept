@@ -1,0 +1,44 @@
+{
+  "id": "he_digits",
+  "version": 100,
+  "suite": "humaneval",
+  "source": "openai/human-eval data/HumanEval.jsonl.gz",
+  "humaneval_task_ids": [
+    "HumanEval/145",
+    "HumanEval/108",
+    "HumanEval/163",
+    "HumanEval/76"
+  ],
+  "spec": "SPEC.md",
+  "functions": [
+    {
+      "name": "order_by_points",
+      "file": "order_by_points.py",
+      "test": "tests/test_order_by_points.py",
+      "subgoal": "HumanEval/145 order_by_points",
+      "humaneval_task_id": "HumanEval/145"
+    },
+    {
+      "name": "count_nums",
+      "file": "count_nums.py",
+      "test": "tests/test_count_nums.py",
+      "subgoal": "HumanEval/108 count_nums",
+      "humaneval_task_id": "HumanEval/108"
+    },
+    {
+      "name": "generate_integers",
+      "file": "generate_integers.py",
+      "test": "tests/test_generate_integers.py",
+      "subgoal": "HumanEval/163 generate_integers",
+      "humaneval_task_id": "HumanEval/163"
+    },
+    {
+      "name": "is_simple_power",
+      "file": "is_simple_power.py",
+      "test": "tests/test_is_simple_power.py",
+      "subgoal": "HumanEval/76 is_simple_power",
+      "humaneval_task_id": "HumanEval/76"
+    }
+  ],
+  "traps": []
+}

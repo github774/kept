@@ -1,0 +1,8 @@
+{
+  "_comment": "Fleet-scale mode only (src/fleet/pools.ts). llm_pools: which providers serve fleet worker + lesson calls. Same model either way; direct OpenAI is priced from prices.json (openai/<model>) and recorded as openai-direct/<model>. Benchmarks ignore this file (OpenRouter only).",
+  "llm_pools": ["openrouter", "openai"],
+  "openai_share": 0.5,
+  "openai_base_url": "https://api.openai.com/v1",
+  "openai_model": "gpt-6-luna",
+  "openai_concurrency": 96
+}

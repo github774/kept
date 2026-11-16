@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="520" viewBox="0 0 1280 520" role="img" aria-label="Kept vs Codex subagents: 100% accuracy kept, 27× fewer tokens, 6.5× cheaper, 2.1× faster">
+<rect width="1280" height="520" rx="20" fill="#F1EDE6"/>
+<text x="40" y="62" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="17" letter-spacing="2.5" fill="#6B665E">KEPT VS CODEX SUBAGENTS · SAME MODEL · SAME TASKS · SAME TESTS · 102 RUNS · 16 TASKS</text>
+<text x="38" y="150" font-family="Georgia, 'Times New Roman', serif" font-size="60" font-weight="700" fill="#1B1A17">Same accuracy. <tspan fill="#2F55D4">27× fewer tokens.</tspan></text>
+<text x="40" y="200" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="22" fill="#6B665E">Every run passed its full test suite on both sides, and Kept did it for a fraction of the tokens, cost and time.</text>
+<rect x="40" y="250" width="232" height="230" rx="14" fill="#FBF9F5" stroke="#D9D3C9"/>
+<text x="60" y="346" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="72" font-weight="800" letter-spacing="-2" fill="#2F55D4">100%</text>
+<text x="60" y="386" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="22" font-weight="600" fill="#1B1A17">accuracy kept</text>
+<text x="60" y="426" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" fill="#6B665E">1,385/1,385 tests passed</text>
+<text x="60" y="448" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" fill="#6B665E">Codex: 1,385/1,385</text>
+<rect x="286" y="250" width="232" height="230" rx="14" fill="#FBF9F5" stroke="#D9D3C9"/>
+<text x="306" y="346" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="72" font-weight="800" letter-spacing="-2" fill="#1B1A17">27×</text>
+<text x="306" y="386" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="22" font-weight="600" fill="#1B1A17">fewer tokens</text>
+<text x="306" y="426" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" fill="#6B665E">up to 33× (HumanEval)</text>
+<text x="306" y="448" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" fill="#6B665E"></text>
+<rect x="532" y="250" width="232" height="230" rx="14" fill="#FBF9F5" stroke="#D9D3C9"/>
+<text x="552" y="346" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="72" font-weight="800" letter-spacing="-2" fill="#1B1A17">6.5×</text>
+<text x="552" y="386" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="22" font-weight="600" fill="#1B1A17">cheaper</text>
+<text x="552" y="426" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" fill="#6B665E">up to 8.2× (Heavy)</text>
+<text x="552" y="448" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" fill="#6B665E"></text>
+<rect x="778" y="250" width="232" height="230" rx="14" fill="#FBF9F5" stroke="#D9D3C9"/>
+<text x="798" y="346" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="72" font-weight="800" letter-spacing="-2" fill="#1B1A17">2.1×</text>
+<text x="798" y="386" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="22" font-weight="600" fill="#1B1A17">faster</text>
+<text x="798" y="426" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" fill="#6B665E">up to 4.0× (Heavy)</text>
+<text x="798" y="448" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" fill="#6B665E"></text>
+<rect x="1024" y="250" width="232" height="230" rx="14" fill="#FBF9F5" stroke="#D9D3C9"/>
+<text x="1044" y="346" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="72" font-weight="800" letter-spacing="-2" fill="#B8612F">0</text>
+<text x="1044" y="386" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="22" font-weight="600" fill="#1B1A17">traps followed</text>
+<text x="1044" y="426" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" fill="#6B665E">Codex followed 17</text>
+<text x="1044" y="448" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="15" fill="#6B665E">planted misleading facts</text>
+</svg>

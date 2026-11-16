@@ -1,0 +1,15 @@
+{
+  "act": 0.62,
+  "pass": 0.45,
+  "jev_timeout_ms": 2000,
+  "jev_fail_switch": 3,
+  "jev_fallback_window_ms": 60000,
+  "case_similarity": 0.4,
+  "lesson_relevant": 0.5,
+  "chunk_similarity": 0.8,
+  "max_recipients": 3,
+  "probation_verified_steps": 2,
+  "stuck_test_runs": 3,
+  "_comment": "act/pass from real Jev calibration 2026-10-31 (bench/jev-calibration/report.md): 222 calls, 0 false act/pass, clean max p=0.56 (0.25 after rewording), problems min 0.94. Lower pass before act if live clean messages land in 0.45-0.62.",
+  "_comment_similarity": "case_similarity 0.6->0.4 and chunk_similarity 0.75->0.55 from measured cosines (text-embedding-3-small, 256d) on runs rhaip/rcudu: same-function chunk vs subgoal 0.77-0.86, cross-function 0.27-0.59; trap case vs other subgoals 0.15-0.46. At 0.6/0.75 nothing could ever be shared (DECISIONS #15). Jev lesson_relevant still filters case recipients."
+}

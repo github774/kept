@@ -1,0 +1,8 @@
+retry: 600000
+
+event: hello
+data: {"bootId":"recorded","mock":false,"gap":false}
+
+event: live
+data: {}
+

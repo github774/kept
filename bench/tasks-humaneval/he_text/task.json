@@ -1,0 +1,44 @@
+{
+  "id": "he_text",
+  "version": 100,
+  "suite": "humaneval",
+  "source": "openai/human-eval data/HumanEval.jsonl.gz",
+  "humaneval_task_ids": [
+    "HumanEval/93",
+    "HumanEval/134",
+    "HumanEval/153",
+    "HumanEval/101"
+  ],
+  "spec": "SPEC.md",
+  "functions": [
+    {
+      "name": "encode",
+      "file": "encode.py",
+      "test": "tests/test_encode.py",
+      "subgoal": "HumanEval/93 encode",
+      "humaneval_task_id": "HumanEval/93"
+    },
+    {
+      "name": "check_if_last_char_is_a_letter",
+      "file": "check_if_last_char_is_a_letter.py",
+      "test": "tests/test_check_if_last_char_is_a_letter.py",
+      "subgoal": "HumanEval/134 check_if_last_char_is_a_letter",
+      "humaneval_task_id": "HumanEval/134"
+    },
+    {
+      "name": "Strongest_Extension",
+      "file": "Strongest_Extension.py",
+      "test": "tests/test_Strongest_Extension.py",
+      "subgoal": "HumanEval/153 Strongest_Extension",
+      "humaneval_task_id": "HumanEval/153"
+    },
+    {
+      "name": "words_string",
+      "file": "words_string.py",
+      "test": "tests/test_words_string.py",
+      "subgoal": "HumanEval/101 words_string",
+      "humaneval_task_id": "HumanEval/101"
+    }
+  ],
+  "traps": []
+}

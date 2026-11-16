@@ -1,0 +1,2413 @@
+{
+ "generated_at": "2026-10-31T20:18:53.438Z",
+ "task": "invoicing_ab (bench/ab/tasks; v3 invoicing, clean helper, mid-run round_money -> ROUND_HALF_EVEN)",
+ "model": [
+  "openai/gpt-6-luna"
+ ],
+ "rows": 21,
+ "excluded": [
+  {
+   "arm": "C",
+   "trial": 6,
+   "run_id": "rrqp2",
+   "reason": "run ended before the poison rule fired"
+  }
+ ],
+ "usd_total": 0.4731,
+ "note": "mean and min-max over trials; no significance claimed. OTHER agents = the 5 helper-dependent functions minus the first poison case's slot.",
+ "exp1_caucus": {
+  "herd_on": {
+   "arm": "A",
+   "trials": 6,
+   "poison_s": {
+    "mean": 52.682,
+    "min": 38.794,
+    "max": 68.616,
+    "n": 6
+   },
+   "deps_importing_at_poison": {
+    "mean": 4.167,
+    "min": 3,
+    "max": 5,
+    "n": 6
+   },
+   "finish_s": {
+    "mean": 199.967,
+    "min": 70.8,
+    "max": 276.8,
+    "n": 6
+   },
+   "tokens": {
+    "mean": 317354.333,
+    "min": 177911,
+    "max": 473792,
+    "n": 6
+   },
+   "usd": {
+    "mean": 0.021,
+    "min": 0.009,
+    "max": 0.035,
+    "n": 6
+   },
+   "final_passing": {
+    "mean": 4.167,
+    "min": 2,
+    "max": 7,
+    "n": 6
+   },
+   "poison_final_all": {
+    "mean": 2.833,
+    "min": 0,
+    "max": 5,
+    "n": 6
+   },
+   "retires": {
+    "mean": 1.5,
+    "min": 0,
+    "max": 3,
+    "n": 6
+   },
+   "poison_cases": {
+    "mean": 1.5,
+    "min": 0,
+    "max": 3,
+    "n": 6
+   },
+   "first_case_s": {
+    "mean": 66.122,
+    "min": 51.229,
+    "max": 89.786,
+    "n": 5
+   },
+   "repeat_failures_same_type_after_first_case": {
+    "mean": 0.667,
+    "min": 0,
+    "max": 2,
+    "n": 6
+   },
+   "others_repeat_cases": {
+    "mean": 0.667,
+    "min": 0,
+    "max": 2,
+    "n": 6
+   },
+   "others_retires_after_poison": {
+    "mean": 0.667,
+    "min": 0,
+    "max": 2,
+    "n": 6
+   },
+   "others_poison_fail_runs_after_first_case": {
+    "mean": 7.167,
+    "min": 0,
+    "max": 26,
+    "n": 6
+   },
+   "others_poison_fail_runs_after_poison": {
+    "mean": 7.833,
+    "min": 0,
+    "max": 29,
+    "n": 6
+   },
+   "others_poison_final": {
+    "mean": 2.667,
+    "min": 0,
+    "max": 5,
+    "n": 6
+   },
+   "others_failing_final": {
+    "mean": 2.667,
+    "min": 0,
+    "max": 5,
+    "n": 6
+   },
+   "others_tokens": {
+    "mean": 120865,
+    "min": 48124,
+    "max": 276201,
+    "n": 6
+   },
+   "others_last_step_s": {
+    "mean": 129.055,
+    "min": 49.643,
+    "max": 261.143,
+    "n": 6
+   }
+  },
+  "herd_off": {
+   "arm": "B",
+   "trials": 3,
+   "poison_s": {
+    "mean": 59.009,
+    "min": 52.366,
+    "max": 66.386,
+    "n": 3
+   },
+   "deps_importing_at_poison": {
+    "mean": 4.333,
+    "min": 3,
+    "max": 5,
+    "n": 3
+   },
+   "finish_s": {
+    "mean": 229.633,
+    "min": 125.4,
+    "max": 285.7,
+    "n": 3
+   },
+   "tokens": {
+    "mean": 359021.333,
+    "min": 217180,
+    "max": 446060,
+    "n": 3
+   },
+   "usd": {
+    "mean": 0.027,
+    "min": 0.013,
+    "max": 0.039,
+    "n": 3
+   },
+   "final_passing": {
+    "mean": 5,
+    "min": 3,
+    "max": 6,
+    "n": 3
+   },
+   "poison_final_all": {
+    "mean": 2,
+    "min": 1,
+    "max": 4,
+    "n": 3
+   },
+   "retires": {
+    "mean": 2,
+    "min": 0,
+    "max": 3,
+    "n": 3
+   },
+   "poison_cases": {
+    "mean": 2,
+    "min": 0,
+    "max": 3,
+    "n": 3
+   },
+   "first_case_s": {
+    "mean": 78.5,
+    "min": 72.458,
+    "max": 84.542,
+    "n": 2
+   },
+   "repeat_failures_same_type_after_first_case": {
+    "mean": 1.333,
+    "min": 0,
+    "max": 2,
+    "n": 3
+   },
+   "others_repeat_cases": {
+    "mean": 1.333,
+    "min": 0,
+    "max": 2,
+    "n": 3
+   },
+   "others_retires_after_poison": {
+    "mean": 1.333,
+    "min": 0,
+    "max": 2,
+    "n": 3
+   },
+   "others_poison_fail_runs_after_first_case": {
+    "mean": 13.333,
+    "min": 2,
+    "max": 24,
+    "n": 3
+   },
+   "others_poison_fail_runs_after_poison": {
+    "mean": 14.667,
+    "min": 2,
+    "max": 26,
+    "n": 3
+   },
+   "others_poison_final": {
+    "mean": 2,
+    "min": 1,
+    "max": 4,
+    "n": 3
+   },
+   "others_failing_final": {
+    "mean": 2,
+    "min": 1,
+    "max": 4,
+    "n": 3
+   },
+   "others_tokens": {
+    "mean": 173730.333,
+    "min": 90768,
+    "max": 231793,
+    "n": 3
+   },
+   "others_last_step_s": {
+    "mean": 206.985,
+    "min": 110.18,
+    "max": 260.631,
+    "n": 3
+   }
+  }
+ },
+ "exp2a_respawn": {
+  "clean": {
+   "arm": "A",
+   "trials": 6,
+   "poison_s": {
+    "mean": 52.682,
+    "min": 38.794,
+    "max": 68.616,
+    "n": 6
+   },
+   "deps_importing_at_poison": {
+    "mean": 4.167,
+    "min": 3,
+    "max": 5,
+    "n": 6
+   },
+   "finish_s": {
+    "mean": 199.967,
+    "min": 70.8,
+    "max": 276.8,
+    "n": 6
+   },
+   "tokens": {
+    "mean": 317354.333,
+    "min": 177911,
+    "max": 473792,
+    "n": 6
+   },
+   "usd": {
+    "mean": 0.021,
+    "min": 0.009,
+    "max": 0.035,
+    "n": 6
+   },
+   "final_passing": {
+    "mean": 4.167,
+    "min": 2,
+    "max": 7,
+    "n": 6
+   },
+   "poison_final_all": {
+    "mean": 2.833,
+    "min": 0,
+    "max": 5,
+    "n": 6
+   },
+   "retires": {
+    "mean": 1.5,
+    "min": 0,
+    "max": 3,
+    "n": 6
+   },
+   "poison_cases": {
+    "mean": 1.5,
+    "min": 0,
+    "max": 3,
+    "n": 6
+   },
+   "replacement": {
+    "replacements": 9,
+    "replacements_after_poison_case": 9,
+    "repeat_failure_rate": 1,
+    "retired_again_rate": 0,
+    "final_pass_rate": 0.667,
+    "final_followed_rate": 0.333,
+    "steps_to_green": {
+     "mean": 4.833,
+     "min": 3,
+     "max": 8,
+     "n": 6
+    },
+    "tokens": {
+     "mean": 83416.333,
+     "min": 44695,
+     "max": 97235,
+     "n": 9
+    },
+    "s_to_green": {
+     "mean": 44.117,
+     "min": 19.2,
+     "max": 95.8,
+     "n": 6
+    },
+    "recovery_ms": {
+     "mean": 68918.167,
+     "min": 35728,
+     "max": 131984,
+     "n": 6
+    },
+    "never_green": 3
+   }
+  },
+  "dirty": {
+   "arm": "C",
+   "trials": 5,
+   "poison_s": {
+    "mean": 54.571,
+    "min": 43.788,
+    "max": 66.918,
+    "n": 5
+   },
+   "deps_importing_at_poison": {
+    "mean": 4.2,
+    "min": 2,
+    "max": 5,
+    "n": 5
+   },
+   "finish_s": {
+    "mean": 137.34,
+    "min": 99.8,
+    "max": 193.7,
+    "n": 5
+   },
+   "tokens": {
+    "mean": 271953.6,
+    "min": 177518,
+    "max": 352421,
+    "n": 5
+   },
+   "usd": {
+    "mean": 0.019,
+    "min": 0.009,
+    "max": 0.027,
+    "n": 5
+   },
+   "final_passing": {
+    "mean": 5.2,
+    "min": 4,
+    "max": 7,
+    "n": 5
+   },
+   "poison_final_all": {
+    "mean": 1.8,
+    "min": 0,
+    "max": 3,
+    "n": 5
+   },
+   "retires": {
+    "mean": 1.4,
+    "min": 0,
+    "max": 3,
+    "n": 5
+   },
+   "poison_cases": {
+    "mean": 1.4,
+    "min": 0,
+    "max": 3,
+    "n": 5
+   },
+   "replacement": {
+    "replacements": 7,
+    "replacements_after_poison_case": 7,
+    "repeat_failure_rate": 0.143,
+    "retired_again_rate": 0,
+    "final_pass_rate": 1,
+    "final_followed_rate": 0,
+    "steps_to_green": {
+     "mean": 1,
+     "min": 1,
+     "max": 1,
+     "n": 7
+    },
+    "tokens": {
+     "mean": 43014,
+     "min": 28124,
+     "max": 77312,
+     "n": 7
+    },
+    "s_to_green": {
+     "mean": 2.157,
+     "min": 0.8,
+     "max": 4.2,
+     "n": 7
+    },
+    "recovery_ms": {
+     "mean": 27328.714,
+     "min": 15321,
+     "max": 36557,
+     "n": 7
+    },
+    "never_green": 0
+   }
+  }
+ },
+ "exp2b_revocation": {
+  "revoke_on": {
+   "arm": "B",
+   "trials": 3,
+   "seed_met": 3,
+   "poison_s": {
+    "mean": 59.009,
+    "min": 52.366,
+    "max": 66.386,
+    "n": 3
+   },
+   "deps_importing_at_poison": {
+    "mean": 4.333,
+    "min": 3,
+    "max": 5,
+    "n": 3
+   },
+   "finish_s": {
+    "mean": 229.633,
+    "min": 125.4,
+    "max": 285.7,
+    "n": 3
+   },
+   "tokens": {
+    "mean": 359021.333,
+    "min": 217180,
+    "max": 446060,
+    "n": 3
+   },
+   "usd": {
+    "mean": 0.027,
+    "min": 0.013,
+    "max": 0.039,
+    "n": 3
+   },
+   "final_passing": {
+    "mean": 5,
+    "min": 3,
+    "max": 6,
+    "n": 3
+   },
+   "poison_final_all": {
+    "mean": 2,
+    "min": 1,
+    "max": 4,
+    "n": 3
+   },
+   "retires": {
+    "mean": 2,
+    "min": 0,
+    "max": 3,
+    "n": 3
+   },
+   "poison_cases": {
+    "mean": 2,
+    "min": 0,
+    "max": 3,
+    "n": 3
+   },
+   "helper_chunks": {
+    "mean": 7,
+    "min": 4,
+    "max": 11,
+    "n": 3
+   },
+   "helper_chunks_revoked": {
+    "mean": 1.333,
+    "min": 0,
+    "max": 4,
+    "n": 3
+   },
+   "helper_reusers": {
+    "mean": 2,
+    "min": 1,
+    "max": 3,
+    "n": 3
+   },
+   "helper_reuses_after_poison": {
+    "mean": 3.333,
+    "min": 0,
+    "max": 7,
+    "n": 3
+   },
+   "reusers_poison_final": {
+    "mean": 0.667,
+    "min": 0,
+    "max": 1,
+    "n": 3
+   },
+   "reusers_failing_final": {
+    "mean": 0.667,
+    "min": 0,
+    "max": 1,
+    "n": 3
+   },
+   "revoke_calls": {
+    "mean": 1.333,
+    "min": 0,
+    "max": 4,
+    "n": 3
+   },
+   "revoke_suppressed": {
+    "mean": 0,
+    "min": 0,
+    "max": 0,
+    "n": 3
+   },
+   "revoke_dms": {
+    "mean": 2.667,
+    "min": 0,
+    "max": 8,
+    "n": 3
+   }
+  },
+  "revoke_off": {
+   "arm": "D",
+   "trials": 3,
+   "seed_met": 3,
+   "poison_s": {
+    "mean": 37.092,
+    "min": 33.726,
+    "max": 39.304,
+    "n": 3
+   },
+   "deps_importing_at_poison": {
+    "mean": 4.667,
+    "min": 4,
+    "max": 5,
+    "n": 3
+   },
+   "finish_s": {
+    "mean": 244.9,
+    "min": 228.8,
+    "max": 271.4,
+    "n": 3
+   },
+   "tokens": {
+    "mean": 413281.667,
+    "min": 385295,
+    "max": 430498,
+    "n": 3
+   },
+   "usd": {
+    "mean": 0.03,
+    "min": 0.026,
+    "max": 0.033,
+    "n": 3
+   },
+   "final_passing": {
+    "mean": 4.333,
+    "min": 2,
+    "max": 6,
+    "n": 3
+   },
+   "poison_final_all": {
+    "mean": 2.667,
+    "min": 1,
+    "max": 5,
+    "n": 3
+   },
+   "retires": {
+    "mean": 3.333,
+    "min": 2,
+    "max": 5,
+    "n": 3
+   },
+   "poison_cases": {
+    "mean": 3.333,
+    "min": 2,
+    "max": 5,
+    "n": 3
+   },
+   "helper_chunks": {
+    "mean": 8.667,
+    "min": 7,
+    "max": 10,
+    "n": 3
+   },
+   "helper_chunks_revoked": {
+    "mean": 0,
+    "min": 0,
+    "max": 0,
+    "n": 3
+   },
+   "helper_reusers": {
+    "mean": 3.333,
+    "min": 2,
+    "max": 5,
+    "n": 3
+   },
+   "helper_reuses_after_poison": {
+    "mean": 4.667,
+    "min": 4,
+    "max": 5,
+    "n": 3
+   },
+   "reusers_poison_final": {
+    "mean": 1,
+    "min": 1,
+    "max": 1,
+    "n": 3
+   },
+   "reusers_failing_final": {
+    "mean": 1,
+    "min": 1,
+    "max": 1,
+    "n": 3
+   },
+   "revoke_calls": {
+    "mean": 0,
+    "min": 0,
+    "max": 0,
+    "n": 3
+   },
+   "revoke_suppressed": {
+    "mean": 3.333,
+    "min": 0,
+    "max": 6,
+    "n": 3
+   },
+   "revoke_dms": {
+    "mean": 0,
+    "min": 0,
+    "max": 0,
+    "n": 3
+   }
+  }
+ },
+ "exp3_library": {
+  "cold": {
+   "arm": "A",
+   "trials": 6,
+   "libraries": [
+    "lib-rf4zr",
+    "lib-ryvje",
+    "lib-rsuvr",
+    "lib-rrwte",
+    "lib-rp5v3",
+    "lib-ryb2j"
+   ],
+   "poison_s": {
+    "mean": 52.682,
+    "min": 38.794,
+    "max": 68.616,
+    "n": 6
+   },
+   "deps_importing_at_poison": {
+    "mean": 4.167,
+    "min": 3,
+    "max": 5,
+    "n": 6
+   },
+   "finish_s": {
+    "mean": 199.967,
+    "min": 70.8,
+    "max": 276.8,
+    "n": 6
+   },
+   "tokens": {
+    "mean": 317354.333,
+    "min": 177911,
+    "max": 473792,
+    "n": 6
+   },
+   "usd": {
+    "mean": 0.021,
+    "min": 0.009,
+    "max": 0.035,
+    "n": 6
+   },
+   "final_passing": {
+    "mean": 4.167,
+    "min": 2,
+    "max": 7,
+    "n": 6
+   },
+   "poison_final_all": {
+    "mean": 2.833,
+    "min": 0,
+    "max": 5,
+    "n": 6
+   },
+   "retires": {
+    "mean": 1.5,
+    "min": 0,
+    "max": 3,
+    "n": 6
+   },
+   "poison_cases": {
+    "mean": 1.5,
+    "min": 0,
+    "max": 3,
+    "n": 6
+   },
+   "lessons_at_start": {
+    "mean": 0,
+    "min": 0,
+    "max": 0,
+    "n": 6
+   },
+   "deps_importing_final": {
+    "mean": 3.667,
+    "min": 2,
+    "max": 5,
+    "n": 6
+   },
+   "poison_fail_runs_all": {
+    "mean": 14.833,
+    "min": 0,
+    "max": 42,
+    "n": 6
+   },
+   "agents_with_poison_failure": {
+    "mean": 3.167,
+    "min": 0,
+    "max": 7,
+    "n": 6
+   },
+   "first_toucher_failed": [
+    false,
+    true,
+    true,
+    null,
+    false,
+    false
+   ]
+  },
+  "warm_with_cases": {
+   "arm": "E",
+   "trials": 3,
+   "libraries": [
+    "lib-rf4zr"
+   ],
+   "poison_s": {
+    "mean": 57.719,
+    "min": 53.708,
+    "max": 61.163,
+    "n": 3
+   },
+   "deps_importing_at_poison": {
+    "mean": 4,
+    "min": 3,
+    "max": 5,
+    "n": 3
+   },
+   "finish_s": {
+    "mean": 226.5,
+    "min": 198,
+    "max": 241.9,
+    "n": 3
+   },
+   "tokens": {
+    "mean": 334788,
+    "min": 230210,
+    "max": 398942,
+    "n": 3
+   },
+   "usd": {
+    "mean": 0.023,
+    "min": 0.016,
+    "max": 0.029,
+    "n": 3
+   },
+   "final_passing": {
+    "mean": 4,
+    "min": 2,
+    "max": 6,
+    "n": 3
+   },
+   "poison_final_all": {
+    "mean": 3,
+    "min": 1,
+    "max": 5,
+    "n": 3
+   },
+   "retires": {
+    "mean": 1.667,
+    "min": 1,
+    "max": 2,
+    "n": 3
+   },
+   "poison_cases": {
+    "mean": 1.667,
+    "min": 1,
+    "max": 2,
+    "n": 3
+   },
+   "lessons_at_start": {
+    "mean": 1,
+    "min": 1,
+    "max": 1,
+    "n": 3
+   },
+   "deps_importing_final": {
+    "mean": 3.333,
+    "min": 2,
+    "max": 5,
+    "n": 3
+   },
+   "poison_fail_runs_all": {
+    "mean": 15.333,
+    "min": 5,
+    "max": 25,
+    "n": 3
+   },
+   "agents_with_poison_failure": {
+    "mean": 3.667,
+    "min": 2,
+    "max": 5,
+    "n": 3
+   },
+   "first_toucher_failed": [
+    false,
+    false,
+    true
+   ]
+  }
+ },
+ "per_run": {
+  "A": [
+   {
+    "arm": "A",
+    "trial": 3,
+    "run_id": "rf4zr",
+    "library_id": "lib-rf4zr",
+    "status": "failed",
+    "stopped": null,
+    "poison_s": 54.014,
+    "poison_rule": "seed: round_money chunk reused",
+    "seed_met": true,
+    "lessons_at_start": 0,
+    "deps_importing_at_poison": 3,
+    "deps_importing_final": 2,
+    "finish_s": 206,
+    "tokens": 260567,
+    "usd": 0.016809,
+    "final_passing": 5,
+    "poison_final_all": 2,
+    "retires": 1,
+    "poison_cases": 1,
+    "first_case_s": 69.433,
+    "index_fn": "line_tax",
+    "repeat_failures_same_type_after_first_case": 0,
+    "others_repeat_cases": 0,
+    "others_retires_after_poison": 0,
+    "others_poison_fail_runs_after_first_case": 0,
+    "others_poison_fail_runs_after_poison": 0,
+    "others_poison_final": 2,
+    "others_failing_final": 2,
+    "others_tokens": 48124,
+    "others_last_step_s": 57.039,
+    "poison_fail_runs_all": 8,
+    "agents_with_poison_failure": 2,
+    "first_toucher": {
+     "agent": "w3-g1-rf4zr",
+     "fn": "convert",
+     "failed_on_poison": false
+    },
+    "replacements": [
+     {
+      "agent": "w1-g2",
+      "fn": "line_tax",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 7,
+      "repeat_failure": true,
+      "steps_to_green": 8,
+      "steps": 11,
+      "tokens": 77106,
+      "s_to_green": 75.1,
+      "recovery_ms": 110946,
+      "final_pass": true,
+      "final_followed": false
+     }
+    ],
+    "helper_chunks": 6,
+    "helper_chunks_revoked": 0,
+    "helper_reusers": 1,
+    "helper_reuses_after_poison": 0,
+    "reusers_poison_final": 0,
+    "reusers_failing_final": 0,
+    "revoke_calls": 0,
+    "revoke_suppressed": 0,
+    "revoke_dms": 0
+   },
+   {
+    "arm": "A",
+    "trial": 2,
+    "run_id": "ryvje",
+    "library_id": "lib-ryvje",
+    "status": "failed",
+    "stopped": null,
+    "poison_s": 68.616,
+    "poison_rule": "fallback: 25s after first round_money chunk (not reused)",
+    "seed_met": false,
+    "lessons_at_start": 0,
+    "deps_importing_at_poison": 5,
+    "deps_importing_final": 5,
+    "finish_s": 263.6,
+    "tokens": 289569,
+    "usd": 0.019189,
+    "final_passing": 3,
+    "poison_final_all": 4,
+    "retires": 1,
+    "poison_cases": 1,
+    "first_case_s": 89.786,
+    "index_fn": "credit_note",
+    "repeat_failures_same_type_after_first_case": 0,
+    "others_repeat_cases": 0,
+    "others_retires_after_poison": 0,
+    "others_poison_fail_runs_after_first_case": 0,
+    "others_poison_fail_runs_after_poison": 0,
+    "others_poison_final": 4,
+    "others_failing_final": 4,
+    "others_tokens": 48449,
+    "others_last_step_s": 49.643,
+    "poison_fail_runs_all": 7,
+    "agents_with_poison_failure": 2,
+    "first_toucher": {
+     "agent": "w5-g1-ryvje",
+     "fn": "credit_note",
+     "failed_on_poison": true
+    },
+    "replacements": [
+     {
+      "agent": "w5-g2",
+      "fn": "credit_note",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 6,
+      "repeat_failure": true,
+      "steps_to_green": 7,
+      "steps": 12,
+      "tokens": 90316,
+      "s_to_green": 95.8,
+      "recovery_ms": 131984,
+      "final_pass": true,
+      "final_followed": false
+     }
+    ],
+    "helper_chunks": 14,
+    "helper_chunks_revoked": 0,
+    "helper_reusers": 0,
+    "helper_reuses_after_poison": 0,
+    "reusers_poison_final": 0,
+    "reusers_failing_final": 0,
+    "revoke_calls": 0,
+    "revoke_suppressed": 0,
+    "revoke_dms": 0
+   },
+   {
+    "arm": "A",
+    "trial": 1,
+    "run_id": "rsuvr",
+    "library_id": "lib-rsuvr",
+    "status": "failed",
+    "stopped": null,
+    "poison_s": 43.843,
+    "poison_rule": "seed: round_money chunk reused",
+    "seed_met": true,
+    "lessons_at_start": 0,
+    "deps_importing_at_poison": 4,
+    "deps_importing_final": 3,
+    "finish_s": 276.8,
+    "tokens": 473792,
+    "usd": 0.034534,
+    "final_passing": 4,
+    "poison_final_all": 3,
+    "retires": 3,
+    "poison_cases": 3,
+    "first_case_s": 63.649,
+    "index_fn": "convert",
+    "repeat_failures_same_type_after_first_case": 2,
+    "others_repeat_cases": 2,
+    "others_retires_after_poison": 2,
+    "others_poison_fail_runs_after_first_case": 26,
+    "others_poison_fail_runs_after_poison": 29,
+    "others_poison_final": 2,
+    "others_failing_final": 2,
+    "others_tokens": 276201,
+    "others_last_step_s": 261.143,
+    "poison_fail_runs_all": 42,
+    "agents_with_poison_failure": 7,
+    "first_toucher": {
+     "agent": "w1-g1-rsuvr",
+     "fn": "line_tax",
+     "failed_on_poison": true
+    },
+    "replacements": [
+     {
+      "agent": "w3-g2",
+      "fn": "convert",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 12,
+      "repeat_failure": true,
+      "steps_to_green": null,
+      "steps": 12,
+      "tokens": 81475,
+      "s_to_green": null,
+      "recovery_ms": null,
+      "final_pass": false,
+      "final_followed": true
+     },
+     {
+      "agent": "w1-g2",
+      "fn": "line_tax",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 12,
+      "repeat_failure": true,
+      "steps_to_green": null,
+      "steps": 12,
+      "tokens": 95340,
+      "s_to_green": null,
+      "recovery_ms": null,
+      "final_pass": false,
+      "final_followed": true
+     },
+     {
+      "agent": "w0-g2",
+      "fn": "line_net",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 12,
+      "repeat_failure": true,
+      "steps_to_green": null,
+      "steps": 12,
+      "tokens": 91871,
+      "s_to_green": null,
+      "recovery_ms": null,
+      "final_pass": false,
+      "final_followed": true
+     }
+    ],
+    "helper_chunks": 6,
+    "helper_chunks_revoked": 1,
+    "helper_reusers": 5,
+    "helper_reuses_after_poison": 8,
+    "reusers_poison_final": 3,
+    "reusers_failing_final": 3,
+    "revoke_calls": 2,
+    "revoke_suppressed": 0,
+    "revoke_dms": 5
+   },
+   {
+    "arm": "A",
+    "trial": 5,
+    "run_id": "rrwte",
+    "library_id": "lib-rrwte",
+    "status": "failed",
+    "stopped": null,
+    "poison_s": 59.587,
+    "poison_rule": "fallback: 25s after first round_money chunk (not reused)",
+    "seed_met": false,
+    "lessons_at_start": 0,
+    "deps_importing_at_poison": 5,
+    "deps_importing_final": 5,
+    "finish_s": 70.8,
+    "tokens": 177911,
+    "usd": 0.009112,
+    "final_passing": 2,
+    "poison_final_all": 5,
+    "retires": 0,
+    "poison_cases": 0,
+    "first_case_s": null,
+    "index_fn": null,
+    "repeat_failures_same_type_after_first_case": 0,
+    "others_repeat_cases": 0,
+    "others_retires_after_poison": 0,
+    "others_poison_fail_runs_after_first_case": 0,
+    "others_poison_fail_runs_after_poison": 0,
+    "others_poison_final": 5,
+    "others_failing_final": 5,
+    "others_tokens": 67683,
+    "others_last_step_s": 56.959,
+    "poison_fail_runs_all": 0,
+    "agents_with_poison_failure": 0,
+    "first_toucher": null,
+    "replacements": [],
+    "helper_chunks": 10,
+    "helper_chunks_revoked": 0,
+    "helper_reusers": 0,
+    "helper_reuses_after_poison": 0,
+    "reusers_poison_final": 0,
+    "reusers_failing_final": 0,
+    "revoke_calls": 0,
+    "revoke_suppressed": 0,
+    "revoke_dms": 0
+   },
+   {
+    "arm": "A",
+    "trial": 4,
+    "run_id": "rp5v3",
+    "library_id": "lib-rp5v3",
+    "status": "finished",
+    "stopped": null,
+    "poison_s": 38.794,
+    "poison_rule": "seed: round_money chunk reused",
+    "seed_met": true,
+    "lessons_at_start": 0,
+    "deps_importing_at_poison": 3,
+    "deps_importing_final": 2,
+    "finish_s": 165.2,
+    "tokens": 297481,
+    "usd": 0.0175,
+    "final_passing": 7,
+    "poison_final_all": 0,
+    "retires": 2,
+    "poison_cases": 2,
+    "first_case_s": 51.229,
+    "index_fn": "convert",
+    "repeat_failures_same_type_after_first_case": 1,
+    "others_repeat_cases": 1,
+    "others_retires_after_poison": 1,
+    "others_poison_fail_runs_after_first_case": 10,
+    "others_poison_fail_runs_after_poison": 11,
+    "others_poison_final": 0,
+    "others_failing_final": 0,
+    "others_tokens": 131863,
+    "others_last_step_s": 157.35,
+    "poison_fail_runs_all": 15,
+    "agents_with_poison_failure": 4,
+    "first_toucher": {
+     "agent": "w6-g1-rp5v3",
+     "fn": "late_fee",
+     "failed_on_poison": false
+    },
+    "replacements": [
+     {
+      "agent": "w3-g2",
+      "fn": "convert",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 3,
+      "repeat_failure": true,
+      "steps_to_green": 4,
+      "steps": 7,
+      "tokens": 44695,
+      "s_to_green": 20.2,
+      "recovery_ms": 35728,
+      "final_pass": true,
+      "final_followed": false
+     },
+     {
+      "agent": "w0-g2",
+      "fn": "line_net",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 10,
+      "repeat_failure": true,
+      "steps_to_green": 4,
+      "steps": 12,
+      "tokens": 83322,
+      "s_to_green": 27.6,
+      "recovery_ms": 44217,
+      "final_pass": true,
+      "final_followed": false
+     }
+    ],
+    "helper_chunks": 8,
+    "helper_chunks_revoked": 1,
+    "helper_reusers": 3,
+    "helper_reuses_after_poison": 2,
+    "reusers_poison_final": 0,
+    "reusers_failing_final": 0,
+    "revoke_calls": 1,
+    "revoke_suppressed": 0,
+    "revoke_dms": 3
+   },
+   {
+    "arm": "A",
+    "trial": 6,
+    "run_id": "ryb2j",
+    "library_id": "lib-ryb2j",
+    "status": "failed",
+    "stopped": null,
+    "poison_s": 51.235,
+    "poison_rule": "seed: round_money chunk reused",
+    "seed_met": true,
+    "lessons_at_start": 0,
+    "deps_importing_at_poison": 5,
+    "deps_importing_final": 5,
+    "finish_s": 217.4,
+    "tokens": 404806,
+    "usd": 0.031518,
+    "final_passing": 4,
+    "poison_final_all": 3,
+    "retires": 2,
+    "poison_cases": 2,
+    "first_case_s": 56.515,
+    "index_fn": "credit_note",
+    "repeat_failures_same_type_after_first_case": 1,
+    "others_repeat_cases": 1,
+    "others_retires_after_poison": 1,
+    "others_poison_fail_runs_after_first_case": 7,
+    "others_poison_fail_runs_after_poison": 7,
+    "others_poison_final": 3,
+    "others_failing_final": 3,
+    "others_tokens": 152870,
+    "others_last_step_s": 192.198,
+    "poison_fail_runs_all": 17,
+    "agents_with_poison_failure": 4,
+    "first_toucher": {
+     "agent": "w3-g1-ryb2j",
+     "fn": "convert",
+     "failed_on_poison": false
+    },
+    "replacements": [
+     {
+      "agent": "w5-g2",
+      "fn": "credit_note",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 9,
+      "repeat_failure": true,
+      "steps_to_green": 3,
+      "steps": 12,
+      "tokens": 97235,
+      "s_to_green": 19.2,
+      "recovery_ms": 42383,
+      "final_pass": true,
+      "final_followed": false
+     },
+     {
+      "agent": "w2-g2",
+      "fn": "invoice_totals",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 5,
+      "repeat_failure": true,
+      "steps_to_green": 3,
+      "steps": 12,
+      "tokens": 89387,
+      "s_to_green": 26.8,
+      "recovery_ms": 48251,
+      "final_pass": true,
+      "final_followed": false
+     }
+    ],
+    "helper_chunks": 10,
+    "helper_chunks_revoked": 2,
+    "helper_reusers": 2,
+    "helper_reuses_after_poison": 2,
+    "reusers_poison_final": 0,
+    "reusers_failing_final": 0,
+    "revoke_calls": 2,
+    "revoke_suppressed": 0,
+    "revoke_dms": 3
+   }
+  ],
+  "B": [
+   {
+    "arm": "B",
+    "trial": 1,
+    "run_id": "r22an",
+    "library_id": "lib-r22an",
+    "status": "failed",
+    "stopped": null,
+    "poison_s": 52.366,
+    "poison_rule": "seed: round_money chunk reused",
+    "seed_met": true,
+    "lessons_at_start": 0,
+    "deps_importing_at_poison": 3,
+    "deps_importing_final": 1,
+    "finish_s": 125.4,
+    "tokens": 217180,
+    "usd": 0.012783,
+    "final_passing": 6,
+    "poison_final_all": 1,
+    "retires": 0,
+    "poison_cases": 0,
+    "first_case_s": null,
+    "index_fn": null,
+    "repeat_failures_same_type_after_first_case": 0,
+    "others_repeat_cases": 0,
+    "others_retires_after_poison": 0,
+    "others_poison_fail_runs_after_first_case": 2,
+    "others_poison_fail_runs_after_poison": 2,
+    "others_poison_final": 1,
+    "others_failing_final": 1,
+    "others_tokens": 90768,
+    "others_last_step_s": 110.18,
+    "poison_fail_runs_all": 2,
+    "agents_with_poison_failure": 2,
+    "first_toucher": {
+     "agent": "w0-g1-r22an",
+     "fn": "line_net",
+     "failed_on_poison": true
+    },
+    "replacements": [],
+    "helper_chunks": 4,
+    "helper_chunks_revoked": 0,
+    "helper_reusers": 1,
+    "helper_reuses_after_poison": 0,
+    "reusers_poison_final": 0,
+    "reusers_failing_final": 0,
+    "revoke_calls": 0,
+    "revoke_suppressed": 0,
+    "revoke_dms": 0
+   },
+   {
+    "arm": "B",
+    "trial": 3,
+    "run_id": "ra9v2",
+    "library_id": "lib-ra9v2",
+    "status": "failed",
+    "stopped": null,
+    "poison_s": 66.386,
+    "poison_rule": "seed: round_money chunk reused",
+    "seed_met": true,
+    "lessons_at_start": 0,
+    "deps_importing_at_poison": 5,
+    "deps_importing_final": 4,
+    "finish_s": 277.8,
+    "tokens": 413824,
+    "usd": 0.02821,
+    "final_passing": 6,
+    "poison_final_all": 1,
+    "retires": 3,
+    "poison_cases": 3,
+    "first_case_s": 84.542,
+    "index_fn": "convert",
+    "repeat_failures_same_type_after_first_case": 2,
+    "others_repeat_cases": 2,
+    "others_retires_after_poison": 2,
+    "others_poison_fail_runs_after_first_case": 14,
+    "others_poison_fail_runs_after_poison": 16,
+    "others_poison_final": 1,
+    "others_failing_final": 1,
+    "others_tokens": 198630,
+    "others_last_step_s": 250.145,
+    "poison_fail_runs_all": 25,
+    "agents_with_poison_failure": 7,
+    "first_toucher": {
+     "agent": "w1-g1-ra9v2",
+     "fn": "line_tax",
+     "failed_on_poison": false
+    },
+    "replacements": [
+     {
+      "agent": "w3-g2",
+      "fn": "convert",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 8,
+      "repeat_failure": true,
+      "steps_to_green": 9,
+      "steps": 12,
+      "tokens": 73205,
+      "s_to_green": 64.1,
+      "recovery_ms": 85247,
+      "final_pass": true,
+      "final_followed": false
+     },
+     {
+      "agent": "w5-g2",
+      "fn": "credit_note",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 2,
+      "repeat_failure": true,
+      "steps_to_green": 3,
+      "steps": 4,
+      "tokens": 28946,
+      "s_to_green": 26.9,
+      "recovery_ms": 53935,
+      "final_pass": true,
+      "final_followed": false
+     },
+     {
+      "agent": "w2-g2",
+      "fn": "invoice_totals",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 10,
+      "repeat_failure": true,
+      "steps_to_green": 7,
+      "steps": 12,
+      "tokens": 101333,
+      "s_to_green": 86.6,
+      "recovery_ms": 105645,
+      "final_pass": false,
+      "final_followed": true
+     }
+    ],
+    "helper_chunks": 11,
+    "helper_chunks_revoked": 4,
+    "helper_reusers": 3,
+    "helper_reuses_after_poison": 7,
+    "reusers_poison_final": 1,
+    "reusers_failing_final": 1,
+    "revoke_calls": 4,
+    "revoke_suppressed": 0,
+    "revoke_dms": 8
+   },
+   {
+    "arm": "B",
+    "trial": 2,
+    "run_id": "rjjed",
+    "library_id": "lib-rjjed",
+    "status": "failed",
+    "stopped": null,
+    "poison_s": 58.274,
+    "poison_rule": "seed: round_money chunk reused",
+    "seed_met": true,
+    "lessons_at_start": 0,
+    "deps_importing_at_poison": 5,
+    "deps_importing_final": 4,
+    "finish_s": 285.7,
+    "tokens": 446060,
+    "usd": 0.039074,
+    "final_passing": 3,
+    "poison_final_all": 4,
+    "retires": 3,
+    "poison_cases": 3,
+    "first_case_s": 72.458,
+    "index_fn": "credit_note",
+    "repeat_failures_same_type_after_first_case": 2,
+    "others_repeat_cases": 2,
+    "others_retires_after_poison": 2,
+    "others_poison_fail_runs_after_first_case": 24,
+    "others_poison_fail_runs_after_poison": 26,
+    "others_poison_final": 4,
+    "others_failing_final": 4,
+    "others_tokens": 231793,
+    "others_last_step_s": 260.631,
+    "poison_fail_runs_all": 36,
+    "agents_with_poison_failure": 6,
+    "first_toucher": {
+     "agent": "w5-g1-rjjed",
+     "fn": "credit_note",
+     "failed_on_poison": true
+    },
+    "replacements": [
+     {
+      "agent": "w5-g2",
+      "fn": "credit_note",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 9,
+      "repeat_failure": true,
+      "steps_to_green": 10,
+      "steps": 12,
+      "tokens": 92620,
+      "s_to_green": 137.1,
+      "recovery_ms": 165037,
+      "final_pass": true,
+      "final_followed": false
+     },
+     {
+      "agent": "w1-g2",
+      "fn": "line_tax",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 12,
+      "repeat_failure": true,
+      "steps_to_green": null,
+      "steps": 12,
+      "tokens": 83681,
+      "s_to_green": null,
+      "recovery_ms": null,
+      "final_pass": false,
+      "final_followed": true
+     },
+     {
+      "agent": "w2-g2",
+      "fn": "invoice_totals",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 12,
+      "repeat_failure": true,
+      "steps_to_green": null,
+      "steps": 12,
+      "tokens": 101131,
+      "s_to_green": null,
+      "recovery_ms": null,
+      "final_pass": false,
+      "final_followed": true
+     }
+    ],
+    "helper_chunks": 6,
+    "helper_chunks_revoked": 0,
+    "helper_reusers": 2,
+    "helper_reuses_after_poison": 3,
+    "reusers_poison_final": 1,
+    "reusers_failing_final": 1,
+    "revoke_calls": 0,
+    "revoke_suppressed": 0,
+    "revoke_dms": 0
+   }
+  ],
+  "C": [
+   {
+    "arm": "C",
+    "trial": 2,
+    "run_id": "r8zwn",
+    "library_id": "lib-r8zwn",
+    "status": "failed",
+    "stopped": null,
+    "poison_s": 46.327,
+    "poison_rule": "seed: round_money chunk reused",
+    "seed_met": true,
+    "lessons_at_start": 0,
+    "deps_importing_at_poison": 2,
+    "deps_importing_final": 2,
+    "finish_s": 99.8,
+    "tokens": 181556,
+    "usd": 0.010071,
+    "final_passing": 6,
+    "poison_final_all": 1,
+    "retires": 0,
+    "poison_cases": 0,
+    "first_case_s": null,
+    "index_fn": null,
+    "repeat_failures_same_type_after_first_case": 0,
+    "others_repeat_cases": 0,
+    "others_retires_after_poison": 0,
+    "others_poison_fail_runs_after_first_case": 0,
+    "others_poison_fail_runs_after_poison": 0,
+    "others_poison_final": 1,
+    "others_failing_final": 1,
+    "others_tokens": 66210,
+    "others_last_step_s": 67.513,
+    "poison_fail_runs_all": 0,
+    "agents_with_poison_failure": 0,
+    "first_toucher": {
+     "agent": "w3-g1-r8zwn",
+     "fn": "convert",
+     "failed_on_poison": false
+    },
+    "replacements": [],
+    "helper_chunks": 6,
+    "helper_chunks_revoked": 0,
+    "helper_reusers": 2,
+    "helper_reuses_after_poison": 1,
+    "reusers_poison_final": 0,
+    "reusers_failing_final": 0,
+    "revoke_calls": 0,
+    "revoke_suppressed": 0,
+    "revoke_dms": 0
+   },
+   {
+    "arm": "C",
+    "trial": 1,
+    "run_id": "rsx2b",
+    "library_id": "lib-rsx2b",
+    "status": "failed",
+    "stopped": null,
+    "poison_s": 65.989,
+    "poison_rule": "seed: round_money chunk reused",
+    "seed_met": true,
+    "lessons_at_start": 0,
+    "deps_importing_at_poison": 4,
+    "deps_importing_final": 4,
+    "finish_s": 111.6,
+    "tokens": 177518,
+    "usd": 0.0094,
+    "final_passing": 4,
+    "poison_final_all": 3,
+    "retires": 0,
+    "poison_cases": 0,
+    "first_case_s": null,
+    "index_fn": null,
+    "repeat_failures_same_type_after_first_case": 0,
+    "others_repeat_cases": 0,
+    "others_retires_after_poison": 0,
+    "others_poison_fail_runs_after_first_case": 0,
+    "others_poison_fail_runs_after_poison": 0,
+    "others_poison_final": 3,
+    "others_failing_final": 3,
+    "others_tokens": 69715,
+    "others_last_step_s": 87.958,
+    "poison_fail_runs_all": 0,
+    "agents_with_poison_failure": 0,
+    "first_toucher": null,
+    "replacements": [],
+    "helper_chunks": 7,
+    "helper_chunks_revoked": 0,
+    "helper_reusers": 1,
+    "helper_reuses_after_poison": 0,
+    "reusers_poison_final": 0,
+    "reusers_failing_final": 0,
+    "revoke_calls": 0,
+    "revoke_suppressed": 0,
+    "revoke_dms": 0
+   },
+   {
+    "arm": "C",
+    "trial": 3,
+    "run_id": "riarn",
+    "library_id": "lib-riarn",
+    "status": "failed",
+    "stopped": null,
+    "poison_s": 66.918,
+    "poison_rule": "seed: round_money chunk reused",
+    "seed_met": true,
+    "lessons_at_start": 0,
+    "deps_importing_at_poison": 5,
+    "deps_importing_final": 4,
+    "finish_s": 193.7,
+    "tokens": 329274,
+    "usd": 0.026651,
+    "final_passing": 5,
+    "poison_final_all": 2,
+    "retires": 3,
+    "poison_cases": 3,
+    "first_case_s": 80.153,
+    "index_fn": "line_tax",
+    "repeat_failures_same_type_after_first_case": 2,
+    "others_repeat_cases": 2,
+    "others_retires_after_poison": 2,
+    "others_poison_fail_runs_after_first_case": 4,
+    "others_poison_fail_runs_after_poison": 6,
+    "others_poison_final": 2,
+    "others_failing_final": 2,
+    "others_tokens": 154803,
+    "others_last_step_s": 180.887,
+    "poison_fail_runs_all": 7,
+    "agents_with_poison_failure": 4,
+    "first_toucher": {
+     "agent": "w3-g1-riarn",
+     "fn": "convert",
+     "failed_on_poison": false
+    },
+    "replacements": [
+     {
+      "agent": "w1-g2",
+      "fn": "line_tax",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 0,
+      "repeat_failure": false,
+      "steps_to_green": 1,
+      "steps": 4,
+      "tokens": 32942,
+      "s_to_green": 4.2,
+      "recovery_ms": 33564,
+      "final_pass": true,
+      "final_followed": false
+     },
+     {
+      "agent": "w5-g2",
+      "fn": "credit_note",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 4,
+      "repeat_failure": true,
+      "steps_to_green": 1,
+      "steps": 8,
+      "tokens": 77312,
+      "s_to_green": 2.4,
+      "recovery_ms": 35482,
+      "final_pass": true,
+      "final_followed": false
+     },
+     {
+      "agent": "w2-g2",
+      "fn": "invoice_totals",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 0,
+      "repeat_failure": false,
+      "steps_to_green": 1,
+      "steps": 3,
+      "tokens": 29903,
+      "s_to_green": 3.1,
+      "recovery_ms": 36557,
+      "final_pass": true,
+      "final_followed": false
+     }
+    ],
+    "helper_chunks": 10,
+    "helper_chunks_revoked": 0,
+    "helper_reusers": 2,
+    "helper_reuses_after_poison": 3,
+    "reusers_poison_final": 0,
+    "reusers_failing_final": 0,
+    "revoke_calls": 0,
+    "revoke_suppressed": 0,
+    "revoke_dms": 0
+   },
+   {
+    "arm": "C",
+    "trial": 5,
+    "run_id": "rva2e",
+    "library_id": "lib-rva2e",
+    "status": "finished",
+    "stopped": null,
+    "poison_s": 43.788,
+    "poison_rule": "seed: round_money chunk reused",
+    "seed_met": true,
+    "lessons_at_start": 0,
+    "deps_importing_at_poison": 5,
+    "deps_importing_final": 4,
+    "finish_s": 133.7,
+    "tokens": 352421,
+    "usd": 0.024793,
+    "final_passing": 7,
+    "poison_final_all": 0,
+    "retires": 3,
+    "poison_cases": 3,
+    "first_case_s": 56.867,
+    "index_fn": "line_tax",
+    "repeat_failures_same_type_after_first_case": 2,
+    "others_repeat_cases": 2,
+    "others_retires_after_poison": 2,
+    "others_poison_fail_runs_after_first_case": 0,
+    "others_poison_fail_runs_after_poison": 3,
+    "others_poison_final": 0,
+    "others_failing_final": 0,
+    "others_tokens": 155908,
+    "others_last_step_s": 121.476,
+    "poison_fail_runs_all": 4,
+    "agents_with_poison_failure": 4,
+    "first_toucher": {
+     "agent": "w5-g1-rva2e",
+     "fn": "credit_note",
+     "failed_on_poison": true
+    },
+    "replacements": [
+     {
+      "agent": "w1-g2",
+      "fn": "line_tax",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 0,
+      "repeat_failure": false,
+      "steps_to_green": 1,
+      "steps": 4,
+      "tokens": 35461,
+      "s_to_green": 1.7,
+      "recovery_ms": 17189,
+      "final_pass": true,
+      "final_followed": false
+     },
+     {
+      "agent": "w2-g2",
+      "fn": "invoice_totals",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 0,
+      "repeat_failure": false,
+      "steps_to_green": 1,
+      "steps": 3,
+      "tokens": 28124,
+      "s_to_green": 0.8,
+      "recovery_ms": 25497,
+      "final_pass": true,
+      "final_followed": false
+     },
+     {
+      "agent": "w5-g2",
+      "fn": "credit_note",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 0,
+      "repeat_failure": false,
+      "steps_to_green": 1,
+      "steps": 5,
+      "tokens": 48712,
+      "s_to_green": 1.2,
+      "recovery_ms": 27691,
+      "final_pass": true,
+      "final_followed": false
+     }
+    ],
+    "helper_chunks": 12,
+    "helper_chunks_revoked": 0,
+    "helper_reusers": 5,
+    "helper_reuses_after_poison": 6,
+    "reusers_poison_final": 0,
+    "reusers_failing_final": 0,
+    "revoke_calls": 0,
+    "revoke_suppressed": 0,
+    "revoke_dms": 0
+   },
+   {
+    "arm": "C",
+    "trial": 4,
+    "run_id": "rgqrz",
+    "library_id": "lib-rgqrz",
+    "status": "failed",
+    "stopped": null,
+    "poison_s": 49.835,
+    "poison_rule": "seed: round_money chunk reused",
+    "seed_met": true,
+    "lessons_at_start": 0,
+    "deps_importing_at_poison": 5,
+    "deps_importing_final": 4,
+    "finish_s": 147.9,
+    "tokens": 318999,
+    "usd": 0.023379,
+    "final_passing": 4,
+    "poison_final_all": 3,
+    "retires": 1,
+    "poison_cases": 1,
+    "first_case_s": 59.593,
+    "index_fn": "line_net",
+    "repeat_failures_same_type_after_first_case": 0,
+    "others_repeat_cases": 0,
+    "others_retires_after_poison": 0,
+    "others_poison_fail_runs_after_first_case": 4,
+    "others_poison_fail_runs_after_poison": 5,
+    "others_poison_final": 3,
+    "others_failing_final": 3,
+    "others_tokens": 97777,
+    "others_last_step_s": 135.733,
+    "poison_fail_runs_all": 6,
+    "agents_with_poison_failure": 2,
+    "first_toucher": {
+     "agent": "w1-g1-rgqrz",
+     "fn": "line_tax",
+     "failed_on_poison": false
+    },
+    "replacements": [
+     {
+      "agent": "w0-g2",
+      "fn": "line_net",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 0,
+      "repeat_failure": false,
+      "steps_to_green": 1,
+      "steps": 6,
+      "tokens": 48644,
+      "s_to_green": 1.7,
+      "recovery_ms": 15321,
+      "final_pass": true,
+      "final_followed": false
+     }
+    ],
+    "helper_chunks": 10,
+    "helper_chunks_revoked": 0,
+    "helper_reusers": 3,
+    "helper_reuses_after_poison": 3,
+    "reusers_poison_final": 0,
+    "reusers_failing_final": 0,
+    "revoke_calls": 0,
+    "revoke_suppressed": 0,
+    "revoke_dms": 0
+   }
+  ],
+  "D": [
+   {
+    "arm": "D",
+    "trial": 3,
+    "run_id": "rf33q",
+    "library_id": "lib-rf33q",
+    "status": "failed",
+    "stopped": null,
+    "poison_s": 38.246,
+    "poison_rule": "seed: round_money chunk reused",
+    "seed_met": true,
+    "lessons_at_start": 0,
+    "deps_importing_at_poison": 4,
+    "deps_importing_final": 4,
+    "finish_s": 228.8,
+    "tokens": 430498,
+    "usd": 0.025663,
+    "final_passing": 5,
+    "poison_final_all": 2,
+    "retires": 3,
+    "poison_cases": 3,
+    "first_case_s": 48.749,
+    "index_fn": "convert",
+    "repeat_failures_same_type_after_first_case": 2,
+    "others_repeat_cases": 2,
+    "others_retires_after_poison": 2,
+    "others_poison_fail_runs_after_first_case": 18,
+    "others_poison_fail_runs_after_poison": 19,
+    "others_poison_final": 2,
+    "others_failing_final": 2,
+    "others_tokens": 224064,
+    "others_last_step_s": 208.661,
+    "poison_fail_runs_all": 22,
+    "agents_with_poison_failure": 6,
+    "first_toucher": {
+     "agent": "w5-g1-rf33q",
+     "fn": "credit_note",
+     "failed_on_poison": true
+    },
+    "replacements": [
+     {
+      "agent": "w3-g2",
+      "fn": "convert",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 2,
+      "repeat_failure": true,
+      "steps_to_green": 3,
+      "steps": 8,
+      "tokens": 47237,
+      "s_to_green": 19.1,
+      "recovery_ms": 29263,
+      "final_pass": true,
+      "final_followed": false
+     },
+     {
+      "agent": "w0-g2",
+      "fn": "line_net",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 12,
+      "repeat_failure": true,
+      "steps_to_green": null,
+      "steps": 12,
+      "tokens": 81258,
+      "s_to_green": null,
+      "recovery_ms": null,
+      "final_pass": false,
+      "final_followed": true
+     },
+     {
+      "agent": "w5-g2",
+      "fn": "credit_note",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 5,
+      "repeat_failure": true,
+      "steps_to_green": 4,
+      "steps": 12,
+      "tokens": 87256,
+      "s_to_green": 40.1,
+      "recovery_ms": 58988,
+      "final_pass": false,
+      "final_followed": true
+     }
+    ],
+    "helper_chunks": 10,
+    "helper_chunks_revoked": 0,
+    "helper_reusers": 3,
+    "helper_reuses_after_poison": 4,
+    "reusers_poison_final": 1,
+    "reusers_failing_final": 1,
+    "revoke_calls": 0,
+    "revoke_suppressed": 0,
+    "revoke_dms": 0
+   },
+   {
+    "arm": "D",
+    "trial": 2,
+    "run_id": "r3h2y",
+    "library_id": "lib-r3h2y",
+    "status": "failed",
+    "stopped": null,
+    "poison_s": 33.726,
+    "poison_rule": "seed: round_money chunk reused",
+    "seed_met": true,
+    "lessons_at_start": 0,
+    "deps_importing_at_poison": 5,
+    "deps_importing_final": 3,
+    "finish_s": 234.5,
+    "tokens": 424052,
+    "usd": 0.030524,
+    "final_passing": 6,
+    "poison_final_all": 1,
+    "retires": 5,
+    "poison_cases": 5,
+    "first_case_s": 39.616,
+    "index_fn": "convert",
+    "repeat_failures_same_type_after_first_case": 4,
+    "others_repeat_cases": 4,
+    "others_retires_after_poison": 4,
+    "others_poison_fail_runs_after_first_case": 22,
+    "others_poison_fail_runs_after_poison": 24,
+    "others_poison_final": 1,
+    "others_failing_final": 1,
+    "others_tokens": 279162,
+    "others_last_step_s": 213.051,
+    "poison_fail_runs_all": 27,
+    "agents_with_poison_failure": 10,
+    "first_toucher": {
+     "agent": "w3-g1-r3h2y",
+     "fn": "convert",
+     "failed_on_poison": true
+    },
+    "replacements": [
+     {
+      "agent": "w3-g2",
+      "fn": "convert",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 2,
+      "repeat_failure": true,
+      "steps_to_green": 3,
+      "steps": 4,
+      "tokens": 24464,
+      "s_to_green": 16.9,
+      "recovery_ms": 30503,
+      "final_pass": true,
+      "final_followed": false
+     },
+     {
+      "agent": "w0-g2",
+      "fn": "line_net",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 3,
+      "repeat_failure": true,
+      "steps_to_green": 4,
+      "steps": 6,
+      "tokens": 39239,
+      "s_to_green": 22.7,
+      "recovery_ms": 39110,
+      "final_pass": true,
+      "final_followed": false
+     },
+     {
+      "agent": "w2-g2",
+      "fn": "invoice_totals",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 10,
+      "repeat_failure": true,
+      "steps_to_green": 7,
+      "steps": 12,
+      "tokens": 96327,
+      "s_to_green": 91.7,
+      "recovery_ms": 113646,
+      "final_pass": false,
+      "final_followed": true
+     },
+     {
+      "agent": "w5-g2",
+      "fn": "credit_note",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 3,
+      "repeat_failure": true,
+      "steps_to_green": 4,
+      "steps": 5,
+      "tokens": 38182,
+      "s_to_green": 47.1,
+      "recovery_ms": 65335,
+      "final_pass": true,
+      "final_followed": false
+     },
+     {
+      "agent": "w1-g2",
+      "fn": "line_tax",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 4,
+      "repeat_failure": true,
+      "steps_to_green": 3,
+      "steps": 8,
+      "tokens": 57651,
+      "s_to_green": 29.9,
+      "recovery_ms": 50633,
+      "final_pass": true,
+      "final_followed": false
+     }
+    ],
+    "helper_chunks": 7,
+    "helper_chunks_revoked": 0,
+    "helper_reusers": 5,
+    "helper_reuses_after_poison": 5,
+    "reusers_poison_final": 1,
+    "reusers_failing_final": 1,
+    "revoke_calls": 0,
+    "revoke_suppressed": 6,
+    "revoke_dms": 0
+   },
+   {
+    "arm": "D",
+    "trial": 1,
+    "run_id": "r4x37",
+    "library_id": "lib-r4x37",
+    "status": "failed",
+    "stopped": null,
+    "poison_s": 39.304,
+    "poison_rule": "seed: round_money chunk reused",
+    "seed_met": true,
+    "lessons_at_start": 0,
+    "deps_importing_at_poison": 5,
+    "deps_importing_final": 5,
+    "finish_s": 271.4,
+    "tokens": 385295,
+    "usd": 0.032933,
+    "final_passing": 2,
+    "poison_final_all": 5,
+    "retires": 2,
+    "poison_cases": 2,
+    "first_case_s": 51.651,
+    "index_fn": "credit_note",
+    "repeat_failures_same_type_after_first_case": 1,
+    "others_repeat_cases": 1,
+    "others_retires_after_poison": 1,
+    "others_poison_fail_runs_after_first_case": 12,
+    "others_poison_fail_runs_after_poison": 13,
+    "others_poison_final": 4,
+    "others_failing_final": 4,
+    "others_tokens": 168395,
+    "others_last_step_s": 254.437,
+    "poison_fail_runs_all": 26,
+    "agents_with_poison_failure": 4,
+    "first_toucher": {
+     "agent": "w5-g1-r4x37",
+     "fn": "credit_note",
+     "failed_on_poison": true
+    },
+    "replacements": [
+     {
+      "agent": "w5-g2",
+      "fn": "credit_note",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 12,
+      "repeat_failure": true,
+      "steps_to_green": null,
+      "steps": 12,
+      "tokens": 97760,
+      "s_to_green": null,
+      "recovery_ms": null,
+      "final_pass": false,
+      "final_followed": true
+     },
+     {
+      "agent": "w2-g2",
+      "fn": "invoice_totals",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 11,
+      "repeat_failure": true,
+      "steps_to_green": 3,
+      "steps": 12,
+      "tokens": 109222,
+      "s_to_green": 31.3,
+      "recovery_ms": 51340,
+      "final_pass": false,
+      "final_followed": true
+     }
+    ],
+    "helper_chunks": 9,
+    "helper_chunks_revoked": 0,
+    "helper_reusers": 2,
+    "helper_reuses_after_poison": 5,
+    "reusers_poison_final": 1,
+    "reusers_failing_final": 1,
+    "revoke_calls": 0,
+    "revoke_suppressed": 4,
+    "revoke_dms": 0
+   }
+  ],
+  "E": [
+   {
+    "arm": "E",
+    "trial": 2,
+    "run_id": "rav4g",
+    "library_id": "lib-rf4zr",
+    "status": "failed",
+    "stopped": null,
+    "poison_s": 58.286,
+    "poison_rule": "seed: round_money chunk reused",
+    "seed_met": true,
+    "lessons_at_start": 1,
+    "deps_importing_at_poison": 4,
+    "deps_importing_final": 3,
+    "finish_s": 198,
+    "tokens": 230210,
+    "usd": 0.015612,
+    "final_passing": 4,
+    "poison_final_all": 3,
+    "retires": 1,
+    "poison_cases": 1,
+    "first_case_s": 75.17,
+    "index_fn": "invoice_totals",
+    "repeat_failures_same_type_after_first_case": 0,
+    "others_repeat_cases": 0,
+    "others_retires_after_poison": 0,
+    "others_poison_fail_runs_after_first_case": 0,
+    "others_poison_fail_runs_after_poison": 0,
+    "others_poison_final": 3,
+    "others_failing_final": 3,
+    "others_tokens": 46970,
+    "others_last_step_s": 59.481,
+    "poison_fail_runs_all": 5,
+    "agents_with_poison_failure": 2,
+    "first_toucher": {
+     "agent": "w6-g1-rav4g",
+     "fn": "late_fee",
+     "failed_on_poison": false
+    },
+    "replacements": [
+     {
+      "agent": "w2-g2",
+      "fn": "invoice_totals",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 4,
+      "repeat_failure": true,
+      "steps_to_green": 5,
+      "steps": 7,
+      "tokens": 60670,
+      "s_to_green": 76.4,
+      "recovery_ms": 103099,
+      "final_pass": true,
+      "final_followed": false
+     }
+    ],
+    "helper_chunks": 7,
+    "helper_chunks_revoked": 2,
+    "helper_reusers": 2,
+    "helper_reuses_after_poison": 4,
+    "reusers_poison_final": 0,
+    "reusers_failing_final": 0,
+    "revoke_calls": 3,
+    "revoke_suppressed": 0,
+    "revoke_dms": 6
+   },
+   {
+    "arm": "E",
+    "trial": 1,
+    "run_id": "rjsbr",
+    "library_id": "lib-rf4zr",
+    "status": "failed",
+    "stopped": null,
+    "poison_s": 53.708,
+    "poison_rule": "seed: round_money chunk reused",
+    "seed_met": true,
+    "lessons_at_start": 1,
+    "deps_importing_at_poison": 5,
+    "deps_importing_final": 5,
+    "finish_s": 241.9,
+    "tokens": 398942,
+    "usd": 0.029063,
+    "final_passing": 2,
+    "poison_final_all": 5,
+    "retires": 2,
+    "poison_cases": 2,
+    "first_case_s": 66.415,
+    "index_fn": "credit_note",
+    "repeat_failures_same_type_after_first_case": 1,
+    "others_repeat_cases": 1,
+    "others_retires_after_poison": 1,
+    "others_poison_fail_runs_after_first_case": 8,
+    "others_poison_fail_runs_after_poison": 9,
+    "others_poison_final": 4,
+    "others_failing_final": 4,
+    "others_tokens": 138884,
+    "others_last_step_s": 220.203,
+    "poison_fail_runs_all": 16,
+    "agents_with_poison_failure": 4,
+    "first_toucher": {
+     "agent": "w0-g1-rjsbr",
+     "fn": "line_net",
+     "failed_on_poison": false
+    },
+    "replacements": [
+     {
+      "agent": "w5-g2",
+      "fn": "credit_note",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 6,
+      "repeat_failure": true,
+      "steps_to_green": 5,
+      "steps": 12,
+      "tokens": 95179,
+      "s_to_green": 49.3,
+      "recovery_ms": 75110,
+      "final_pass": false,
+      "final_followed": true
+     },
+     {
+      "agent": "w2-g2",
+      "fn": "invoice_totals",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 8,
+      "repeat_failure": true,
+      "steps_to_green": 3,
+      "steps": 12,
+      "tokens": 89545,
+      "s_to_green": 31.7,
+      "recovery_ms": 60383,
+      "final_pass": false,
+      "final_followed": true
+     }
+    ],
+    "helper_chunks": 11,
+    "helper_chunks_revoked": 2,
+    "helper_reusers": 3,
+    "helper_reuses_after_poison": 3,
+    "reusers_poison_final": 1,
+    "reusers_failing_final": 1,
+    "revoke_calls": 2,
+    "revoke_suppressed": 0,
+    "revoke_dms": 3
+   },
+   {
+    "arm": "E",
+    "trial": 3,
+    "run_id": "rtpvn",
+    "library_id": "lib-rf4zr",
+    "status": "failed",
+    "stopped": null,
+    "poison_s": 61.163,
+    "poison_rule": "seed: round_money chunk reused",
+    "seed_met": true,
+    "lessons_at_start": 1,
+    "deps_importing_at_poison": 3,
+    "deps_importing_final": 2,
+    "finish_s": 239.6,
+    "tokens": 375212,
+    "usd": 0.025449,
+    "final_passing": 6,
+    "poison_final_all": 1,
+    "retires": 2,
+    "poison_cases": 2,
+    "first_case_s": 71.172,
+    "index_fn": "line_tax",
+    "repeat_failures_same_type_after_first_case": 1,
+    "others_repeat_cases": 1,
+    "others_retires_after_poison": 1,
+    "others_poison_fail_runs_after_first_case": 11,
+    "others_poison_fail_runs_after_poison": 12,
+    "others_poison_final": 0,
+    "others_failing_final": 0,
+    "others_tokens": 157076,
+    "others_last_step_s": 183.213,
+    "poison_fail_runs_all": 25,
+    "agents_with_poison_failure": 5,
+    "first_toucher": {
+     "agent": "w1-g1-rtpvn",
+     "fn": "line_tax",
+     "failed_on_poison": true
+    },
+    "replacements": [
+     {
+      "agent": "w1-g2",
+      "fn": "line_tax",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 12,
+      "repeat_failure": true,
+      "steps_to_green": null,
+      "steps": 12,
+      "tokens": 86602,
+      "s_to_green": null,
+      "recovery_ms": null,
+      "final_pass": false,
+      "final_followed": true
+     },
+     {
+      "agent": "w3-g2",
+      "fn": "convert",
+      "after_poison_case": true,
+      "retired_again": false,
+      "poison_fail_runs": 10,
+      "repeat_failure": true,
+      "steps_to_green": 11,
+      "steps": 12,
+      "tokens": 74555,
+      "s_to_green": 92.8,
+      "recovery_ms": 110099,
+      "final_pass": true,
+      "final_followed": false
+     }
+    ],
+    "helper_chunks": 3,
+    "helper_chunks_revoked": 0,
+    "helper_reusers": 2,
+    "helper_reuses_after_poison": 1,
+    "reusers_poison_final": 0,
+    "reusers_failing_final": 0,
+    "revoke_calls": 0,
+    "revoke_suppressed": 0,
+    "revoke_dms": 0
+   }
+  ]
+ }
+}

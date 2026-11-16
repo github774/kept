@@ -1,0 +1,17 @@
+{
+  "agents_per_run": 4,
+  "steps_per_generation": 12,
+  "generations_per_slot": 2,
+  "usd_per_run": 1.0,
+  "usd_benchmark_total": 30.0,
+  "concurrent_llm_calls_demo": 4,
+  "concurrent_llm_calls_benchmark": 12,
+  "relay_messages_per_agent_per_step": 1,
+  "replies_per_case_thread": 3,
+  "prompt_input_tokens_per_step": 12000,
+  "test_timeout_ms": 10000,
+  "max_lessons": 10,
+  "max_chunks_in_prompt": 1,
+  "inbox_per_step": 5,
+  "codex_wall_clock_ms": 600000
+}

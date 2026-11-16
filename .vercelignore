@@ -1,0 +1,13 @@
+# Vercel only needs the dashboard (landing + /live), the shared wire types and the benchmark summary.
+/*
+!/vercel.json
+!/dashboard
+!/contract
+!/orchestrator
+/orchestrator/*
+!/orchestrator/src
+!/bench
+/bench/*
+!/bench/results.summary.json
+/dashboard/node_modules
+/dashboard/dist

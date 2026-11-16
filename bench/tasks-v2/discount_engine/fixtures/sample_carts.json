@@ -1,0 +1,13 @@
+{
+  "source": "checkout staging (promo_common pipeline)",
+  "carts": [
+    {"subtotal": "100.00", "codes": ["PCT10", "PCT20"], "total": "72.00"},
+    {"subtotal": "30.00", "codes": ["OFF500"], "total": "25.00"},
+    {"subtotal": "30.00", "codes": ["OFF5"], "total": "29.95"},
+    {"subtotal": "40.00", "codes": ["PCT10", "OFF500"], "total": "31.00"}
+  ],
+  "windows": [
+    {"start": "2026-03-01", "end": "2026-03-31", "on": "2026-03-30", "active": true},
+    {"start": "2026-03-01", "end": "2026-03-31", "on": "2026-03-31", "active": false}
+  ]
+}

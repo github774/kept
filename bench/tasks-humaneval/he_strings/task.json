@@ -1,0 +1,44 @@
+{
+  "id": "he_strings",
+  "version": 100,
+  "suite": "humaneval",
+  "source": "openai/human-eval data/HumanEval.jsonl.gz",
+  "humaneval_task_ids": [
+    "HumanEval/1",
+    "HumanEval/140",
+    "HumanEval/141",
+    "HumanEval/125"
+  ],
+  "spec": "SPEC.md",
+  "functions": [
+    {
+      "name": "separate_paren_groups",
+      "file": "separate_paren_groups.py",
+      "test": "tests/test_separate_paren_groups.py",
+      "subgoal": "HumanEval/1 separate_paren_groups",
+      "humaneval_task_id": "HumanEval/1"
+    },
+    {
+      "name": "fix_spaces",
+      "file": "fix_spaces.py",
+      "test": "tests/test_fix_spaces.py",
+      "subgoal": "HumanEval/140 fix_spaces",
+      "humaneval_task_id": "HumanEval/140"
+    },
+    {
+      "name": "file_name_check",
+      "file": "file_name_check.py",
+      "test": "tests/test_file_name_check.py",
+      "subgoal": "HumanEval/141 file_name_check",
+      "humaneval_task_id": "HumanEval/141"
+    },
+    {
+      "name": "split_words",
+      "file": "split_words.py",
+      "test": "tests/test_split_words.py",
+      "subgoal": "HumanEval/125 split_words",
+      "humaneval_task_id": "HumanEval/125"
+    }
+  ],
+  "traps": []
+}

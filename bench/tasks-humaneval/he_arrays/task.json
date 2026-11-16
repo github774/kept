@@ -1,0 +1,44 @@
+{
+  "id": "he_arrays",
+  "version": 100,
+  "suite": "humaneval",
+  "source": "openai/human-eval data/HumanEval.jsonl.gz",
+  "humaneval_task_ids": [
+    "HumanEval/147",
+    "HumanEval/116",
+    "HumanEval/135",
+    "HumanEval/110"
+  ],
+  "spec": "SPEC.md",
+  "functions": [
+    {
+      "name": "get_max_triples",
+      "file": "get_max_triples.py",
+      "test": "tests/test_get_max_triples.py",
+      "subgoal": "HumanEval/147 get_max_triples",
+      "humaneval_task_id": "HumanEval/147"
+    },
+    {
+      "name": "sort_array",
+      "file": "sort_array.py",
+      "test": "tests/test_sort_array.py",
+      "subgoal": "HumanEval/116 sort_array",
+      "humaneval_task_id": "HumanEval/116"
+    },
+    {
+      "name": "can_arrange",
+      "file": "can_arrange.py",
+      "test": "tests/test_can_arrange.py",
+      "subgoal": "HumanEval/135 can_arrange",
+      "humaneval_task_id": "HumanEval/135"
+    },
+    {
+      "name": "exchange",
+      "file": "exchange.py",
+      "test": "tests/test_exchange.py",
+      "subgoal": "HumanEval/110 exchange",
+      "humaneval_task_id": "HumanEval/110"
+    }
+  ],
+  "traps": []
+}

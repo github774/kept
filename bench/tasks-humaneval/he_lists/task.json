@@ -1,0 +1,44 @@
+{
+  "id": "he_lists",
+  "version": 100,
+  "suite": "humaneval",
+  "source": "openai/human-eval data/HumanEval.jsonl.gz",
+  "humaneval_task_ids": [
+    "HumanEval/129",
+    "HumanEval/109",
+    "HumanEval/160",
+    "HumanEval/81"
+  ],
+  "spec": "SPEC.md",
+  "functions": [
+    {
+      "name": "minPath",
+      "file": "minPath.py",
+      "test": "tests/test_minPath.py",
+      "subgoal": "HumanEval/129 minPath",
+      "humaneval_task_id": "HumanEval/129"
+    },
+    {
+      "name": "move_one_ball",
+      "file": "move_one_ball.py",
+      "test": "tests/test_move_one_ball.py",
+      "subgoal": "HumanEval/109 move_one_ball",
+      "humaneval_task_id": "HumanEval/109"
+    },
+    {
+      "name": "do_algebra",
+      "file": "do_algebra.py",
+      "test": "tests/test_do_algebra.py",
+      "subgoal": "HumanEval/160 do_algebra",
+      "humaneval_task_id": "HumanEval/160"
+    },
+    {
+      "name": "numerical_letter_grade",
+      "file": "numerical_letter_grade.py",
+      "test": "tests/test_numerical_letter_grade.py",
+      "subgoal": "HumanEval/81 numerical_letter_grade",
+      "humaneval_task_id": "HumanEval/81"
+    }
+  ],
+  "traps": []
+}

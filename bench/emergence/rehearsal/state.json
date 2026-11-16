@@ -1,0 +1,44 @@
+{
+  "experiment": "emg-202610311932",
+  "library_id": "emg-202610311932-shared",
+  "created_at": 1793475122860,
+  "key_usage_baseline": 1.471748656,
+  "key_usage_last": 1.54094537,
+  "key_usage_last_at": 1793475372605,
+  "budget_usd": 1,
+  "next_launch_seq": 6,
+  "sessions": [
+    {
+      "started_at": 1793475122860,
+      "ended_at": 1793475372568,
+      "runs_completed": 5,
+      "stop_reason": null,
+      "peaks": {
+        "processes": 857,
+        "stack_processes": 116,
+        "stack_rss_mb": 4344,
+        "bench_rss_mb": 70,
+        "samples": 51
+      }
+    }
+  ],
+  "waves": [
+    {
+      "wave": 1,
+      "at": 1793475372565,
+      "run_keys": [
+        "shared:0000",
+        "control:0000",
+        "shared:0001",
+        "shared:0002",
+        "control:0001"
+      ],
+      "library": {
+        "cases": 0,
+        "lessons": 0,
+        "synthetic": 0,
+        "revoked": 0
+      }
+    }
+  ]
+}

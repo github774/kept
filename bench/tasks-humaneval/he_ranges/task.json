@@ -1,0 +1,44 @@
+{
+  "id": "he_ranges",
+  "version": 100,
+  "suite": "humaneval",
+  "source": "openai/human-eval data/HumanEval.jsonl.gz",
+  "humaneval_task_ids": [
+    "HumanEval/127",
+    "HumanEval/144",
+    "HumanEval/83",
+    "HumanEval/138"
+  ],
+  "spec": "SPEC.md",
+  "functions": [
+    {
+      "name": "intersection",
+      "file": "intersection.py",
+      "test": "tests/test_intersection.py",
+      "subgoal": "HumanEval/127 intersection",
+      "humaneval_task_id": "HumanEval/127"
+    },
+    {
+      "name": "simplify",
+      "file": "simplify.py",
+      "test": "tests/test_simplify.py",
+      "subgoal": "HumanEval/144 simplify",
+      "humaneval_task_id": "HumanEval/144"
+    },
+    {
+      "name": "starts_one_ends",
+      "file": "starts_one_ends.py",
+      "test": "tests/test_starts_one_ends.py",
+      "subgoal": "HumanEval/83 starts_one_ends",
+      "humaneval_task_id": "HumanEval/83"
+    },
+    {
+      "name": "is_equal_to_sum_even",
+      "file": "is_equal_to_sum_even.py",
+      "test": "tests/test_is_equal_to_sum_even.py",
+      "subgoal": "HumanEval/138 is_equal_to_sum_even",
+      "humaneval_task_id": "HumanEval/138"
+    }
+  ],
+  "traps": []
+}

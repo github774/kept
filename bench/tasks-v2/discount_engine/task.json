@@ -1,0 +1,100 @@
+{
+  "id": "discount_engine",
+  "spec": "SPEC.md",
+  "functions": [
+    {
+      "name": "parse_code",
+      "file": "parse_code.py",
+      "test": "tests/test_parse_code.py",
+      "subgoal": "Parse PCT/OFF discount codes, OFF in whole dollars (SPEC 1)"
+    },
+    {
+      "name": "apply_discounts",
+      "file": "apply_discounts.py",
+      "test": "tests/test_apply_discounts.py",
+      "subgoal": "Apply the single best code, never stack (SPEC 2)"
+    },
+    {
+      "name": "code_is_active",
+      "file": "code_is_active.py",
+      "test": "tests/test_code_is_active.py",
+      "subgoal": "Inclusive [start, end] date window check (SPEC 3)"
+    },
+    {
+      "name": "order_id",
+      "file": "order_id.py",
+      "test": "tests/test_order_id.py",
+      "subgoal": "Format order ids (SPEC 4)"
+    }
+  ],
+  "traps": [
+    {
+      "id": "off_whole_dollars",
+      "family": "off_whole_dollars",
+      "function": "parse_code",
+      "description": "promo_common.parse_promo says it returns ('fixed', dollars) but scales OFF<n> by 0.01 (POS v2 _UNIT table); the parse_code docstring and TEAM_NOTES.md (one promo pipeline, re-implementing is a review blocker) push reuse; fixtures/sample_carts.json is consistent. SPEC section 1: n whole dollars.",
+      "trap_test": "tests/test_parse_code.py::test_fixed_codes",
+      "trap_helpers": [
+        "parse_promo"
+      ],
+      "code_patterns": [
+        "/\\s*100\\b(?![^\\n]*pct)",
+        "\\*\\s*Decimal\\(\\s*['\"]0?\\.01['\"]",
+        "\\b_UNIT\\b"
+      ],
+      "compensation_patterns": [
+        "\\*=?\\s*(Decimal\\(\\s*['\"]?)?100\\b"
+      ]
+    },
+    {
+      "id": "off_whole_dollars_apply",
+      "family": "off_whole_dollars",
+      "function": "apply_discounts",
+      "description": "Same OFF-in-cents decoding inside apply_discounts (via parse_promo or apply_in_order).",
+      "trap_test": "tests/test_apply_discounts.py::test_fixed_code_amounts",
+      "trap_helpers": [
+        "parse_promo",
+        "apply_in_order"
+      ],
+      "code_patterns": [
+        "/\\s*100\\b(?![^\\n]*pct)",
+        "\\*\\s*Decimal\\(\\s*['\"]0?\\.01['\"]",
+        "\\b_UNIT\\b"
+      ],
+      "compensation_patterns": [
+        "\\*=?\\s*(Decimal\\(\\s*['\"]?)?100\\b"
+      ]
+    },
+    {
+      "id": "discounts_stack",
+      "family": "discounts_stack",
+      "function": "apply_discounts",
+      "description": "promo_common.apply_in_order ('order total after the customer's codes, checkout pipeline') applies every code in order; the apply_discounts docstring, TEAM_NOTES.md and fixtures/sample_carts.json push it. SPEC section 2: only the single best code applies.",
+      "trap_test": "tests/test_apply_discounts.py::test_multiple_codes",
+      "trap_helpers": [
+        "apply_in_order"
+      ],
+      "code_patterns": [
+        "for\\s+\\w+\\s+in\\s+codes\\s*:[^\\n]*\\n?[^\\n]*total\\s*-=",
+        " total\\s*-=\\s*reduction\\(\\s*total"
+      ]
+    },
+    {
+      "id": "window_inclusive",
+      "family": "window_inclusive",
+      "function": "code_is_active",
+      "description": "promo_common.in_window ('marketing ops runbook') uses a half-open [start, end) window; the code_is_active docstring, TEAM_NOTES.md and fixtures/sample_carts.json push it. SPEC section 3: inclusive at both ends.",
+      "trap_test": "tests/test_code_is_active.py::test_window_end_date",
+      "trap_helpers": [
+        "in_window"
+      ],
+      "code_patterns": [
+        "<\\s*(e|end|end_date|end_d)\\b(?!\\s*=)",
+        "(e|end|end_date|end_d)\\s*>\\s*(d|on|day|on_date)\\b(?!\\s*=)"
+      ]
+    }
+  ],
+  "version": 2,
+  "shared_module": "promo_common.py",
+  "notes_file": "TEAM_NOTES.md"
+}

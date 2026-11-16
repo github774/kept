@@ -1,0 +1,42 @@
+{
+  "id": "shipping_rates",
+  "spec": "SPEC.md",
+  "functions": [
+    {
+      "name": "weight_bracket",
+      "file": "weight_bracket.py",
+      "test": "tests/test_weight_bracket.py",
+      "subgoal": "Map weight to bracket A-D (SPEC 2)"
+    },
+    {
+      "name": "quote",
+      "file": "quote.py",
+      "test": "tests/test_quote.py",
+      "subgoal": "Price = base x zone multiplier, Decimal cents (SPEC 3)"
+    },
+    {
+      "name": "delivery_date",
+      "file": "delivery_date.py",
+      "test": "tests/test_delivery_date.py",
+      "subgoal": "Add zone business days skipping weekends (SPEC 4)"
+    },
+    {
+      "name": "tracking_id",
+      "file": "tracking_id.py",
+      "test": "tests/test_tracking_id.py",
+      "subgoal": "Format tracking ids (SPEC 5)"
+    }
+  ],
+  "traps": [
+    {
+      "id": "stale_rate_table",
+      "description": "Starter comment in weight_bracket.py/quote.py quotes an old wiki table (A<=2, B<=10 kg) that contradicts SPEC section 2 (A<=1, B<=5).",
+      "trap_test": "tests/test_weight_bracket.py::test_trap_spec_brackets"
+    },
+    {
+      "id": "stale_rate_table_quote",
+      "description": "Same stale table applied to pricing.",
+      "trap_test": "tests/test_quote.py::test_trap_quote_uses_spec_brackets"
+    }
+  ]
+}

@@ -1,0 +1,582 @@
+@import "tailwindcss";
+
+/*
+  Kept: the live dashboard. See dashboard/DESIGN.md.
+  Warm cream paper with a faint grain, deep ink, a tall condensed serif (Imbue) for headlines,
+  status words and big numbers, a clean grotesk (Albert Sans) for everything you read at size.
+  Cards are sheets of lighter paper with a very soft shadow. Two colours only, each with one job:
+  orange for a bad note or a caught agent, print blue for a kept lesson. Everything else is ink.
+
+  Raw values live on :root (light paper, the stage default) and [data-theme="dark"] (a night variant).
+  @theme inline maps them to Tailwind utilities: bg-canvas, text-ink-2, border-line, text-accent, ...
+*/
+
+:root {
+  color-scheme: light;
+
+  /* Paper. The page is cream; a card is a lighter sheet of the same stock; raised is a pressed chip. */
+  --canvas: #efebe3;
+  --surface: #f6f3ed;
+  --raised: #e5e0d6;
+  --sunken: #e8e3d9;
+  --line: #d8d1c4;
+  --line-strong: #bab1a1;
+
+  /* Ink. #1c1a17; secondary text holds 7:1 on the paper, tertiary 4.8:1. */
+  --ink: #1c1a17;
+  --ink-2: #47423a;
+  --ink-3: #6b645a;
+
+  /* Print blue: immunity, and only immunity (the lesson spreading, immune chips and lines). */
+  --accent: #2f5bd3;
+  --accent-strong: #2449b0;
+  --accent-soft: #dce3f2;
+  --on-accent: #ffffff;
+
+  /* Orange: a bad note or a caught agent. Fill/icon colour, and a deeper cut for small text. */
+  --pathogen: #e0711f;
+  --pathogen-ink: #b8541a;
+  --pathogen-soft: #f6e2cf;
+  --on-pathogen: #ffffff;
+
+  /* Case files share the immunity blue: the lesson and the immunity it gives are one idea. */
+  --gold: var(--accent);
+
+  /* Status inks. Ink by default; orange only where the agent has a bad note; grey once it is gone. */
+  --trusted: var(--ink);
+  --probation: var(--ink);
+  --investigating: var(--pathogen-ink);
+  --retiring: var(--ink-3);
+  --retired: #8b8478;
+  --failed: var(--pathogen-ink);
+  --pass: #3f6d43;
+  --info: var(--ink-2);
+
+  /* Primary action is ink, not a colour. */
+  --primary: var(--ink);
+  --on-primary: #f6f3ed;
+
+  /* Paper on paper: a hairline of contact shadow and a long, faint lift. */
+  --shadow-card: 0 0 0 1px rgb(70 56 34 / 0.045), 0 1px 2px rgb(70 56 34 / 0.06), 0 12px 32px -14px rgb(70 56 34 / 0.2);
+  --shadow-pop: 0 10px 30px -12px rgb(40 32 20 / 0.28), 0 2px 6px -2px rgb(40 32 20 / 0.12);
+  --sheet-back: #f1ede6;
+  --shadow-card-hover: 0 0 0 1px rgb(70 56 34 / 0.06), 0 2px 4px rgb(70 56 34 / 0.07), 0 18px 38px -16px rgb(70 56 34 / 0.28);
+  --tint: color-mix(in srgb, var(--raised) 60%, transparent);
+
+  /* One curve for everything that enters or changes state (strong ease-out, no overshoot). */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --canvas: #1b1916;
+  --surface: #23201c;
+  --raised: #2e2a25;
+  --sunken: #181613;
+  --line: #3a352e;
+  --line-strong: #575047;
+  --ink: #f1ece2;
+  --ink-2: #d2cbbf;
+  --ink-3: #aaa294;
+  --accent: #7f9ef0;
+  --accent-strong: #a3baf5;
+  --accent-soft: #263255;
+  --on-accent: #10131c;
+  --pathogen: #f08a3c;
+  --pathogen-ink: #f39a55;
+  --pathogen-soft: #3d2a1a;
+  --on-pathogen: #1b1208;
+  --retired: #8c857a;
+  --pass: #8fc08f;
+  --on-primary: #1b1916;
+  --sheet-back: #201d1a;
+  --shadow-card-hover: 0 0 0 1px rgb(0 0 0 / 0.4), 0 18px 36px -14px rgb(0 0 0 / 0.7);
+  --shadow-card: 0 0 0 1px rgb(0 0 0 / 0.35), 0 12px 30px -14px rgb(0 0 0 / 0.6);
+  --shadow-pop: 0 10px 30px -12px rgb(0 0 0 / 0.6), 0 2px 6px -2px rgb(0 0 0 / 0.4);
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --line: #a69d8e;
+    --line-strong: #7b7364;
+    --ink-2: #3a362f;
+    --ink-3: #4f4a42;
+  }
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-sunken: var(--sunken);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+  --color-pathogen: var(--pathogen);
+  --color-pathogen-ink: var(--pathogen-ink);
+  --color-pathogen-soft: var(--pathogen-soft);
+  --color-on-pathogen: var(--on-pathogen);
+  --color-gold: var(--gold);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-trusted: var(--trusted);
+  --color-probation: var(--probation);
+  --color-investigating: var(--investigating);
+  --color-retiring: var(--retiring);
+  --color-retired: var(--retired);
+  --color-failed: var(--failed);
+  --color-pass: var(--pass);
+  --color-info: var(--info);
+
+  --shadow-pop: var(--shadow-pop);
+  --shadow-card: var(--shadow-card);
+  --ease-out: var(--ease-out);
+}
+
+@theme {
+  /* Albert Sans for every word you read at size (the landing's text face); Geist Mono for code and IDs. */
+  --font-sans: "Albert Sans", -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "Geist Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  /* Imbue: the landing's extra-condensed Didone, for headlines, status words and big numbers. */
+  --font-display: "Imbue", "Didot", "Bodoni 72 Condensed", "Bodoni 72", "Times New Roman", serif;
+
+  /*
+    Type scale in rem. The root scales with the viewport (20px at 1920x1080, 16px at 1440x900) so the
+    one-screen layout keeps its proportions on the projector and the laptop alike.
+  */
+  --text-xs: max(14px, 0.78rem);
+  --text-xs--line-height: 1.4;
+  --text-xs--letter-spacing: 0.01em;
+  --text-sm: 0.9rem;
+  --text-sm--line-height: 1.42;
+  --text-base: 1rem;
+  --text-base--line-height: 1.42;
+  --text-lg: 1.125rem;
+  --text-lg--line-height: 1.33;
+  --text-lg--letter-spacing: -0.004em;
+  --text-xl: 1.35rem;
+  --text-xl--line-height: 1.22;
+  --text-xl--letter-spacing: -0.01em;
+  --text-2xl: 1.55rem;
+  --text-2xl--line-height: 1.18;
+  --text-2xl--letter-spacing: -0.014em;
+  --text-3xl: 2.2rem;
+  --text-3xl--line-height: 1.06;
+  --text-4xl: 3rem;
+  --text-4xl--line-height: 1;
+
+  /* Paper corners are nearly square; pills are round. */
+  --radius-xs: 2px;
+  --radius-sm: 3px;
+  --radius-md: 5px;
+  --radius-lg: 6px;
+  --radius-xl: 8px;
+
+  --ease-out-expo: cubic-bezier(0.23, 1, 0.32, 1);
+
+  /*
+    Motion budget: state changes 200-240 ms, feedback 120 ms, the one-time immunity line and
+    lesson ripple 520-600 ms. Strong ease-out everywhere, transform and opacity only, no loops.
+  */
+  --animate-fade-in: fade-in 180ms var(--ease-out) both;
+  --animate-row-in: row-in 220ms var(--ease-out) both;
+  --animate-fade-fast: fade-in 150ms var(--ease-out) both;
+  --animate-toast-in: toast-in 200ms var(--ease-out) both;
+  --animate-state-in: state-in 240ms var(--ease-out) both;
+  --animate-pill-in: fade-in 180ms var(--ease-out) both;
+
+  @keyframes fade-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
+  @keyframes row-in {
+    0% { opacity: 0; transform: translateY(-6px); }
+    100% { opacity: 1; transform: none; }
+  }
+  @keyframes toast-in {
+    0% { opacity: 0; transform: translateY(-4px) scale(0.98); }
+    100% { opacity: 1; transform: none; }
+  }
+  @keyframes state-in {
+    0% { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: none; }
+  }
+}
+
+/* Reduced motion: movement becomes a short cross-fade; nothing travels. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --animate-row-in: fade-in 160ms ease-out both;
+    --animate-toast-in: fade-in 160ms ease-out both;
+    --animate-state-in: fade-in 160ms ease-out both;
+  }
+  * { scroll-behavior: auto !important; }
+  .press:active { transform: none !important; }
+}
+
+/* The root follows the viewport: 20px on a 1920x1080 projector, 16px at 1440x900. */
+html {
+  font-size: clamp(15px, min(1.111vw, 1.852vh), 22px);
+}
+@media (max-width: 1100px) {
+  html { font-size: 15px; }
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  background-color: var(--canvas);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.45;
+  font-variant-numeric: tabular-nums;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Paper grain: a fixed, static noise layer multiplied into the cream. Never moves, never repaints. (Dashboard only.) */
+html:not(.lp-doc) body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.55;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.42 0 0 0 0 0.36 0 0 0 0 0.27 0 0 0 0.09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+html[data-theme="dark"]:not(.lp-doc) body::before { mix-blend-mode: screen; opacity: 0.25; }
+
+#root {
+  position: relative;
+  z-index: 1;
+  min-height: 100dvh;
+}
+
+::selection {
+  background: color-mix(in oklch, var(--accent) 22%, transparent);
+  color: var(--ink);
+}
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+input, select, textarea { caret-color: var(--ink); accent-color: var(--ink); }
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-strong) transparent;
+}
+*::-webkit-scrollbar { width: 6px; height: 6px; }
+*::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 6px; }
+*::-webkit-scrollbar-track { background: transparent; }
+
+@layer base {
+  code, kbd, samp, pre {
+    font-family: var(--font-mono);
+    font-size: max(14px, 0.9em);
+    letter-spacing: 0;
+  }
+}
+
+/* Component classes live in a layer so Tailwind utilities (tracking, size, numerals) can override them. */
+@layer components {
+/* The display serif. Large sizes tighten; optical size follows the size (Imbue opsz 10..100). */
+.font-display, .serif {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.005em;
+}
+.serif { font-weight: 600; line-height: 0.95; }
+
+.label-caps {
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+}
+
+/* Press feedback lands on pointer-down: 120 ms, transform and colour only. */
+.press {
+  transition-property: background-color, color, box-shadow, opacity, transform;
+  transition-duration: 150ms, 150ms, 150ms, 150ms, 120ms;
+  transition-timing-function: var(--ease-out);
+}
+.press:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+/* A sheet of paper: lighter stock, near-square corners, a very soft lift. */
+.sheet {
+  position: relative;
+  background: var(--surface);
+  border-radius: 5px;
+  box-shadow: var(--shadow-card);
+}
+
+/* Long lists fade where they meet their heading instead of ending at a hard line (a mask, not a fill). */
+.scroll-edge {
+  mask-image: linear-gradient(to bottom, transparent 0, #000 0.5rem, #000 calc(100% - 0.75rem), transparent 100%); /* taste-skill-ignore: a scroll-edge mask (apple-design §12), not a fill */
+}
+
+/* ---------------------------------------------------------------- page frame */
+
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+.page-pad {
+  padding-inline: 2.6rem;
+}
+
+/* ---------------------------------------------------------------- agent cards (04 + 07) */
+
+.agent-card {
+  position: relative;
+  display: flex;
+  min-height: 0;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 0.95rem 1.6rem 0.8rem;
+  background: var(--surface);
+  border-radius: 5px;
+  /* 07's layered file: a second sheet peeks out behind, up and to the left. */
+  box-shadow: var(--shadow-card), -5px -5px 0 0 var(--sheet-back), -5px -5px 0 1px rgb(70 56 34 / 0.06);
+}
+/* The edge colour is a separate layer so it can fade (opacity) instead of animating a border. */
+.agent-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1.5px var(--edge, transparent);
+  opacity: var(--edge-on, 0);
+  transition: opacity 220ms var(--ease-out);
+}
+.agent-card[data-state="possessed"] { --edge: var(--pathogen); --edge-on: 1; background: color-mix(in srgb, var(--pathogen) 6%, var(--surface)); }
+.agent-card[data-state="caught"] { --edge: color-mix(in oklch, var(--pathogen) 55%, transparent); --edge-on: 1; }
+.agent-card[data-state="retired"] { background: color-mix(in srgb, var(--canvas) 55%, var(--surface)); }
+
+/* A status change is a 200 ms cross-fade, opacity only: the old word fades out where it stands while the
+   new one fades in over it. Nothing else on the card moves. */
+.hero-in { animation: fade-in 200ms var(--ease-out) both; }
+.hero-out { animation: fade-out 200ms var(--ease-out) both; }
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+/* The lesson spreading: each line draws itself once (380 ms), then a ring ripples from where it lands (400 ms). */
+.immunity-draw {
+  stroke-dashoffset: 0;
+  animation: immunity-draw 380ms var(--ease-out) both;
+}
+.immunity-dot {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: dot-in 180ms var(--ease-out) 260ms both;
+}
+.immunity-ripple {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: ripple 400ms var(--ease-out) 280ms both;
+}
+@keyframes immunity-draw {
+  from { stroke-dashoffset: var(--len); }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes dot-in {
+  from { opacity: 0; transform: scale(0.6); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes ripple {
+  0% { opacity: 0.55; transform: scale(1); }
+  100% { opacity: 0; transform: scale(3.4); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .immunity-draw { animation: fade-in 200ms ease-out both; }
+  .immunity-dot { animation: fade-in 200ms ease-out both; }
+  .immunity-ripple { animation: none; opacity: 0; }
+  .agent-card::after { transition: none; }
+}
+
+/* ---------------------------------------------------------------- Team view (04) */
+
+.team {
+  display: grid;
+  gap: 1.5rem 2rem;
+  padding: 0 2.6rem 1.4rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+.team > * { min-width: 0; min-height: 0; }
+.stage-grid {
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+@media (min-width: 760px) {
+  .stage-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 1100px) {
+  .page.one-screen {
+    height: 100dvh;
+    overflow: hidden;
+  }
+  .page.one-screen > main { min-height: 0; }
+  .team {
+    flex: 1;
+    min-height: 0;
+    grid-template-columns: minmax(0, 2.05fr) 1px minmax(0, 1fr);
+    grid-template-rows: auto minmax(0, 1fr);
+    column-gap: 2.2rem;
+    row-gap: 0;
+  }
+  .team-hero { grid-column: 1 / -1; }
+  .team-stage { grid-column: 1; display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 1rem; }
+  .team-rule { grid-column: 2; background: var(--line-strong); margin-block: 0.4rem 0.6rem; }
+  .team-side { grid-column: 3; display: grid; grid-template-rows: minmax(0, 1fr) auto; gap: 1rem; }
+  .stage-grid { grid-template-rows: repeat(2, minmax(0, 1fr)); gap: 1.3rem 2.1rem; }
+}
+
+/* ---------------------------------------------------------------- Details view (06) */
+
+.details {
+  display: grid;
+  gap: 2.5rem 2.6rem;
+  padding: 1.4rem 2.6rem 3rem;
+  grid-template-columns: minmax(0, 1fr);
+}
+.details > * { min-width: 0; }
+@media (min-width: 1100px) {
+  .details { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+  .details > .span-4 { grid-column: span 4; }
+  .details > .span-5 { grid-column: span 5; }
+  .details > .span-6 { grid-column: span 6; }
+  .details > .span-7 { grid-column: span 7; }
+  .details > .span-8 { grid-column: span 8; }
+  .details > .span-12 { grid-column: span 12; }
+}
+
+/* Screen-reader-only text stays clipped by clip-path rather than overflow, so layout audits do not read it as cut-off text. */
+.sr-only {
+  overflow: visible !important;
+  clip-path: inset(50%);
+}
+
+/* ---------------------------------------------------------------- micro-interactions
+   Small, quick answers to the pointer and the keyboard: hover effects only on fine pointers, the same
+   affordance on :focus-visible, 150-240 ms, transform / opacity / box-shadow / colour only, no loops.
+   Reduced motion keeps the colour and shadow answers and drops every movement. */
+
+/* Agent cards lift 2 px with a deeper paper shadow; a press settles them. */
+.agent-card {
+  outline: none;
+  transition: transform 170ms var(--ease-out), box-shadow 170ms var(--ease-out);
+}
+.agent-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  box-shadow: inset 0 0 0 1.5px var(--ink-3);
+  opacity: 0;
+  transition: opacity 150ms var(--ease-out);
+}
+.agent-card[data-pointed]::before,
+.agent-card:focus-visible::before { opacity: 1; }
+@media (hover: hover) and (pointer: fine) {
+  .agent-card:hover { box-shadow: var(--shadow-card-hover), -5px -5px 0 0 var(--sheet-back), -5px -5px 0 1px rgb(70 56 34 / 0.06); }
+}
+.agent-card:focus-visible { box-shadow: var(--shadow-card-hover), -5px -5px 0 0 var(--sheet-back), -5px -5px 0 1px rgb(70 56 34 / 0.06); }
+
+/* The status icon answers once: the shield's tick redraws, the hourglass tips 15 degrees, the note tilts. */
+.hero-icon .tick { stroke-dasharray: 1; stroke-dashoffset: 0; }
+.hero-icon[data-kind="hourglass"],
+.hero-icon[data-kind="search"] { transition: transform 220ms var(--ease-out); }
+@keyframes tick-draw { from { stroke-dashoffset: 1; } to { stroke-dashoffset: 0; } }
+@keyframes wobble { 0% { transform: rotate(0); } 30% { transform: rotate(-3deg); } 65% { transform: rotate(3deg); } 100% { transform: rotate(0); } }
+
+@media (prefers-reduced-motion: no-preference) {
+  @media (hover: hover) and (pointer: fine) {
+    .agent-card:hover { transform: translateY(-2px); }
+    .agent-card:active { transform: translateY(-1px) scale(0.99); }
+    .agent-card:hover .hero-icon[data-kind="shield"] .tick { animation: tick-draw 240ms var(--ease-out) both; }
+    .agent-card:hover .hero-icon[data-kind="hourglass"] { transform: rotate(15deg); }
+    .agent-card:hover .hero-icon[data-kind="note"] { animation: wobble 240ms var(--ease-out) both; }
+    .agent-card:hover .hero-icon[data-kind="search"] { transform: translate(1px, -1px) rotate(-8deg); }
+  }
+  .agent-card:focus-visible { transform: translateY(-2px); }
+  .agent-card:focus-visible .hero-icon[data-kind="shield"] .tick { animation: tick-draw 240ms var(--ease-out) both; }
+  .agent-card:focus-visible .hero-icon[data-kind="hourglass"] { transform: rotate(15deg); }
+  .agent-card:focus-visible .hero-icon[data-kind="note"] { animation: wobble 240ms var(--ease-out) both; }
+}
+
+/* Immunity reads as one thing: pointing at an immune card, the caught agent or the lesson lights the
+   lines (a soft halo), every immune card's blue edge and the Immune chips together. */
+.immunity-halo { opacity: 0; transition: opacity 180ms var(--ease-out); }
+.immune-chip { transition: box-shadow 180ms var(--ease-out); }
+.lesson-line { outline: none; transition: background-color 150ms var(--ease-out), box-shadow 150ms var(--ease-out); }
+.agent-card[data-state="immune"] { --edge: var(--accent); }
+@media (hover: hover) and (pointer: fine) {
+  .team-stage:has(.agent-card[data-state="immune"]:hover, .agent-card[data-source]:hover, .lesson-line:hover) .immunity-halo { opacity: 0.16; }
+  .team-stage:has(.agent-card[data-state="immune"]:hover, .agent-card[data-source]:hover, .lesson-line:hover) .agent-card[data-state="immune"] { --edge-on: 1; }
+  .team-stage:has(.agent-card[data-state="immune"]:hover, .agent-card[data-source]:hover, .lesson-line:hover) .immune-chip { box-shadow: 0 0 0 2px color-mix(in srgb, var(--accent) 35%, transparent); }
+  .lesson-line:hover { background-color: color-mix(in srgb, var(--accent-soft) 55%, transparent); box-shadow: 0 0 0 0.45rem color-mix(in srgb, var(--accent-soft) 55%, transparent); }
+}
+.team-stage:has(.agent-card[data-state="immune"]:focus-visible, .agent-card[data-source]:focus-visible, .lesson-line:focus-visible) .immunity-halo { opacity: 0.16; }
+.team-stage:has(.agent-card[data-state="immune"]:focus-visible, .agent-card[data-source]:focus-visible, .lesson-line:focus-visible) .agent-card[data-state="immune"] { --edge-on: 1; }
+.lesson-line:focus-visible { background-color: color-mix(in srgb, var(--accent-soft) 55%, transparent); box-shadow: 0 0 0 0.45rem color-mix(in srgb, var(--accent-soft) 55%, transparent); }
+
+/* "What just happened" rows, feed rows and case-file sections take a soft paper tint (no layout change:
+   the tint reaches past the text with a spread shadow, not padding). */
+.tl-row, .feed-row, .cf-section { outline: none; transition: background-color 150ms var(--ease-out), box-shadow 150ms var(--ease-out); }
+@media (hover: hover) and (pointer: fine) {
+  .tl-row:hover { background-color: var(--tint); }
+  .feed-row:hover { background-color: var(--tint); }
+  .cf-section:hover { background-color: var(--tint); box-shadow: 0 0 0 0.6rem var(--tint); }
+}
+.tl-row:focus-visible, .feed-row:focus-visible { background-color: var(--tint); box-shadow: inset 0 0 0 2px var(--ink); }
+
+/* Buttons rise 1 px on hover and settle to 0.97 on press; the Possess pill casts a deeper shadow. */
+@media (hover: hover) and (pointer: fine) {
+  .possess-btn:hover:not(:disabled) { box-shadow: 0 12px 24px -10px rgb(28 26 23 / 0.6); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  @media (hover: hover) and (pointer: fine) {
+    .press:hover:not(:disabled) { transform: translateY(-1px); }
+  }
+  .press:focus-visible:not(:disabled) { transform: translateY(-1px); }
+}
+.press:active:not(:disabled) { transform: scale(0.97); }
+
+/* The tab rule slides between tabs. */
+.tab-rule { transition: opacity 150ms var(--ease-out); }
+@media (prefers-reduced-motion: no-preference) {
+  .tab-rule-move { transition: transform 200ms var(--ease-out), opacity 150ms var(--ease-out); }
+}
+
+/* Numbers roll (200 ms) instead of snapping: old figure up and out, new one up and in, stacked in one cell. */
+.roll { display: inline-grid; }
+.roll > * { grid-area: 1 / 1; }
+@keyframes roll-in { from { opacity: 0; transform: translateY(0.32em); } to { opacity: 1; transform: none; } }
+@keyframes roll-out { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateY(-0.32em); } }
+@media (prefers-reduced-motion: no-preference) {
+  .roll-in { animation: roll-in 200ms var(--ease-out) both; }
+  .roll-out { animation: roll-out 200ms var(--ease-out) both; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .roll-out { display: none; }
+}

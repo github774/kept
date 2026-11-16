@@ -1,0 +1,101 @@
+{
+  "_comment": "SYNTHETIC cold-start cases, one per planted trap (BUILD_SPEC Drift monitor). synthetic:true must be shown on the dashboard. Benchmark cold mode starts WITHOUT these. Hand-written, not from a real run.",
+  "cases": [
+    {
+      "id": "seed.invoice_parser.amount_cents",
+      "runId": "seed",
+      "libraryId": "seed",
+      "slot": 0,
+      "gen": 0,
+      "agentName": "synthetic",
+      "task": "invoice_parser",
+      "subtask": "parse_line",
+      "trapId": "amount_cents",
+      "claim": "parse_line treats amounts without a decimal point as cents and divides by 100, per the legacy export note.",
+      "evidence": {
+        "testOutput": "FAILED tests/test_parse_line.py::test_trap_amount_is_dollars - assert Decimal('19.99') == Decimal('1999.00')",
+        "fallbackReason": "SPEC section 3 says the amount column is always dollars; 1999 is $1,999.00 and must never be divided by 100."
+      },
+      "category": "spec_misread",
+      "lesson": "Invoice amounts are always dollars, even without a decimal point; ignore the starter comment about cents and never divide by 100.",
+      "wrongBehavior": "Trusts the starter comment that the legacy export stores amounts in cents: an amount with no decimal point is treated as cents and divided by 100, so 1999 becomes 19.99.",
+      "correctBehavior": "Follows SPEC section 3: the amount is always dollars, with or without a decimal point; 1999 stays 1999.00 and nothing is ever divided by 100.",
+      "recipients": [],
+      "synthetic": true,
+      "revoked": false,
+      "createdAt": 0
+    },
+    {
+      "id": "seed.shipping_rates.stale_rate_table",
+      "runId": "seed",
+      "libraryId": "seed",
+      "slot": 0,
+      "gen": 0,
+      "agentName": "synthetic",
+      "task": "shipping_rates",
+      "subtask": "weight_bracket",
+      "trapId": "stale_rate_table",
+      "claim": "weight_bracket uses the ops wiki rate table: bracket A up to 2 kg, B up to 10 kg, C up to 20 kg.",
+      "evidence": {
+        "testOutput": "FAILED tests/test_weight_bracket.py::test_trap_spec_brackets - AssertionError: assert 'A' == 'B' (weight_bracket(1.5))",
+        "fallbackReason": "SPEC section 2 sets bracket A at up to 1 kg and B at up to 5 kg; the wiki table in the starter comment is stale."
+      },
+      "category": "spec_misread",
+      "lesson": "Use SPEC section 2 weight brackets (A <= 1 kg, B <= 5 kg); the rate table in the starter comment is stale.",
+      "wrongBehavior": "Trusts the ops wiki rate table in the starter comment as current: weight brackets are A up to 2 kg, B up to 10 kg, C up to 20 kg, so 1.5 kg is bracket A.",
+      "correctBehavior": "Follows SPEC section 2 weight brackets only: A up to 1 kg, B up to 5 kg; the starter wiki table is stale and ignored, so 1.5 kg is bracket B.",
+      "recipients": [],
+      "synthetic": true,
+      "revoked": false,
+      "createdAt": 0
+    },
+    {
+      "id": "seed.shipping_rates.stale_rate_table_quote",
+      "runId": "seed",
+      "libraryId": "seed",
+      "slot": 0,
+      "gen": 0,
+      "agentName": "synthetic",
+      "task": "shipping_rates",
+      "subtask": "quote",
+      "trapId": "stale_rate_table_quote",
+      "claim": "quote prices parcels with the ops wiki brackets (A up to 2 kg, B up to 10 kg) times the zone multiplier.",
+      "evidence": {
+        "testOutput": "FAILED tests/test_quote.py::test_trap_quote_uses_spec_brackets - assert Decimal('5.00') == Decimal('8.50') (quote(1.5, 1))",
+        "fallbackReason": "Pricing must use the SPEC section 2 brackets; a 1.5 kg parcel is bracket B, not A."
+      },
+      "category": "spec_misread",
+      "lesson": "Quote prices from the SPEC section 2 brackets (A <= 1 kg, B <= 5 kg), never from the stale wiki rate table.",
+      "wrongBehavior": "Prices parcels with the ops wiki brackets from the starter comment (A up to 2 kg, B up to 10 kg) times the zone multiplier, so a 1.5 kg parcel is priced as bracket A at 5.00.",
+      "correctBehavior": "Prices parcels with the SPEC section 2 brackets (A up to 1 kg, B up to 5 kg) times the zone multiplier, ignoring the stale wiki table, so a 1.5 kg zone 1 parcel is bracket B at 8.50.",
+      "recipients": [],
+      "synthetic": true,
+      "revoked": false,
+      "createdAt": 0
+    },
+    {
+      "id": "seed.discount_engine.discounts_stack",
+      "runId": "seed",
+      "libraryId": "seed",
+      "slot": 0,
+      "gen": 0,
+      "agentName": "synthetic",
+      "task": "discount_engine",
+      "subtask": "apply_discounts",
+      "trapId": "discounts_stack",
+      "claim": "apply_discounts stacks every code in order against the running total, as marketing confirmed.",
+      "evidence": {
+        "testOutput": "FAILED tests/test_apply_discounts.py::test_trap_discounts_do_not_stack - assert Decimal('85.00') == Decimal('90.00')",
+        "fallbackReason": "SPEC section 2 says only the single best code applies; discounts never stack."
+      },
+      "category": "spec_misread",
+      "lesson": "Discount codes never stack: apply only the single best code (SPEC section 2), whatever the starter comment or marketing note says.",
+      "wrongBehavior": "Trusts the marketing note in the starter comment that discounts stack: applies every code in order against the running total, so PCT10 then OFF5 on 100.00 gives 85.00.",
+      "correctBehavior": "Follows SPEC section 2: discount codes never stack; evaluates each code alone and applies only the single best one, so PCT10 and OFF5 on 100.00 gives 90.00.",
+      "recipients": [],
+      "synthetic": true,
+      "revoked": false,
+      "createdAt": 0
+    }
+  ]
+}

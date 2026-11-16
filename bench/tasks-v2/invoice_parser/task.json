@@ -1,0 +1,90 @@
+{
+  "id": "invoice_parser",
+  "spec": "SPEC.md",
+  "functions": [
+    {
+      "name": "format_invoice_id",
+      "file": "format_invoice_id.py",
+      "test": "tests/test_format_invoice_id.py",
+      "subgoal": "Canonicalize invoice ids (SPEC 4)"
+    },
+    {
+      "name": "parse_line",
+      "file": "parse_line.py",
+      "test": "tests/test_parse_line.py",
+      "subgoal": "Parse one CSV row into id/date/customer/amount (SPEC 1-4)"
+    },
+    {
+      "name": "total_by_customer",
+      "file": "total_by_customer.py",
+      "test": "tests/test_total_by_customer.py",
+      "subgoal": "Sum Decimal dollar amounts per customer (SPEC 5)"
+    },
+    {
+      "name": "overdue_invoices",
+      "file": "overdue_invoices.py",
+      "test": "tests/test_overdue_invoices.py",
+      "subgoal": "List ids past due as of a date (SPEC 5)"
+    }
+  ],
+  "traps": [
+    {
+      "id": "amount_cents",
+      "family": "amount_cents",
+      "function": "parse_line",
+      "description": "invoice_common.parse_amount says it returns 'Decimal US dollars' but scales whole numbers by 0.01 (export v3 _UNIT table); the parse_line docstring and TEAM_NOTES.md (tech-lead decision: one amount parser, hand-rolled parsing is a review blocker) push reuse; fixtures/sample_totals_v3.json is consistent with cents. SPEC section 3: always dollars, 1999 is $1,999.00.",
+      "trap_test": "tests/test_parse_line.py::test_amount_without_decimal_point",
+      "code_patterns": [
+        "/\\s*100\\b",
+        "/\\s*Decimal\\(\\s*['\"]?100\\b",
+        "\\*\\s*Decimal\\(\\s*['\"]0?\\.01['\"]",
+        "\\b_UNIT\\b",
+        "scaleb\\(\\s*-2"
+      ],
+      "trap_helpers": [
+        "parse_amount"
+      ],
+      "compensation_patterns": [
+        "\\*=?\\s*(Decimal\\(\\s*['\"]?)?100\\b"
+      ]
+    },
+    {
+      "id": "amount_cents_total",
+      "family": "amount_cents",
+      "function": "total_by_customer",
+      "description": "Same helper in total_by_customer (starter docstring + finance-reconciled fixture totals).",
+      "trap_test": "tests/test_total_by_customer.py::test_whole_number_amounts",
+      "code_patterns": [
+        "/\\s*100\\b",
+        "/\\s*Decimal\\(\\s*['\"]?100\\b",
+        "\\*\\s*Decimal\\(\\s*['\"]0?\\.01['\"]",
+        "\\b_UNIT\\b",
+        "scaleb\\(\\s*-2"
+      ],
+      "trap_helpers": [
+        "parse_amount"
+      ],
+      "compensation_patterns": [
+        "\\*=?\\s*(Decimal\\(\\s*['\"]?)?100\\b"
+      ]
+    },
+    {
+      "id": "due_date_inclusive",
+      "family": "due_date_inclusive",
+      "function": "overdue_invoices",
+      "description": "invoice_common.is_past_due ('overdue as of as_of', FIN-7) returns True when due == as_of; the overdue_invoices docstring and TEAM_NOTES.md push reuse. SPEC section 5: strictly before as_of.",
+      "trap_test": "tests/test_overdue_invoices.py::test_due_date_equal_to_as_of",
+      "code_patterns": [
+        "<=\\s*(as_of|cutoff|asof|as_of_date)\\b",
+        "\\b(as_of|cutoff|asof|as_of_date)\\s*>=\\s*\\w",
+        "not\\s+(as_of|cutoff|asof|as_of_date)\\s*<"
+      ],
+      "trap_helpers": [
+        "is_past_due"
+      ]
+    }
+  ],
+  "version": 2,
+  "shared_module": "invoice_common.py",
+  "notes_file": "TEAM_NOTES.md"
+}

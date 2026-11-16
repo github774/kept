@@ -1,0 +1,9 @@
+{
+  "format": "export v3",
+  "signed_off_by": "finance-ops",
+  "totals": {
+    "Acme Corp": "269.99",
+    "Beta LLC": "57.75",
+    "Gamma Inc": "1.00"
+  }
+}

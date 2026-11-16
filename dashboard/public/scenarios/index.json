@@ -1,0 +1,65 @@
+{
+  "recordedAt": "2026-10-31T23:13:46.701Z",
+  "scenarios": [
+    {
+      "task": "invoice_parser",
+      "slot": 2,
+      "file": "invoice_parser.s2.json",
+      "runId": "rtpfe",
+      "possessed": true,
+      "end": "finished",
+      "recoveryMs": 18827,
+      "events": 56
+    },
+    {
+      "task": "invoice_parser",
+      "slot": 3,
+      "file": "invoice_parser.s3.json",
+      "runId": "rbajh",
+      "possessed": true,
+      "end": "finished",
+      "recoveryMs": 17947,
+      "events": 66
+    },
+    {
+      "task": "shipping_rates",
+      "slot": 2,
+      "file": "shipping_rates.s2.json",
+      "runId": "rtita",
+      "possessed": true,
+      "end": "finished",
+      "recoveryMs": 16974,
+      "events": 47
+    },
+    {
+      "task": "shipping_rates",
+      "slot": 3,
+      "file": "shipping_rates.s3.json",
+      "runId": "r9cc8",
+      "possessed": true,
+      "end": "finished",
+      "recoveryMs": 26712,
+      "events": 47
+    },
+    {
+      "task": "discount_engine",
+      "slot": 2,
+      "file": "discount_engine.s2.json",
+      "runId": "rgw8b",
+      "possessed": true,
+      "end": "finished",
+      "recoveryMs": 16613,
+      "events": 54
+    },
+    {
+      "task": "discount_engine",
+      "slot": 3,
+      "file": "discount_engine.s3.json",
+      "runId": "r8tka",
+      "possessed": true,
+      "end": "finished",
+      "recoveryMs": 21479,
+      "events": 47
+    }
+  ]
+}

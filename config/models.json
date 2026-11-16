@@ -1,0 +1,29 @@
+{
+  "_comment": "OpenRouter model ids (DECISIONS #1, #3). Top level = dev profile (DeepSeek v4.1 Flash). MODEL_PROFILE=bench switches worker/judge/lesson writer to GPT-6 Luna for benchmark + demo. WORKER_MODEL env overrides worker last.",
+  "worker": "deepseek/deepseek-v4.1-flash-1017",
+  "fallback_judge": "deepseek/deepseek-v4.1-flash-1017",
+  "lesson_writer": "deepseek/deepseek-v4.1-flash-1017",
+  "embedding": {
+    "model": "openai/text-embedding-3-small",
+    "dimensions": 256
+  },
+  "jev": {
+    "model": "typesafe/jev-1.14"
+  },
+  "profiles": {
+    "bench": {
+      "worker": "openai/gpt-6-luna",
+      "fallback_judge": "openai/gpt-6-luna",
+      "lesson_writer": "openai/gpt-6-luna"
+    }
+  },
+  "request_options": {
+    "_comment": "Chat request options (DECISIONS #11, docs/SMOKE.md). default applies to every chat model; models[<id>] overrides. reasoning_effort null = omit reasoning. provider_order pins a provider (allow_fallbacks false); otherwise auto_pin_provider pins to the first responding provider for prompt-cache hits. provider.require_parameters is always sent.",
+    "default": {
+      "max_tokens": 4000,
+      "reasoning_effort": "low",
+      "auto_pin_provider": true
+    },
+    "models": {}
+  }
+}

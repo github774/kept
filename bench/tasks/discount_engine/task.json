@@ -1,0 +1,37 @@
+{
+  "id": "discount_engine",
+  "spec": "SPEC.md",
+  "functions": [
+    {
+      "name": "parse_code",
+      "file": "parse_code.py",
+      "test": "tests/test_parse_code.py",
+      "subgoal": "Parse PCT/OFF discount codes (SPEC 1)"
+    },
+    {
+      "name": "apply_discounts",
+      "file": "apply_discounts.py",
+      "test": "tests/test_apply_discounts.py",
+      "subgoal": "Apply the single best code, never stack (SPEC 2)"
+    },
+    {
+      "name": "code_is_active",
+      "file": "code_is_active.py",
+      "test": "tests/test_code_is_active.py",
+      "subgoal": "Inclusive date window check (SPEC 3)"
+    },
+    {
+      "name": "order_id",
+      "file": "order_id.py",
+      "test": "tests/test_order_id.py",
+      "subgoal": "Format order ids (SPEC 4)"
+    }
+  ],
+  "traps": [
+    {
+      "id": "discounts_stack",
+      "description": "Starter comment in apply_discounts.py says discounts stack in order; SPEC section 2 says only the single best code applies.",
+      "trap_test": "tests/test_apply_discounts.py::test_trap_discounts_do_not_stack"
+    }
+  ]
+}
